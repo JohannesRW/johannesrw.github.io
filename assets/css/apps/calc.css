@@ -1,0 +1,57 @@
+window[data-app="calc"] {
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(15px); }
+  window[data-app="calc"] topbar {
+    border-bottom: none; }
+  window[data-app="calc"] content center {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 20px 1fr 25px 1fr;
+    gap: 0 0;
+    grid-template-areas: "history" "display" "mem" "buttons"; }
+    window[data-app="calc"] content center history {
+      grid-area: history;
+      font-size: 14px;
+      text-align: right;
+      margin: 0 10px;
+      color: #3b3b3b; }
+    window[data-app="calc"] content center display {
+      grid-area: display;
+      font-size: 45px;
+      font-weight: 600;
+      text-align: right;
+      align-self: self-end;
+      margin: 0 10px 15px 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap; }
+    window[data-app="calc"] content center mem {
+      grid-area: mem;
+      justify-content: space-evenly;
+      display: flex;
+      margin-bottom: 10px;
+      color: rgba(0, 0, 0, 0.35);
+      font-weight: 600; }
+      window[data-app="calc"] content center mem i {
+        font-style: normal; }
+    window[data-app="calc"] content center buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+      gap: 2px 2px;
+      grid-template-areas: ". . . ." ". . . ." ". . . ." ". . . ." ". . . ." ". . . .";
+      grid-area: buttons;
+      margin: 0 0 5px 0; }
+      window[data-app="calc"] content center buttons button {
+        width: 76px;
+        height: 49px;
+        background-color: green;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        background-color: rgba(255, 255, 255, 0.6); }
+        window[data-app="calc"] content center buttons button[type="digit"] {
+          background-color: rgba(255, 255, 255, 0.9);
+          font-size: 18px; }
+        window[data-app="calc"] content center buttons button:hover {
+          background-color: #B3CCDB; }

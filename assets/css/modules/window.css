@@ -47,21 +47,22 @@ window {
       cursor: s-resize; }
   window topbar {
     display: grid;
-    grid-template-columns: 30px 1fr 135px;
+    grid-template-columns: auto 1fr 135px;
     grid-template-rows: 30px;
     gap: 0 0;
     grid-template-areas: "icon title buttons";
     grid-area: topbar;
     border-bottom: 1px solid #dadbdc; }
-    window topbar i {
+    window topbar img {
       grid-area: icon;
       align-self: center;
       justify-self: center;
-      font-size: 12px;
-      color: rgba(0, 0, 0, 0.7); }
+      height: 16px;
+      color: rgba(0, 0, 0, 0.7);
+      margin: 0 -5px 0 5px; }
     window topbar title {
+      margin-left: 10px;
       font-size: 13px;
-      cursor: default;
       user-select: none;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -102,6 +103,11 @@ window {
     window content left {
       overflow: auto;
       grid-area: left; }
+      window content left item {
+        display: block;
+        padding: 6px 10px; }
+        window content left item:hover {
+          background-color: rgba(0, 0, 0, 0.15); }
     window content center {
       overflow: auto;
       padding: 0 5px;

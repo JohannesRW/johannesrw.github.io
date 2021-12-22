@@ -1,6 +1,5 @@
 export default class Taskbar {
 	options = {
-		startIcon:'nos-windows',
 		clock:{
 			hours:true,
 			minutes:true,
@@ -18,9 +17,9 @@ export default class Taskbar {
 	removeActive(){
 		$('taskbar .active').removeClass('active');
 	}
-	add(icon,title,win){
+	add(icon,title){
 		let taskbar = this;
-		let el = $('<i/>',{class:'nos-'+icon,title:title});
+		let el = $('<img/>',{src:icon,title:title});
 		taskbar.apps.el.append(el);
 		return el;
 	}
@@ -29,16 +28,18 @@ export default class Taskbar {
 		//create taskbar elements
 		taskbar.el = $('<taskbar/>');
 		taskbar.start = {el:$('<start/>')};
-		taskbar.start.icon = {el:$('<i/>',{class:taskbar.options.startIcon})};
+		taskbar.search = {el:$('<input/>',{type:'text',placeholder:'Zur Suche Text hier eingeben'})};
 		taskbar.apps = {el:$('<apps/>')};
 		taskbar.info = {el:$('<info/>')};
 		taskbar.clock = {el:$('<clock/>')};
+		taskbar.showdesktop = {el:$('<showdesktop/>')};
 		//append elements to taskbar
-		taskbar.start.el.append(taskbar.start.icon.el);
 		taskbar.el.append(taskbar.start.el);
+		taskbar.el.append(taskbar.search.el);
 		taskbar.el.append(taskbar.apps.el);
 		taskbar.el.append(taskbar.info.el);
 		taskbar.el.append(taskbar.clock.el);
+		taskbar.el.append(taskbar.showdesktop.el);
 		//append taskbar to desktop
 		$('body').append(taskbar.el);
 		//add css
@@ -65,6 +66,7 @@ export default class Taskbar {
 	listen(){
 		let taskbar = this;
 		taskbar.start.el.on('click',function(event){event.stopImmediatePropagation();nos.UI.Startmenu.show();});
+		taskbar.showdesktop.el.on('click',function(event){});
 	}
 	height(){
 		let taskbar = this;

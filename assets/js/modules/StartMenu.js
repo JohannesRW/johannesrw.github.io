@@ -9,8 +9,6 @@ export default class StartMenu {
 		nos.UI.Desktop.el.append(startmenu.el);
 		nos.System.addCSS('startmenu');
 		nos.System.log('Startmenu loaded');
-		startmenu.add('info','Info','info')
-		startmenu.add('settings','Settings','settings')
 	}
 	hide(){
 		let startmenu = this;
@@ -34,7 +32,7 @@ export default class StartMenu {
 		item.el.append(item.title.el);
 		startmenu.el.append(item.el);
 		item.el.on('click',function(event){
-			nos.System.run(appname,hash);
+			nos.Apps.run(appname,hash);
 		})
 	}
 	destroy(){

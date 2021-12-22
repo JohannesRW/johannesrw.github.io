@@ -8,9 +8,9 @@ startmenu {
   position: relative;
   backdrop-filter: blur(10px);
   align-self: self-end;
-  flex-direction: column; }
+  flex-direction: column;
+  overflow-y: auto; }
   startmenu item {
-    cursor: default;
     display: flex;
     height: 40px;
     align-items: center; }

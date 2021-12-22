@@ -17,6 +17,11 @@ body {
     display: flex; }
 
 body {
+  cursor: default;
   background-color: #0193e6;
+  background-image: url("/assets/img/wallpaper/default.jpg");
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
   font-family: Segoe UI,Segoe,Calibri,Candara,Optima,Arial,sans-serif;
   font-size: 12px; }
