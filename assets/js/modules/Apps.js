@@ -30,6 +30,7 @@ export default class Apps {
 					if(apps.hashes[appname]){
 						let hash = apps.hashes[appname];
 						if(hash !== md5hash){
+							console.error('hash check failed: '+md5hash);
 							nos.System.log.error('<strong>hash check failed</strong><br>app		'+appname+'<br>expected	'+hash+'<br>hash		'+md5hash);
 							apps.src[appname] = null;
 							return;
