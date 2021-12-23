@@ -22,7 +22,7 @@ window.nos = new class {
 		nos.autoStart();
 	}
 	autoStart(){
-		nos.Apps.run('logs','33ee180c769df4682dc07183102cb080');
+		nos.Apps.run('logs','49ab655fa0c61a561872e176e97b2318');
 	}
 	autoAppend(obj,parentElement=false){
 		let returnElement = obj.el||parentElement;

@@ -166,7 +166,13 @@ body {
               min-width: 120px;
               display: flex;
               align-items: center;
-              padding: 0 5px; }
+              padding: 0 5px;
+              justify-content: space-between; }
+              body desktop window content left menu item badge {
+                background-color: #dddddd;
+                padding: 0 10px;
+                border-radius: 10px;
+                font-size: 11px; }
               body desktop window content left menu item:hover {
                 background-color: #E5F3FF;
                 border-color: #E5F3FF; }

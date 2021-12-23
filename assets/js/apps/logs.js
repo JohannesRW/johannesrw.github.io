@@ -31,11 +31,11 @@ nos.Apps.src.logs = class {
 	update(){
 		let app = this;
 		app.logs = nos.System.getLogs();
-		app.menu.items.info.el.html('Info ('+app.logs.info.length+')');
-		app.menu.items.debug.el.html('Debug ('+app.logs.debug.length+')');
-		app.menu.items.success.el.html('Success ('+app.logs.success.length+')');
-		app.menu.items.warn.el.html('Warn ('+app.logs.warn.length+')');
-		app.menu.items.error.el.html('Error ('+app.logs.error.length+')');
+		app.menu.items.info.el.html('Info <badge>'+app.logs.info.length+'</badge>');
+		app.menu.items.debug.el.html('Debug <badge>'+app.logs.debug.length+'</badge>');
+		app.menu.items.success.el.html('Success <badge>'+app.logs.success.length+'</badge>');
+		app.menu.items.warn.el.html('Warn <badge>'+app.logs.warn.length+'</badge>');
+		app.menu.items.error.el.html('Error <badge>'+app.logs.error.length+'</badge>');
 		app.menu.items[app.current].el.click();
 	}
 	listen(){
