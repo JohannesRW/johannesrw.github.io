@@ -293,7 +293,9 @@ export default class Window {
 				top:{current:win.options.top.current},
 				left:{current:win.options.left.current},
 			}
-			$.post( 'user/app/'+appname+'/save', options );
+			if(nos.System.database){
+				$.post( 'user/app/'+appname+'/save', options );
+			}
 		}
 	}
 	setContent(el=''){
