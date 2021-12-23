@@ -1,6 +1,6 @@
 window[data-app="calc"] {
-  background-color: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(15px); }
+  background-color: rgba(225, 225, 225, 0.6);
+  backdrop-filter: blur(30px); }
   window[data-app="calc"] topbar {
     border-bottom: none; }
   window[data-app="calc"] content left, window[data-app="calc"] content right {

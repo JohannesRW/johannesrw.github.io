@@ -25,7 +25,6 @@ export default class Taskbar {
 		if(nos.System.isMobile()){
 			taskbar.elements.search.el.css({display:'none'});
 		}
-		nos.System.addCSS('taskbar');
 	}
 	removeActive(){
 		$('taskbar .active').removeClass('active');
@@ -45,10 +44,7 @@ export default class Taskbar {
 	}
 	updateClock(){
 		let taskbar = this;
-		let today = new Date();
-		let time = String(today.getHours()).padStart(2,'0')+':'+String(today.getMinutes()).padStart(2,'0')+(taskbar.options.clock.seconds?':'+String(today.getSeconds()).padStart(2,'0'):'');
-		let date = String(today.getDate()).padStart(2,'0')+'.'+String(today.getMonth()+1).padStart(2,'0')+'.'+today.getFullYear();
-		taskbar.elements.clock.el.html(time+(taskbar.options.clock.date?'<br>'+date:''));
+		taskbar.elements.clock.el.html(nos.System.time(false)+(taskbar.options.clock.date?'<br>'+nos.System.date():''));
 	}
 	stopClock(){
 		let taskbar = this;
@@ -57,7 +53,12 @@ export default class Taskbar {
 	listen(){
 		let taskbar = this;
 		taskbar.elements.start.el.on('click',function(event){event.stopImmediatePropagation();nos.UI.Startmenu.show();});
-		taskbar.elements.showdesktop.el.on('click',function(event){});
+		taskbar.elements.showdesktop.el.on('click',function(){
+			$.each(nos.Apps.running,function(appname,app){
+				app.win.minimize();
+				taskbar.removeActive();
+			})
+		});
 	}
 	height(){
 		let taskbar = this;

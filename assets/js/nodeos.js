@@ -15,14 +15,14 @@ window.nos = new class {
 		nos.User = new User();
 	}
 	init(){
-		nos.System.log.info('<strong>NodeOS v'+this.version+' &copy; Johannes Hundt</strong>');
+		nos.System.log.info('<strong>NodeOS</strong><br>version		'+this.version+'<br>author		<a href="//github.com/JohannesRW" target="_blank">Johannes Hundt</a>');
 		nos.UI.init();
 		nos.System.checkConnection();
 		nos.Apps.addToStartmenu();
 		nos.autoStart();
 	}
 	autoStart(){
-		nos.Apps.run('logs');
+		nos.Apps.run('logs','33ee180c769df4682dc07183102cb080');
 	}
 	autoAppend(obj,parentElement=false){
 		let returnElement = obj.el||parentElement;

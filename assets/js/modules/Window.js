@@ -82,12 +82,14 @@ export default class Window {
 	constructor(options={}) {
 		let win = this;
 		$.extend(true,win.options, options);
-		nos.System.addCSS('window');
 		nos.UI.Desktop.elements.el.append(nos.autoAppend(win.elements));
 		win.applyOptions();
 		win.register();
 		win.listen();
 		win.bringToFront();
+		if(win.options.minimized){
+			win.minimize();
+		}
 	}
 	applyOptions(){
 		let win = this;
@@ -106,9 +108,6 @@ export default class Window {
 		}
 		if(win.options.invertIcon){
 			win.elements.topbar.icon.el.css({filter:'invert('+win.options.invertIcon+')'});
-		}
-		if(win.options.minimized){
-			win.minimize();
 		}
 		win.applySize();
 		win.applyPosition();
@@ -245,6 +244,7 @@ export default class Window {
 		win.options.minimized = true;
 		win.elements.el.css({display:'none'});
 		win.save();
+		nos.UI.Taskbar.removeActive();
 	}
 	restore(){
 		let win = this;

@@ -46,8 +46,8 @@ nos.Apps.src.logs = class {
 				item.el.addClass('active');
 				app.current = key;
 				app.win.setContent();
-				$.each(app.logs[key],function(index,msg){
-					app.win.addContent('<pre class="'+key+'">'+msg+'</pre>');
+				$.each(app.logs[key],function(index,log){
+					app.win.addContent('<pre class="'+key+'">'+log.msg+'<date>'+log.date+' '+log.time+'</date></pre><hr>');
 				})
 			})
 		})

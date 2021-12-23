@@ -31,7 +31,7 @@ export default class Apps {
 							return;
 						}
 						else { //if hash is valid
-							nos.System.log.debug('<strong>hash check successfull</strong><br>app		'+appname+'<br>hash		'+hash);
+							nos.System.log.success('<strong>hash check successfull</strong><br>app		'+appname+'<br>hash		'+hash);
 						}
 					}
 					else { //no hash provided

@@ -2,7 +2,6 @@ export default class StartMenu {
 	constructor() {
 		let startmenu = this;
 		nos.UI.Desktop.elements.el.append(nos.autoAppend(startmenu.elements));
-		nos.System.addCSS('startmenu');
 	}
 	elements={
 		el:$('<startmenu/>')

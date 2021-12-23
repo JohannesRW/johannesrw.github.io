@@ -16,26 +16,19 @@ export default class System {
 			}
 		}
 	}
+	database=false;
 	constructor() {
 		let system = this;
 		if(system.isMobile()){
 			$('body').addClass('mobile');
 		}
 	}
-	addCSS(fileName){
-		if(!$('#nodeos_systemcss_'+fileName).length){ //prevent multiple
-			$('head').append($('<link/>',{id:'nodeos_systemcss_'+fileName,rel:'stylesheet',href:'/assets/css/modules/'+fileName+'.css'}));
-		}
-	}
-	removeCSS(fileName){
-		$('#nodeos_systemcss_'+filename).remove();
-	}
 	log = {
-		info: function(msg){logs.info.push(msg);if(nos.Apps.running.logs){nos.Apps.running.logs.update();}},
-		debug: function(msg,force=false){if(logging || force){logs.debug.push(msg);if(nos.Apps.running.logs){nos.Apps.running.logs.update();}}},
-		warn: function(msg){logs.warn.push(msg);if(nos.Apps.running.logs){nos.Apps.running.logs.update();}},
-		error: function(msg){logs.error.push(msg);if(nos.Apps.running.logs){nos.Apps.running.logs.update();}},
-		success: function(msg){logs.success.push(msg);if(nos.Apps.running.logs){nos.Apps.running.logs.update();}}
+		info: function(msg){logs.info.push({msg:msg,date:nos.System.date(),time:nos.System.time()});if(nos.Apps.running.logs){nos.Apps.running.logs.update();}},
+		debug: function(msg,force=false){if(logging || force){logs.debug.push({msg:msg,date:nos.System.date(),time:nos.System.time()});if(nos.Apps.running.logs){nos.Apps.running.logs.update();}}},
+		warn: function(msg){logs.warn.push({msg:msg,date:nos.System.date(),time:nos.System.time()});if(nos.Apps.running.logs){nos.Apps.running.logs.update();}},
+		error: function(msg){logs.error.push({msg:msg,date:nos.System.date(),time:nos.System.time()});if(nos.Apps.running.logs){nos.Apps.running.logs.update();}},
+		success: function(msg){logs.success.push({msg:msg,date:nos.System.date(),time:nos.System.time()});if(nos.Apps.running.logs){nos.Apps.running.logs.update();}}
 	}
 	isMobile(){
 		return (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent)
@@ -51,13 +44,23 @@ export default class System {
 		let system = this;
 		nos.UI.Taskbar.elements.info.el.append(system.elements.status.mongodb.el);
 		$.getJSON( '/status/mongodb').done(function() {
-			system.log.success('Database connection established.')
+			system.database = true;
+			system.log.success('<strong>MongoDB connection established.</strong>')
 			system.elements.status.mongodb.el.attr('src',system.elements.status.mongodb.success);
-			system.elements.status.mongodb.el.attr('title','Database connection established.');
+			system.elements.status.mongodb.el.attr('title','MongoDB connection established.');
 		}).fail(function() {
-			system.log.error('Database connection failed.')
+			system.database = false;
+			system.log.error('<strong>MongoDB connection failed.</strong>')
 			system.elements.status.mongodb.el.attr('src',system.elements.status.mongodb.error);
-			system.elements.status.mongodb.el.attr('title','Database connection failed.');
+			system.elements.status.mongodb.el.attr('title','MongoDB connection failed.');
 		});
+	}
+	time(seconds=true){
+		let today = new Date();
+		return String(today.getHours()).padStart(2,'0')+':'+String(today.getMinutes()).padStart(2,'0')+(seconds?':'+String(today.getSeconds()).padStart(2,'0'):'');
+	}
+	date(){
+		let today = new Date();
+		return String(today.getDate()).padStart(2,'0')+'.'+String(today.getMonth()+1).padStart(2,'0')+'.'+today.getFullYear();
 	}
 }
