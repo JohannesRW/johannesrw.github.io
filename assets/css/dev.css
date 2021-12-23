@@ -14,13 +14,14 @@ body {
   right: 0;
   position: absolute; }
   body desktop {
-    display: flex; }
+    display: flex;
+    overflow: hidden; }
 
 body {
   cursor: default;
   background-color: #0193e6;
   background-image: url("/assets/img/wallpaper/default.jpg");
-  background-size: cover;
+  background-size: auto;
   background-position: top;
   background-repeat: no-repeat;
   font-family: Segoe UI,Segoe,Calibri,Candara,Optima,Arial,sans-serif;

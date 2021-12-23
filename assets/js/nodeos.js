@@ -13,11 +13,23 @@ window.nos = new class NodeOS {
 		nos.Apps = new Apps();
 		nos.Window = Window;
 		nos.User = new User();
-		nos.System.log('NodeOS v'+this.version);
 	}
 	init(){
+		nos.System.log.info('<strong>NodeOS v'+this.version+' &copy; Johannes Hundt</strong>');
 		nos.UI.init();
-		//nos.Apps.run('calc');
+		nos.autoStart();
+	}
+	autoStart(){
+		nos.Apps.run('logs');
+	}
+	autoAppend(obj,parentElement=false){
+		let returnElement = obj.el||parentElement;
+		$.each(obj,function(key,element){
+			if(key!=='el'){
+				returnElement.append(nos.autoAppend(element,returnElement));
+			}
+		})
+		return returnElement;
 	}
 }
 nos.init();

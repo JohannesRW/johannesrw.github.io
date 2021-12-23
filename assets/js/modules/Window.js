@@ -1,6 +1,5 @@
 export default class Window {
 	id = '';
-	resizeHandles={};
 	mousePosition = {}
 	options = {
 		appname:'undefined',
@@ -32,50 +31,40 @@ export default class Window {
 			current:300,
 		}
 	}
-	constructor(options={}) {
-		let win = this;
-		$.extend(win.options, options);
-		nos.System.addCSS('window');
-		win.create();
-		win.register();
-		win.listen();
-		win.bringToFront();
-	}
-	create(){
-		let win = this;
-		win.el = $('<window/>',{'data-app':win.options.appname});
-		win.resizeHandles = {
-			left: {el:$('<resizehandle/>',{'data-direction':'w',css:{display:(!win.options.resizable?'none':'')}})},
-			top: {el:$('<resizehandle/>',{'data-direction':'n',css:{display:(!win.options.resizable?'none':'')}})},
-			right: {el:$('<resizehandle/>',{'data-direction':'e',css:{display:(!win.options.resizable?'none':'')}})},
-			bottom: {el:$('<resizehandle/>',{'data-direction':'s',css:{display:(!win.options.resizable?'none':'')}})},
-			topLeft: {el:$('<resizehandle/>',{'data-direction':'nw',css:{display:(!win.options.resizable?'none':'')}})},
-			topRight: {el:$('<resizehandle/>',{'data-direction':'ne',css:{display:(!win.options.resizable?'none':'')}})},
-			bottomLeft: {el:$('<resizehandle/>',{'data-direction':'sw',css:{display:(!win.options.resizable?'none':'')}})},
-			bottomRight: {el:$('<resizehandle/>',{'data-direction':'se',css:{display:(!win.options.resizable?'none':'')}})},
-		}
-		win.topbar = {
-			el:$('<topbar/>'),
-			icon:{
-				el:$('<img/>',{src:win.options.icon})
+	elements={
+		el:$('<window/>'),
+		resizeHandles: {
+			left: {el: $('<resizehandle/>', {'data-direction': 'w'})},
+			top: {el: $('<resizehandle/>', {'data-direction': 'n'})},
+			right: {el: $('<resizehandle/>', {'data-direction': 'e'})},
+			bottom: {el: $('<resizehandle/>', {'data-direction': 's'})},
+			topLeft: {el: $('<resizehandle/>', {'data-direction': 'nw'})},
+			topRight: {el: $('<resizehandle/>', {'data-direction': 'ne'})},
+			bottomLeft: {el: $('<resizehandle/>', {'data-direction': 'sw'})},
+			bottomRight: {el: $('<resizehandle/>', {'data-direction': 'se'})},
+		},
+		topbar: {
+			el: $('<topbar/>'),
+			icon: {
+				el: $('<img/>')
 			},
-			title:{
-				el:$('<title/>',{html:win.options.title})
+			title: {
+				el: $('<title/>')
 			},
-			buttons:{
-				el:$('<buttons/>'),
-				minimize:{
-					el:$('<div/>',{'data-window':'minimize'})
+			buttons: {
+				el: $('<buttons/>'),
+				minimize: {
+					el: $('<div/>', {'data-window': 'minimize'})
 				},
-				maximize:{
-					el:$('<div/>',{'data-window':'maximize',css:{display:(nos.System.isMobile()||!win.options.resizable?'none':'')}})
+				maximize: {
+					el: $('<div/>', {'data-window': 'maximize'})
 				},
-				close:{
-					el:$('<div/>',{'data-window':'close'})
+				close: {
+					el: $('<div/>', {'data-window': 'close'})
 				}
 			}
-		}
-		win.content = {
+		},
+		content: {
 			el:$('<content/>'),
 			left:{
 				el:$('<left/>')
@@ -86,70 +75,78 @@ export default class Window {
 			right:{
 				el:$('<right/>')
 			}
+		},
+		status: {
+			el:$('<status/>')
 		}
-		win.status = {
-			el:$('<status/>',{html:'<appname>'+win.options.appname+'</appname><version>v'+win.options.version+'</version>'})
+	}
+	constructor(options={}) {
+		let win = this;
+		$.extend(true,win.options, options);
+		nos.System.addCSS('window');
+		nos.UI.Desktop.elements.el.append(nos.autoAppend(win.elements));
+		win.applyOptions();
+		win.register();
+		win.listen();
+		win.bringToFront();
+	}
+	applyOptions(){
+		let win = this;
+		win.elements.el.attr('data-app',win.options.appname);
+		win.elements.topbar.icon.el.attr('src',win.options.icon);
+		win.elements.topbar.title.el.html(win.options.title);
+		win.elements.status.el.html('<appname>'+win.options.appname+'</appname><version>v'+win.options.version+'</version>');
+		if(!win.options.resizable||nos.System.isMobile()){
+			win.elements.topbar.buttons.maximize.el.css({display: 'none'});
+			$.each(win.elements.resizeHandles,function(key,handle){
+				handle.el.css({display:'none'});
+			});
 		}
-		//append elements
-		if(win.options.windowIcon) {win.topbar.el.append(win.topbar.icon.el);}
-		win.topbar.el.append(win.topbar.title.el);
-		win.topbar.el.append(win.topbar.buttons.el);
-		win.topbar.buttons.el.append(win.topbar.buttons.minimize.el);
-		win.topbar.buttons.el.append(win.topbar.buttons.maximize.el);
-		win.topbar.buttons.el.append(win.topbar.buttons.close.el);
-		win.content.el.append(win.content.left.el);
-		win.content.el.append(win.content.center.el);
-		win.content.el.append(win.content.right.el);
-		win.el.append(win.topbar.el);
-		win.el.append(win.content.el);
-		if(win.options.status) {win.el.append(win.status.el);}
-		$.each(win.resizeHandles,function(key,handle){
-			win.el.append(handle.el);
-		})
+		if(!win.options.status){
+			win.elements.status.el.remove();
+		}
 		if(win.options.invertIcon){
-			win.topbar.icon.el.css({filter:'invert('+win.options.invertIcon+')'});
+			win.elements.topbar.icon.el.css({filter:'invert('+win.options.invertIcon+')'});
 		}
-		//append window to desktop
-		nos.UI.Desktop.el.append(win.el);
+		if(win.options.minimized){
+			win.minimize();
+		}
 		win.applySize();
 		win.applyPosition();
-		if(win.options.minimized){win.minimize();}
-		nos.System.log('Window loaded');
 	}
 	applySize(){
 		let win = this;
 		if(win.options.maximized || nos.System.isMobile()){
-			win.el.css({width: nos.UI.Desktop.width()+'px',height: nos.UI.Desktop.height()+'px'});
+			win.elements.el.css({width: nos.UI.Desktop.width()+'px',height: nos.UI.Desktop.height()+'px'});
 		}
 		else {
-			win.el.css({width: win.options.width.current+'px',height: win.options.height.current+'px'});
+			win.elements.el.css({width: win.options.width.current+'px',height: win.options.height.current+'px'});
 		}
 	}
 	applyPosition(){
 		let win = this;
 		if(win.options.maximized || nos.System.isMobile()){
-			win.el.css({top: 0,left: 0});
+			win.elements.el.css({top: 0,left: 0});
 		}
 		else {
-			win.el.css({top: win.options.top.current+'px',left: win.options.left.current+'px'});
+			win.elements.el.css({top: win.options.top.current+'px',left: win.options.left.current+'px'});
 		}
 	}
 	listen(){
 		let win = this;
-		win.el.on('mousedown',function(){win.bringToFront.call(win)});
-		win.topbar.buttons.close.el.on('click',function(){win.close.call(win)});
-		win.topbar.buttons.minimize.el.on('click',function(){win.minimize.call(win)});
-		win.topbar.buttons.maximize.el.on('click',function(){win.maximize.call(win)});
-		win.topbar.el.on('dblclick',function(){win.maximize.call(win)});
-		win.topbar.el.on('mousedown',function(event){win.drag.call(win,event)});
-		$.each(win.resizeHandles,function(key,handle){
-			handle.el.on('mousedown',function(event){win.resize.call(win,event,handle)});
+		win.elements.el.on('mousedown',function(){win.bringToFront.call(win)});
+		win.elements.topbar.buttons.close.el.on('click',function(){win.close.call(win)});
+		win.elements.topbar.buttons.minimize.el.on('click',function(){win.minimize.call(win)});
+		win.elements.topbar.buttons.maximize.el.on('click',function(){win.maximize.call(win)});
+		win.elements.topbar.el.on('dblclick',function(){win.maximize.call(win)});
+		win.elements.topbar.el.on('mousedown',function(event){win.drag.call(win,event)});
+		$.each(win.elements.resizeHandles,function(key,handle){
+			handle.el.on('mousedown',function(event){win.resize.call(win,event,handle.el.data('direction'))});
 		})
 	}
-	resize(event,handle){
+	resize(event,direction){
 		let win = this;
 		if(!win.options.resizable || win.options.maximized){return;}
-		let direction = handle.el.data('direction');
 		win.mousePosition.x = event.clientX;
 		win.mousePosition.y = event.clientY;
 		win.options.top.start = win.options.top.current;
@@ -234,28 +231,27 @@ export default class Window {
 		let win = this;
 		nos.UI.Taskbar.removeActive();
 		win.taskbarIcon.addClass('active');
-		if(win.el.css('z-index') != nos.UI.zindex){
-			win.el.css({zIndex:++nos.UI.zindex});
+		if(win.elements.el.css('z-index') != nos.UI.zindex){
+			win.elements.el.css({zIndex:++nos.UI.zindex});
 		}
 	}
 	close(){
 		let win = this;
 		nos.Apps.kill(win.options.appname);
-		win.el.remove();
+		win.elements.el.remove();
 		win.taskbarIcon.remove();
 	}
 	minimize(){
 		let win = this;
 		win.options.minimized = true;
-		win.el.css({display:'none'});
+		win.elements.el.css({display:'none'});
 		win.save();
 	}
 	restore(){
 		let win = this;
-		if(!win.options.resizable){return;}
-		win.options.maximized = false;
+		if(win.options.resizable){win.options.maximized = false;}
 		win.options.minimized = false;
-		win.el.css({display:'grid'});
+		win.elements.el.css({display:'grid'});
 		win.applySize();
 		win.applyPosition();
 		win.bringToFront();
@@ -263,6 +259,7 @@ export default class Window {
 	}
 	maximize(){
 		let win = this;
+		if(!win.options.resizable){return;}
 		if(win.options.maximized){win.restore();}
 		else {
 			win.options.maximized = true;
@@ -273,7 +270,7 @@ export default class Window {
 	}
 	toggle(){
 		let win = this;
-		if(win.el.css('display') == 'none' || win.el.css('z-index') != nos.UI.zindex){
+		if(win.elements.el.css('display') == 'none' || win.elements.el.css('z-index') != nos.UI.zindex){
 			win.restore();
 		}
 		else {
@@ -300,16 +297,28 @@ export default class Window {
 			$.post( 'user/app/'+appname+'/save', options );
 		}
 	}
-	setContent(el){
+	setContent(el=''){
 		let win = this;
-		win.content.center.el.append(el);
+		win.elements.content.center.el.html(el);
 	}
-	setLeft(el){
+	addContent(el=''){
 		let win = this;
-		win.content.left.el.append(el);
+		win.elements.content.center.el.append(el);
 	}
-	setRight(el){
+	setLeft(el=''){
 		let win = this;
-		win.content.right.el.append(el);
+		win.elements.content.left.el.html(el);
+	}
+	addLeft(el=''){
+		let win = this;
+		win.elements.content.left.el.append(el);
+	}
+	setRight(el=''){
+		let win = this;
+		win.elements.content.right.el.html(el);
+	}
+	addRight(el=''){
+		let win = this;
+		win.elements.content.right.el.append(el);
 	}
 }

@@ -1,13 +1,10 @@
 export default class Desktop {
+	elements={
+		el:$('<desktop/>')
+	}
 	constructor() {
 		let desktop = this;
-		desktop.create();
-		nos.System.log('Desktop loaded');
-	}
-	create(){
-		let desktop = this;
-		desktop.el = $('<desktop/>');
-		$('body').append(desktop.el);
+		$('body').append(nos.autoAppend(desktop.elements));
 	}
 	width(){
 		let desktop = this;
@@ -15,6 +12,6 @@ export default class Desktop {
 	}
 	height(){
 		let desktop = this;
-		return desktop.el.outerHeight();
+		return desktop.elements.el.outerHeight();
 	}
 }

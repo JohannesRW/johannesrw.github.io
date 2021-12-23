@@ -1,0 +1,14 @@
+window[data-app="logs"] content center pre {
+  user-select: text;
+  text-align: left;
+  padding: 0 5px 0 5px; }
+  window[data-app="logs"] content center pre.info {
+    color: #0193e6; }
+  window[data-app="logs"] content center pre.debug {
+    color: #9a01e6; }
+  window[data-app="logs"] content center pre.success {
+    color: #068a00; }
+  window[data-app="logs"] content center pre.warn {
+    color: #d57a00; }
+  window[data-app="logs"] content center pre.error {
+    color: #d70000; }

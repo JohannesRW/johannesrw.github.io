@@ -1,4 +1,4 @@
-class Games {
+nos.Apps.src.games = class Games {
 	options={
 		appname:'games',
 		title:'Games',
@@ -7,36 +7,42 @@ class Games {
 		resizable:false,
 		maximized:true,
 	}
+	games = {
+		holeio:'//hole-io.com/',
+		slitherio:'//slither.io/',
+		superhex:'//superhex.io/',
+		paperio:'//paper-io.com/',
+		amongus:'//amongusplay.online/'
+	}
+	menu = {
+		el:$('<menu/>'),
+		items:{
+			holeio:{el:$('<item/>',{html:'Hole.io'})},
+			slitherio:{el:$('<item/>',{html:'Slither.io'})},
+			superhex:{el:$('<item/>',{html:'SuperHex.io'})},
+			paperio:{el:$('<item/>',{html:'Paper.io'})},
+			amongus:{el:$('<item/>',{html:'Among Us'})},
+		}
+	}
 	constructor() {
 		let app = this;
 		app.win = new nos.Window(app.options);
-		app.setMenu();
+		app.win.setLeft(nos.autoAppend(app.menu));
 		app.listen();
+		app.menu.items.holeio.el.click();
 	}
 	listen(){
 		let app = this;
-		$.each(app.games,function(key,game){
-			game.el.on('click',function(){
-				app.loadGame(game.url);
+		$.each(app.menu.items,function(key,item){
+			item.el.on('click',function(){
+				app.menu.el.find('.active').removeClass('active');
+				item.el.addClass('active');
+				app.loadGame(app.games[key]);
 			})
 		})
 	}
 	loadGame(url){
 		let app = this;
-		app.win.content.center.el.html('<object width="100%" height="99%" data="'+url+'"></object>');
-	}
-	setMenu(){
-		let app = this;
-		app.games = [
-			{url:'//hole-io.com/',el:$('<item/>',{html:'Hole.io'})},
-			{url:'//slither.io/',el:$('<item/>',{html:'Slither.io'})},
-			{url:'//superhex.io/',el:$('<item/>',{html:'Superhex.io'})},
-			{url:'//paper-io.com/',el:$('<item/>',{html:'Paper.io'})},
-			{url:'//amongusplay.online/',el:$('<item/>',{html:'Among Us'})},
-		]
-		$.each(app.games,function(key,game){
-			app.win.setLeft(game.el);
-		})
+		app.win.setContent('<object width="100%" height="99%" data="'+url+'"></object>');
 	}
 }
-nos.Apps.src.games = Games;

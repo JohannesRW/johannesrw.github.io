@@ -1,20 +1,19 @@
 export default class Apps {
 	src = {};
 	running = {};
-	cssFiles={};
 	constructor() {
 		let apps = this;
 	}
 	addCSS(fileName){
 		if(!$('#nodeos_appcss_'+fileName).length){ //prevent multiple
 			$('head').append($('<link/>',{id:'nodeos_appcss_'+fileName,rel:'stylesheet',href:'/assets/css/apps/'+fileName+'.css'}));
-			nos.System.log(fileName+' CSS loaded');
 		}
 	}
 	removeCSS(fileName){
 		$('#nodeos_appcss_'+filename).remove();
 	}
 	addToStartmenu(){
+		nos.UI.Startmenu.add('folder','Logs','logs')
 		nos.UI.Startmenu.add('folder','Info','info')
 		nos.UI.Startmenu.add('folder','Settings','settings')
 		nos.UI.Startmenu.add('folder','Rechner','calc')
@@ -25,17 +24,18 @@ export default class Apps {
 		if(!apps.running[appname]){ //if App is NOT started
 			if(!apps.src[appname]){ //if AppSrc is NOT set
 				$.getScript( 'assets/js/apps/'+appname+'.js', function(data) { //get AppSrc
+					let md5hash = md5(data);
 					if(hash){ //if hash
-						if(hash !== md5(data)){ //if hash is invalid
-							nos.System.log('hash check failed for app: "'+appname+'" with hash: "'+hash+'" should be: "'+md5(data)+'"');
+						if(hash !== md5hash){ //if hash is invalid
+							nos.System.log.error('<strong>hash check failed</strong><br>app		'+appname+'<br>expected	'+hash+'<br>hash		'+md5hash);
 							return;
 						}
 						else { //if hash is valid
-							nos.System.log('hash check successfull for app: "'+appname+'" with hash: "'+hash+'"');
+							nos.System.log.debug('<strong>hash check successfull</strong><br>app		'+appname+'<br>hash		'+hash);
 						}
 					}
 					else { //no hash provided
-						nos.System.log('insecure app load - please provide a hash for: "'+appname+'"');
+						nos.System.log.warn('<strong>insecure app load - no hash provided</strong><br>app		'+appname+'<br>hash		'+md5hash);
 					}
 					apps.running[appname] = new apps.src[appname]();
 				});

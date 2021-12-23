@@ -3,6 +3,8 @@ window[data-app="calc"] {
   backdrop-filter: blur(15px); }
   window[data-app="calc"] topbar {
     border-bottom: none; }
+  window[data-app="calc"] content left, window[data-app="calc"] content right {
+    display: none; }
   window[data-app="calc"] content center {
     display: grid;
     grid-template-columns: 1fr;

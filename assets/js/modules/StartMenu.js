@@ -1,22 +1,19 @@
 export default class StartMenu {
 	constructor() {
 		let startmenu = this;
-		startmenu.create();
-	}
-	create(){
-		let startmenu = this;
-		startmenu.el = $('<startmenu/>');
-		nos.UI.Desktop.el.append(startmenu.el);
+		nos.UI.Desktop.elements.el.append(nos.autoAppend(startmenu.elements));
 		nos.System.addCSS('startmenu');
-		nos.System.log('Startmenu loaded');
+	}
+	elements={
+		el:$('<startmenu/>')
 	}
 	hide(){
 		let startmenu = this;
-		startmenu.el.css({display:'none'});
+		startmenu.elements.el.css({display:'none'});
 	}
 	show(){
 		let startmenu = this;
-		startmenu.el.css({display:'flex'});
+		startmenu.elements.el.css({display:'flex'});
 		$(document).one('click',function (event){
 			startmenu.hide();
 		})
@@ -30,15 +27,14 @@ export default class StartMenu {
 		}
 		item.el.append(item.icon.el);
 		item.el.append(item.title.el);
-		startmenu.el.append(item.el);
+		startmenu.elements.el.append(nos.autoAppend(item));
 		item.el.on('click',function(event){
 			nos.Apps.run(appname,hash);
 		})
 	}
 	destroy(){
 		let startmenu = this;
-		startmenu.el.remove();
+		startmenu.elements.el.remove();
 		nos.System.removeCSS('startmenu');
-		nos.System.log('Startmenu destroyed');
 	}
 }

@@ -102,24 +102,42 @@ window {
     overflow: hidden; }
     window content left {
       overflow: auto;
-      grid-area: left; }
-      window content left item {
-        display: block;
-        padding: 6px 10px; }
-        window content left item:hover {
-          background-color: rgba(0, 0, 0, 0.15); }
+      grid-area: left;
+      border-right: 1px solid #F7F7F7; }
+      window content left menu {
+        display: flex;
+        margin: 10px 0 0 0;
+        flex-direction: column;
+        padding: 0; }
+        window content left menu item {
+          height: 22px;
+          border: 1px solid transparent;
+          margin: 0 1px;
+          min-width: 120px;
+          display: flex;
+          align-items: center;
+          padding: 0 5px; }
+          window content left menu item:hover {
+            background-color: #E5F3FF;
+            border-color: #E5F3FF; }
+          window content left menu item.active {
+            background-color: #CDE8FF; }
+            window content left menu item.active:hover {
+              border-color: #99D1FF; }
     window content center {
       overflow: auto;
       padding: 0 5px;
       grid-area: center; }
     window content right {
       overflow: auto;
-      grid-area: right; }
+      grid-area: right;
+      border-left: 1px solid #F7F7F7; }
   window status {
     grid-area: status;
     height: 18px;
     display: flex;
-    justify-content: space-between;
     font-size: 11px;
     padding: 0 5px;
     color: rgba(0, 0, 0, 0.65); }
+    window status version {
+      margin-left: 5px; }

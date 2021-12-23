@@ -1,4 +1,4 @@
-class Calc {
+nos.Apps.src.calc = class Calc {
 	previous='';
 	current='';
 	operator='';
@@ -13,6 +13,44 @@ class Calc {
 		width:{current:320},
 		height:{current:460}
 	}
+	elements={
+		history:{
+			el:$('<history/>')
+		},
+		display:{
+			el:$('<display/>')
+		},
+		mem:{
+			el:$('<mem/>',{html:'<i>MC</i><i>MR</i><i>M+</i><i>M-</i><i>MS</i><i>M</i>'})
+		},
+		buttons:{
+			el:$('<buttons/>'),
+			percent:{el:$('<button/>',{html:'%'})},
+			ce:{el:$('<button/>',{html:'CE'})},
+			c:{el:$('<button/>',{html:'C'})},
+			back:{el:$('<button/>',{html:'&#8592;'})},
+			divideBy:{el:$('<button/>',{html:'1/x'})},
+			square:{el:$('<button/>',{html:'x²'})},
+			squareRoot:{el:$('<button/>',{html:'²&radic;x'})},
+			divide:{el:$('<button/>',{html:'&divide;'})},
+			_7:{el:$('<button/>',{html:'7',type:'digit'})},
+			_8:{el:$('<button/>',{html:'8',type:'digit'})},
+			_9:{el:$('<button/>',{html:'9',type:'digit'})},
+			times:{el:$('<button/>',{html:'&times;'})},
+			_4:{el:$('<button/>',{html:'4',type:'digit'})},
+			_5:{el:$('<button/>',{html:'5',type:'digit'})},
+			_6:{el:$('<button/>',{html:'6',type:'digit'})},
+			minus:{el:$('<button/>',{html:'-'})},
+			_1:{el:$('<button/>',{html:'1',type:'digit'})},
+			_2:{el:$('<button/>',{html:'2',type:'digit'})},
+			_3:{el:$('<button/>',{html:'3',type:'digit'})},
+			plus:{el:$('<button/>',{html:'+'})},
+			plusminus:{el:$('<button/>',{html:'&plusmn;',type:'digit'})},
+			_0:{el:$('<button/>',{html:'0',type:'digit'})},
+			decimal:{el:$('<button/>',{html:',',type:'digit'})},
+			equals:{el:$('<button/>',{html:'='})}
+		}
+	};
 	constructor() {
 		let app = this;
 		app.win = new nos.Window(app.options);
@@ -20,32 +58,37 @@ class Calc {
 		app.setContent();
 		app.listen();
 	}
+	setContent(){
+		let app = this;
+		nos.autoAppend(app.elements,app.win.elements.content.center.el);
+	}
 	listen(){
 		let app = this;
-		app.buttons[0].el.on('click',function(){app.current += '0';app.update();});
-		app.buttons[1].el.on('click',function(){app.current += '1';app.update();});
-		app.buttons[2].el.on('click',function(){app.current += '2';app.update();});
-		app.buttons[3].el.on('click',function(){app.current += '3';app.update();});
-		app.buttons[4].el.on('click',function(){app.current += '4';app.update();});
-		app.buttons[5].el.on('click',function(){app.current += '5';app.update();});
-		app.buttons[6].el.on('click',function(){app.current += '6';app.update();});
-		app.buttons[7].el.on('click',function(){app.current += '7';app.update();});
-		app.buttons[8].el.on('click',function(){app.current += '8';app.update();});
-		app.buttons[9].el.on('click',function(){app.current += '9';app.update();});
-		app.buttons.percent.el.on('click',function(){app.current = app.current/100;app.update();});
-		app.buttons.decimal.el.on('click',function(){app.current += '.';app.update();});
-		app.buttons.plusminus.el.on('click',function(){app.current = app.current*-1;app.update();});
-		app.buttons.ce.el.on('click',function(){app.current = '';app.update();});
-		app.buttons.c.el.on('click',function(){app.previous='';app.current = '';app.operator='';app.update();app.updateHistory()});
-		app.buttons.back.el.on('click',function(){app.current = String (app.current).slice(0, -1);app.update();});
-		app.buttons.plus.el.on('click',function(){app.previous = app.current;app.current='';app.operator='+';app.updateHistory();app.update();});
-		app.buttons.minus.el.on('click',function(){app.previous = app.current;app.current='';app.operator='-';app.updateHistory();app.update();});
-		app.buttons.times.el.on('click',function(){app.previous = app.current;app.current='';app.operator='&times;';app.updateHistory();app.update();});
-		app.buttons.divide.el.on('click',function(){app.previous = app.current;app.current='';app.operator='&divide;';app.updateHistory();app.update();});
-		app.buttons.equals.el.on('click',function(){app.calc();});
-		app.buttons.divideBy.el.on('click',function(){app.previous=1;app.operator='/';app.calc()});
-		app.buttons.square.el.on('click',function(){app.previous=app.current;app.current='';app.operator='²';app.calc()});
-		app.buttons.squareRoot.el.on('click',function(){app.operator='²&radic;';app.calc()});
+		app.elements.buttons._0.el.on('click',function(){app.current += '0';app.update();});
+		app.elements.buttons._1.el.on('click',function(){app.current += '1';app.update();});
+		app.elements.buttons._2.el.on('click',function(){app.current += '2';app.update();});
+		app.elements.buttons._3.el.on('click',function(){app.current += '3';app.update();});
+		app.elements.buttons._4.el.on('click',function(){app.current += '4';app.update();});
+		app.elements.buttons._5.el.on('click',function(){app.current += '5';app.update();});
+		app.elements.buttons._6.el.on('click',function(){app.current += '6';app.update();});
+		app.elements.buttons._7.el.on('click',function(){app.current += '7';app.update();});
+		app.elements.buttons._8.el.on('click',function(){app.current += '8';app.update();});
+		app.elements.buttons._9.el.on('click',function(){app.current += '9';app.update();});
+		//operators
+		app.elements.buttons.percent.el.on('click',function(){app.current = app.current/100;app.update();});
+		app.elements.buttons.decimal.el.on('click',function(){app.current += '.';app.update();});
+		app.elements.buttons.plusminus.el.on('click',function(){app.current = app.current*-1;app.update();});
+		app.elements.buttons.ce.el.on('click',function(){app.current = '';app.update();});
+		app.elements.buttons.c.el.on('click',function(){app.previous='';app.current = '';app.operator='';app.update();app.updateHistory()});
+		app.elements.buttons.back.el.on('click',function(){app.current = String (app.current).slice(0, -1);app.update();});
+		app.elements.buttons.plus.el.on('click',function(){app.previous = app.current;app.current='';app.operator='+';app.updateHistory();app.update();});
+		app.elements.buttons.minus.el.on('click',function(){app.previous = app.current;app.current='';app.operator='-';app.updateHistory();app.update();});
+		app.elements.buttons.times.el.on('click',function(){app.previous = app.current;app.current='';app.operator='&times;';app.updateHistory();app.update();});
+		app.elements.buttons.divide.el.on('click',function(){app.previous = app.current;app.current='';app.operator='&divide;';app.updateHistory();app.update();});
+		app.elements.buttons.equals.el.on('click',function(){app.calc();});
+		app.elements.buttons.divideBy.el.on('click',function(){app.previous=1;app.operator='/';app.calc()});
+		app.elements.buttons.square.el.on('click',function(){app.previous=app.current;app.current='';app.operator='²';app.calc()});
+		app.elements.buttons.squareRoot.el.on('click',function(){app.operator='²&radic;';app.calc()});
 	}
 	calc(){
 		let app = this;
@@ -73,80 +116,16 @@ class Calc {
 				result = 1/(app.current*1);
 				break;
 		}
-		app.history.el.html(app.previous+app.operator+app.current);
+		app.elements.history.el.html(app.previous+app.operator+app.current);
 		app.current = result;
 		app.update();
 	}
 	update(){
 		let app = this;
-		app.display.el.html(app.current);
+		app.elements.display.el.html(app.current);
 	}
 	updateHistory(){
 		let app = this;
-		app.history.el.html(app.previous+app.operator);
+		app.elements.history.el.html(app.previous+app.operator);
 	}
-	setContent(){
-		let app = this;
-		app.history = {el:$('<history/>')};
-		app.display = {el:$('<display/>')};
-		app.mem = {el:$('<mem/>',{html:'<i>MC</i><i>MR</i><i>M+</i><i>M-</i><i>MS</i><i>M</i>'})};
-		app.buttons = {
-			el:$('<buttons/>'),
-			percent:{el:$('<button/>',{html:'%'})},
-			ce:{el:$('<button/>',{html:'CE'})},
-			c:{el:$('<button/>',{html:'C'})},
-			back:{el:$('<button/>',{html:'&#8592;'})},
-			divideBy:{el:$('<button/>',{html:'1/x'})},
-			square:{el:$('<button/>',{html:'x²'})},
-			squareRoot:{el:$('<button/>',{html:'²&radic;x'})},
-			divide:{el:$('<button/>',{html:'&divide;'})},
-			7:{el:$('<button/>',{html:'7',type:'digit'})},
-			8:{el:$('<button/>',{html:'8',type:'digit'})},
-			9:{el:$('<button/>',{html:'9',type:'digit'})},
-			times:{el:$('<button/>',{html:'&times;'})},
-			4:{el:$('<button/>',{html:'4',type:'digit'})},
-			5:{el:$('<button/>',{html:'5',type:'digit'})},
-			6:{el:$('<button/>',{html:'6',type:'digit'})},
-			minus:{el:$('<button/>',{html:'-'})},
-			1:{el:$('<button/>',{html:'1',type:'digit'})},
-			2:{el:$('<button/>',{html:'2',type:'digit'})},
-			3:{el:$('<button/>',{html:'3',type:'digit'})},
-			plus:{el:$('<button/>',{html:'+'})},
-			plusminus:{el:$('<button/>',{html:'&plusmn;',type:'digit'})},
-			0:{el:$('<button/>',{html:'0',type:'digit'})},
-			decimal:{el:$('<button/>',{html:',',type:'digit'})},
-			equals:{el:$('<button/>',{html:'='})},
-		}
-		app.buttons.el.append(app.buttons.percent.el);
-		app.buttons.el.append(app.buttons.ce.el);
-		app.buttons.el.append(app.buttons.c.el);
-		app.buttons.el.append(app.buttons.back.el);
-		app.buttons.el.append(app.buttons.divideBy.el);
-		app.buttons.el.append(app.buttons.square.el);
-		app.buttons.el.append(app.buttons.squareRoot.el);
-		app.buttons.el.append(app.buttons.divide.el);
-		app.buttons.el.append(app.buttons[7].el);
-		app.buttons.el.append(app.buttons[8].el);
-		app.buttons.el.append(app.buttons[9].el);
-		app.buttons.el.append(app.buttons.times.el);
-		app.buttons.el.append(app.buttons[4].el);
-		app.buttons.el.append(app.buttons[5].el);
-		app.buttons.el.append(app.buttons[6].el);
-		app.buttons.el.append(app.buttons.minus.el);
-		app.buttons.el.append(app.buttons[1].el);
-		app.buttons.el.append(app.buttons[2].el);
-		app.buttons.el.append(app.buttons[3].el);
-		app.buttons.el.append(app.buttons.plus.el);
-		app.buttons.el.append(app.buttons.plusminus.el);
-		app.buttons.el.append(app.buttons[0].el);
-		app.buttons.el.append(app.buttons.decimal.el);
-		app.buttons.el.append(app.buttons.equals.el);
-
-		app.win.setContent(app.history.el);
-		app.win.setContent(app.display.el);
-		app.win.setContent(app.mem.el);
-		app.win.setContent(app.buttons.el);
-	}
-
 }
-nos.Apps.src.calc = Calc;
