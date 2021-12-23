@@ -1,8 +1,8 @@
 export default class Apps {
 	src = {};
 	running = {};
-	hashes={ //hashes for system apps
-		logs:'642fa177aeb07ed96b12b6af61d01799',
+	hashes={ //hashes for system apps (needs to be updated when changing apps)
+		logs:'a021f96dfcf523f2ecba66c6429a672d',
 		info:'372f8b7fbcaa3c85be7bbae6e3b2f772',
 	}
 	constructor() {}

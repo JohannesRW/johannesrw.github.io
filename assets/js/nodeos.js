@@ -22,7 +22,7 @@ window.nos = new class {
 		nos.autoStart();
 	}
 	autoStart(){
-		//nos.Apps.run('logs');
+		nos.Apps.run('info');
 	}
 	autoAppend(obj,parentElement=false){
 		let returnElement = obj.el||parentElement;
