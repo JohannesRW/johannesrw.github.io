@@ -1,5 +1,4 @@
 export default class Window {
-	id = '';
 	mousePosition = {}
 	options = {
 		appname:'undefined',

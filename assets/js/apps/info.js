@@ -1,4 +1,4 @@
-nos.Apps.src.info = class Info {
+nos.Apps.src.info = class {
 	options={
 		appname:'info',
 		title:'Info',

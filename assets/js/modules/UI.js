@@ -12,7 +12,6 @@ export default class UI {
 		ui.Desktop = new Desktop();
 		ui.Taskbar = new Taskbar();
 		ui.Startmenu = new StartMenu();
-		nos.Apps.addToStartmenu();
 	}
 	get zindex(){
 		let ui = this;

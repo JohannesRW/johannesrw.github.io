@@ -1,4 +1,4 @@
-nos.Apps.src.calc = class Calc {
+nos.Apps.src.calc = class {
 	previous='';
 	current='';
 	operator='';

@@ -4,7 +4,7 @@ import Window from './modules/Window.js';
 import User from "./modules/User.js";
 import Apps from "./modules/Apps.js";
 
-window.nos = new class NodeOS {
+window.nos = new class {
 	version = '0.0.1';
 	constructor() {
 		let nos = this;
@@ -17,6 +17,8 @@ window.nos = new class NodeOS {
 	init(){
 		nos.System.log.info('<strong>NodeOS v'+this.version+' &copy; Johannes Hundt</strong>');
 		nos.UI.init();
+		nos.System.checkConnection();
+		nos.Apps.addToStartmenu();
 		nos.autoStart();
 	}
 	autoStart(){

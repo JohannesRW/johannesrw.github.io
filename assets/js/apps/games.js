@@ -1,4 +1,4 @@
-nos.Apps.src.games = class Games {
+nos.Apps.src.games = class {
 	options={
 		appname:'games',
 		title:'Games',

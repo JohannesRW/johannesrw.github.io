@@ -1,4 +1,4 @@
-nos.Apps.src.logs = class Logs {
+nos.Apps.src.logs = class {
 	options={
 		appname:'logs',
 		title:'Logs',
