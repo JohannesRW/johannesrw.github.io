@@ -16,7 +16,7 @@ export default class Apps {
 		nos.UI.Startmenu.add('folder','Logs','logs')
 		nos.UI.Startmenu.add('folder','Info','info')
 		nos.UI.Startmenu.add('folder','Settings','settings')
-		nos.UI.Startmenu.add('folder','Rechner','calc')
+		nos.UI.Startmenu.add('folder','Calculator','calc')
 		nos.UI.Startmenu.add('folder','Games','games')
 	}
 	run(appname,hash=false){

@@ -58,6 +58,9 @@ taskbar {
   taskbar info {
     grid-area: info;
     display: flex; }
+    taskbar info img {
+      width: 15px;
+      padding: 0 5px; }
   taskbar clock {
     letter-spacing: -0.5px;
     grid-area: clock;
