@@ -17,7 +17,7 @@ export default class StartMenu {
 			startmenu.hide();
 		})
 	}
-	add(icon,title,appname,hash=false){
+	add(icon='',title,appname,hash=false){
 		let startmenu = this;
 		let item = {
 			el: $('<item/>'),
