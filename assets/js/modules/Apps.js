@@ -28,6 +28,7 @@ export default class Apps {
 					if(hash){ //if hash
 						if(hash !== md5hash){ //if hash is invalid
 							nos.System.log.error('<strong>hash check failed</strong><br>app		'+appname+'<br>expected	'+hash+'<br>hash		'+md5hash);
+							apps.src[appname] = null;
 							return;
 						}
 						else { //if hash is valid
