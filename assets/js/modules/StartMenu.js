@@ -17,7 +17,7 @@ export default class StartMenu {
 			startmenu.hide();
 		})
 	}
-	add(icon='',title,appname,hash=false){
+	add(icon='',title,appname){
 		let startmenu = this;
 		let item = {
 			el: $('<item/>'),
@@ -28,7 +28,7 @@ export default class StartMenu {
 		item.el.append(item.title.el);
 		startmenu.elements.el.append(nos.autoAppend(item));
 		item.el.on('click',function(event){
-			nos.Apps.run(appname,hash);
+			nos.Apps.run(appname);
 		})
 	}
 	destroy(){
