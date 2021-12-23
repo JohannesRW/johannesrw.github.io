@@ -5,7 +5,7 @@ import User from "./modules/User.js";
 import Apps from "./modules/Apps.js";
 
 window.nos = new class {
-	version = '0.0.1';
+	version = '0.0.2';
 	constructor() {
 		let nos = this;
 		nos.System = new System();
