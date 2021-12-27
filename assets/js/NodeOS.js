@@ -3,36 +3,27 @@ import UI from './modules/UI.js';
 import Window from './modules/Window.js';
 import User from "./modules/User.js";
 import Apps from "./modules/Apps.js";
+import Tools from "./modules/Tools.js";
 
-window.nos = new class {
+window.$$ = new class {
 	version = '0.0.2';
-	constructor() {
-		let nos = this;
-		nos.System = new System();
-		nos.UI = new UI();
-		nos.Apps = new Apps();
-		nos.Window = Window;
-		nos.User = new User();
-	}
+	USERID = null;
+	System = new System();
+	UI = new UI();
+	Apps = new Apps();
+	User = new User();
+	Tools = Tools;
+	Window = Window;
+
+	constructor() {}
 	init(){
-		nos.System.log.info('<strong>NodeOS</strong><br>version		'+this.version+'<br>author		<a href="//github.com/JohannesRW" target="_blank">Johannes Hundt</a>');
-		nos.UI.init();
-		nos.System.checkConnection();
-		nos.Apps.addToStartmenu();
-		nos.autoStart();
+		this.info();
+		this.UI.init();
+		this.System.init();
+		this.Apps.init();
 	}
-	autoStart(){
-		nos.Apps.run('info');
-	}
-	autoAppend(obj,parentElement=false){
-		let returnElement = obj.el||parentElement;
-		$.each(obj,function(key,element){
-			if(key!=='el'){
-				returnElement.append(nos.autoAppend(element,returnElement));
-			}
-		})
-		return returnElement;
+	info(){
+		this.System.log.info('NodeOS',{version:this.version,author:'<a href="//github.com/JohannesRW" target="_blank">Johannes Hundt</a>'});
 	}
 }
-nos.init();
-
+$$.init();

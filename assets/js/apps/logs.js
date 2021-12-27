@@ -1,4 +1,4 @@
-nos.Apps.src.logs = class {
+$$.Apps.src.logs = class {
 	options={
 		appname:'logs',
 		title:'Logs',
@@ -18,18 +18,26 @@ nos.Apps.src.logs = class {
 			error:{el:$('<item/>')},
 		}
 	}
+	menuRight={
+		el:$('<menu/>'),
+		items:{
+			clear:{el:$('<item/>',{html:'Clear logs'})}
+		}
+	}
 	current = 'info';
-	constructor() {
+	constructor(options={}) {
 		let app = this;
-		app.win = new nos.Window(app.options);
-		app.win.setLeft(nos.autoAppend(app.menu));
-		nos.Apps.addCSS('logs');
+		$.extend(true,app.options, options);
+		app.win = new $$.Window(app.options);
+		app.win.setLeft($$.Tools.autoAppend(app.menu));
+		app.win.setRight($$.Tools.autoAppend(app.menuRight));
+		$$.Apps.addCSS('logs');
 		app.listen();
 		app.update();
 	}
 	update(){
 		let app = this;
-		app.logs = nos.System.getLogs();
+		app.logs = $$.System.getLogs();
 		app.menu.items.info.el.html('Info <badge>'+app.logs.info.length+'</badge>');
 		app.menu.items.debug.el.html('Debug <badge>'+app.logs.debug.length+'</badge>');
 		app.menu.items.success.el.html('Success <badge>'+app.logs.success.length+'</badge>');
@@ -46,8 +54,18 @@ nos.Apps.src.logs = class {
 				app.current = key;
 				app.win.setContent();
 				$.each(app.logs[key],function(index,log){
-					app.win.addContent('<pre class="'+key+'">'+log.msg+'<date>'+log.date+' '+log.time+'</date></pre><hr>');
+					let payloadHtml = '';
+					$.each(log.payload,function(payloadKey,payload){
+						payloadHtml += '<br>'+(payloadKey+':').padEnd(15,' ')+JSON.stringify(payload);
+					})
+					app.win.addContent('<pre class="'+key+'"><strong>'+log.msg+'</strong>'+payloadHtml+'<date>'+log.date+' '+log.time+'</date></pre><hr>');
 				})
+			})
+		})
+		$.each(app.menuRight.items,function(key,item){
+			item.el.on('click',function(){
+				$$.System.clearLogs(app.current);
+				app.update();
 			})
 		})
 	}

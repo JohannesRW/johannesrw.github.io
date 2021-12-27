@@ -1,4 +1,4 @@
-nos.Apps.src.calc = class {
+$$.Apps.src.calc = class {
 	previous='';
 	current='';
 	operator='';
@@ -11,7 +11,9 @@ nos.Apps.src.calc = class {
 		status:false,
 		resizable:false,
 		width:{current:320},
-		height:{current:460}
+		height:{current:460},
+		hasLeft: false,
+		hasRight: false
 	}
 	elements={
 		history:{
@@ -51,16 +53,17 @@ nos.Apps.src.calc = class {
 			equals:{el:$('<button/>',{html:'='})}
 		}
 	};
-	constructor() {
+	constructor(options={}) {
 		let app = this;
-		app.win = new nos.Window(app.options);
-		nos.Apps.addCSS('calc');
+		$.extend(true,app.options, options);
+		app.win = new $$.Window(app.options);
+		$$.Apps.addCSS('calc');
 		app.setContent();
 		app.listen();
 	}
 	setContent(){
 		let app = this;
-		nos.autoAppend(app.elements,app.win.elements.content.center.el);
+		$$.Tools.autoAppend(app.elements,app.win.elements.content.center.el);
 	}
 	listen(){
 		let app = this;
@@ -120,7 +123,7 @@ nos.Apps.src.calc = class {
 		app.current = result;
 		app.update();
 	}
-	update(){
+	update(clearCurrent){
 		let app = this;
 		app.elements.display.el.html(app.current);
 	}

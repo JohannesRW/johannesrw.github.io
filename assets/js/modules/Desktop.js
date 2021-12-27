@@ -4,7 +4,7 @@ export default class Desktop {
 	}
 	constructor() {
 		let desktop = this;
-		$('body').append(nos.autoAppend(desktop.elements));
+		$('body').append($$.Tools.autoAppend(desktop.elements));
 	}
 	width(){
 		let desktop = this;

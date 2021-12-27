@@ -21,6 +21,38 @@ body {
   left: 0;
   right: 0;
   position: absolute; }
+  body a {
+    color: #0032c1;
+    text-decoration: none; }
+  body hr {
+    border: 1px solid #d1d1d1;
+    border-top: none;
+    margin: 20px 0; }
+  body form.loginscreen {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #15234a;
+    z-index: 99999;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+    body form.loginscreen input {
+      height: 30px;
+      width: 250px;
+      font-size: 16px;
+      background-color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      outline: none;
+      padding: 5px 10px; }
+    body form.loginscreen button {
+      padding: 10px 10px;
+      width: 272px;
+      margin: 25px;
+      border-radius: 0; }
   body desktop {
     display: flex;
     overflow: hidden; }
@@ -151,15 +183,32 @@ body {
         grid-area: content;
         overflow: hidden; }
         body desktop window content left {
-          overflow: auto;
           grid-area: left;
           border-right: 1px solid #F7F7F7; }
-          body desktop window content left menu {
+        body desktop window content left, body desktop window content right {
+          overflow: auto; }
+          body desktop window content left menu, body desktop window content right menu {
             display: flex;
             margin: 10px 0 0 0;
             flex-direction: column;
             padding: 0; }
-            body desktop window content left menu item {
+            body desktop window content left menu input, body desktop window content right menu input {
+              border-radius: 0;
+              outline: none;
+              border: none;
+              border-bottom: 1px solid #D9D9D9;
+              margin: 0 5px 10px 5px;
+              padding: 0 5px;
+              height: 20px; }
+              body desktop window content left menu input.search, body desktop window content right menu input.search {
+                background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iMzUiCiAgIGhlaWdodD0iMzUiCiAgIHZpZXdCb3g9IjAgMCA5LjI2MDQxNjIgOS4yNjA0MTY5IgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmc1IgogICBpbmtzY2FwZTp2ZXJzaW9uPSIxLjEuMSAoM2JmNWFlMGQyNSwgMjAyMS0wOS0yMCkiCiAgIHNvZGlwb2RpOmRvY25hbWU9InNlYXJjaC5zdmciCiAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIgogICB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIGlkPSJuYW1lZHZpZXc3IgogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBib3JkZXJvcGFjaXR5PSIxLjAiCiAgICAgaW5rc2NhcGU6cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMC4wIgogICAgIGlua3NjYXBlOnBhZ2VjaGVja2VyYm9hcmQ9IjAiCiAgICAgaW5rc2NhcGU6ZG9jdW1lbnQtdW5pdHM9Im1tIgogICAgIHNob3dncmlkPSJmYWxzZSIKICAgICB1bml0cz0icHgiCiAgICAgaW5rc2NhcGU6em9vbT0iMC43MzY4NDQyNiIKICAgICBpbmtzY2FwZTpjeD0iMzQ1LjM5MTg1IgogICAgIGlua3NjYXBlOmN5PSIzMDMuMzIwNTQiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIxOTIwIgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjEwMTciCiAgICAgaW5rc2NhcGU6d2luZG93LXg9Ii04IgogICAgIGlua3NjYXBlOndpbmRvdy15PSItOCIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIxIgogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9ImxheWVyMSIgLz4KICA8ZGVmcwogICAgIGlkPSJkZWZzMiIgLz4KICA8ZwogICAgIGlua3NjYXBlOmxhYmVsPSJFYmVuZSAxIgogICAgIGlua3NjYXBlOmdyb3VwbW9kZT0ibGF5ZXIiCiAgICAgaWQ9ImxheWVyMSI+CiAgICA8ZwogICAgICAgaWQ9ImcxMjI1IgogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTc0LjY4Nzg3OCwtMTM0LjI5NDU1KSI+CiAgICAgIDxlbGxpcHNlCiAgICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuNTI5MTY3O3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lIgogICAgICAgICBpZD0icGF0aDg1OCIKICAgICAgICAgY3g9IjgwLjc0NzI4NCIKICAgICAgICAgY3k9IjEzNy44NDA0MiIKICAgICAgICAgcng9IjIuNjY1MzM4MyIKICAgICAgICAgcnk9IjIuNjY1MzM4IiAvPgogICAgICA8cGF0aAogICAgICAgICBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDowLjUyOTE2NztzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIgogICAgICAgICBkPSJtIDc4LjcyNzQ4NCwxMzkuNzcwNDYgLTMuNjgwNTMxLDMuNTAxIgogICAgICAgICBpZD0icGF0aDExNDEiIC8+CiAgICA8L2c+CiAgPC9nPgo8L3N2Zz4K");
+                background-repeat: no-repeat;
+                background-size: 12px;
+                background-position-y: 5px;
+                padding: 0 5px 0 15px; }
+            body desktop window content left menu hr, body desktop window content right menu hr {
+              margin: 0; }
+            body desktop window content left menu item, body desktop window content right menu item {
               height: 22px;
               border: 1px solid transparent;
               margin: 0 1px;
@@ -168,24 +217,24 @@ body {
               align-items: center;
               padding: 0 5px;
               justify-content: space-between; }
-              body desktop window content left menu item badge {
+              body desktop window content left menu item badge, body desktop window content right menu item badge {
                 background-color: #dddddd;
                 padding: 0 10px;
                 border-radius: 10px;
                 font-size: 11px; }
-              body desktop window content left menu item:hover {
+              body desktop window content left menu item:hover, body desktop window content right menu item:hover {
                 background-color: #E5F3FF;
                 border-color: #E5F3FF; }
-              body desktop window content left menu item.active {
+              body desktop window content left menu item.active, body desktop window content right menu item.active {
                 background-color: #CDE8FF; }
-                body desktop window content left menu item.active:hover {
+                body desktop window content left menu item.active:hover, body desktop window content right menu item.active:hover {
                   border-color: #99D1FF; }
         body desktop window content center {
           overflow: auto;
           padding: 0 5px;
-          grid-area: center; }
+          grid-area: center;
+          text-align: left; }
         body desktop window content right {
-          overflow: auto;
           grid-area: right;
           border-left: 1px solid #F7F7F7; }
       body desktop window status {

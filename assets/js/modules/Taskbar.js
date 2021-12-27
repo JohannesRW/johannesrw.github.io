@@ -19,10 +19,10 @@ export default class Taskbar {
 	constructor(options={}) {
 		let taskbar = this;
 		$.extend(taskbar.options, options);
-		$('body').append(nos.autoAppend(taskbar.elements));
+		$('body').append($$.Tools.autoAppend(taskbar.elements));
 		taskbar.listen();
 		taskbar.startClock();
-		if(nos.System.isMobile()){
+		if($$.System.isMobile()){
 			taskbar.elements.search.el.css({display:'none'});
 		}
 	}
@@ -44,7 +44,7 @@ export default class Taskbar {
 	}
 	updateClock(){
 		let taskbar = this;
-		taskbar.elements.clock.el.html(nos.System.time(false)+(taskbar.options.clock.date?'<br>'+nos.System.date():''));
+		taskbar.elements.clock.el.html($$.System.time(false)+(taskbar.options.clock.date?'<br>'+$$.System.date():''));
 	}
 	stopClock(){
 		let taskbar = this;
@@ -52,9 +52,9 @@ export default class Taskbar {
 	}
 	listen(){
 		let taskbar = this;
-		taskbar.elements.start.el.on('click',function(event){event.stopImmediatePropagation();nos.UI.Startmenu.show();});
+		taskbar.elements.start.el.on('click',function(event){event.stopImmediatePropagation();$$.UI.Startmenu.show();});
 		taskbar.elements.showdesktop.el.on('click',function(){
-			$.each(nos.Apps.running,function(appname,app){
+			$.each($$.Apps.running,function(appname,app){
 				app.win.minimize();
 				taskbar.removeActive();
 			})
@@ -67,6 +67,6 @@ export default class Taskbar {
 	destroy(){
 		let taskbar = this;
 		taskbar.elements.el.remove();
-		nos.System.removeCSS('taskbar');
+		$$.System.removeCSS('taskbar');
 	}
 }

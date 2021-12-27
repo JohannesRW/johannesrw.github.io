@@ -1,0 +1,72 @@
+[
+	{
+		"name": {
+			"first": "Max",
+			"last": "Mustermann"
+		},
+		"website": "MaxMustermann@github.io",
+		"private": {
+			"address": {
+				"street": "Musterstraße",
+				"number": 5,
+				"zip": 12345,
+				"city": "Musterstadt"
+			},
+			"contact": {
+				"mail": "max.mustermann@mail.com",
+				"phone": "0123456789",
+				"mobile": "012345678900"
+			}
+		},
+		"jobs": [{
+			"title": "Systemadministrator",
+			"address": {
+				"company": "Musterfirma GmbH",
+				"street": "Musterstraße",
+				"number": 10,
+				"zip": 12345,
+				"city": "Musterstadt"
+			},
+			"contact": {
+				"mail": "Max@Musterfirma.de",
+				"phone": null,
+				"mobile": null
+			}
+		}]
+	},
+	{
+		"name": {
+			"first": "Martha",
+			"last": "Musterfrau"
+		},
+		"website": "MarthaMusterfrau@github.io",
+		"private": {
+			"address": {
+				"street": "Musterstraße",
+				"number": 5,
+				"zip": 12345,
+				"city": "Musterstadt"
+			},
+			"contact": {
+				"mail": "martha.musterfrau@mail.com",
+				"phone": "0123456789",
+				"mobile": "012345678900"
+			}
+		},
+		"jobs": [{
+			"title": "Systemadministratorin",
+			"address": {
+				"company": "Musterfirma GmbH",
+				"street": "Musterstraße",
+				"number": 10,
+				"zip": 12345,
+				"city": "Musterstadt"
+			},
+			"contact": {
+				"mail": "Martha@Musterfirma.de",
+				"phone": null,
+				"mobile": null
+			}
+		}]
+	}
+]

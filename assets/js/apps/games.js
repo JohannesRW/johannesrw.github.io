@@ -1,4 +1,4 @@
-nos.Apps.src.games = class {
+$$.Apps.src.games = class {
 	options={
 		appname:'games',
 		title:'Games',
@@ -6,6 +6,7 @@ nos.Apps.src.games = class {
 		status:false,
 		resizable:false,
 		maximized:true,
+		hasRight: false
 	}
 	games = {
 		holeio:'//hole-io.com/',
@@ -24,10 +25,11 @@ nos.Apps.src.games = class {
 			amongus:{el:$('<item/>',{html:'Among Us'})},
 		}
 	}
-	constructor() {
+	constructor(options={}) {
 		let app = this;
-		app.win = new nos.Window(app.options);
-		app.win.setLeft(nos.autoAppend(app.menu));
+		$.extend(true,app.options, options);
+		app.win = new $$.Window(app.options);
+		app.win.setLeft($$.Tools.autoAppend(app.menu));
 		app.listen();
 		app.menu.items.holeio.el.click();
 	}
