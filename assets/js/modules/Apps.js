@@ -10,7 +10,7 @@ export default class Apps {
 		logs:'',
 		info:'',
 	};
-	appOptions=false;
+	appOptions= {};
 	constructor() {}
 	init(){
 		$$.UI.Startmenu.add(null,'Logs','logs')
