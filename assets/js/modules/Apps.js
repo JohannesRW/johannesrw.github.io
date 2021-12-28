@@ -7,8 +7,7 @@ export default class Apps {
 	src = {};
 	running = {};
 	hashes={ //hashes for system apps (needs to be updated when changing apps)
-		logs:1247913352,
-		contacts:1444184195,
+		logs:null
 	};
 	appOptions= {};
 	constructor() {}
