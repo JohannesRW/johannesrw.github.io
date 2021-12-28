@@ -66,6 +66,11 @@ export default class Window {
 				}
 			}
 		},
+		ribbons:{
+			el:$('<ribbons/>'),
+			buttons:{el:$('<buttons/>')},
+			content:{el:$('<content/>')}
+		},
 		content: {
 			el:$('<content/>'),
 			left:{
@@ -344,5 +349,21 @@ export default class Window {
 	addRight(el=''){
 		let win = this;
 		win.elements.content.right.el.append(el);
+	}
+	setRibbonButtons(el=''){
+		let win = this;
+		win.elements.ribbons.buttons.el.html(el);
+	}
+	addRibbonButtons(el=''){
+		let win = this;
+		win.elements.ribbons.buttons.el.append(el);
+	}
+	setRibbonContent(el=''){
+		let win = this;
+		win.elements.ribbons.content.el.html(el);
+	}
+	addRibbonContent(el=''){
+		let win = this;
+		win.elements.ribbons.content.el.append(el);
 	}
 }

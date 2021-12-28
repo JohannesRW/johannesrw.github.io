@@ -1,9 +1,10 @@
 import System from './modules/System.js';
 import UI from './modules/UI.js';
-import Window from './modules/Window.js';
 import User from "./modules/User.js";
 import Apps from "./modules/Apps.js";
 import Tools from "./modules/Tools.js";
+
+import Window from './modules/Window.js';
 
 window.$$ = new class {
 	version = '0.0.2';

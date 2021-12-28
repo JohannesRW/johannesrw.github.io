@@ -17,11 +17,27 @@ $$.Apps.src.logs = class {
 			warn:{el:$('<item/>')},
 			error:{el:$('<item/>')},
 		}
-	}
-	menuRight={
-		el:$('<menu/>'),
-		items:{
-			clear:{el:$('<item/>',{html:'Clear logs'})}
+	};
+	ribbons={
+		buttons:{
+			el:$('<menu/>'),
+			logs:{el:$('<item/>',{html:'Logs'})}
+		},
+		content:{
+			logs:{
+				el:$('<menu/>'),
+				info:{el:$('<item/>')},
+				hr01:{el:$('<hr/>')},
+				debug:{el:$('<item/>')},
+				hr02:{el:$('<hr/>')},
+				success:{el:$('<item/>')},
+				hr03:{el:$('<hr/>')},
+				warn:{el:$('<item/>')},
+				hr04:{el:$('<hr/>')},
+				error:{el:$('<item/>')},
+				hr:{el:$('<hr/>')},
+				clear:{el:$('<item/>',{html:'<i class="las la-trash"></i>Clear'})},
+			}
 		}
 	}
 	current = 'info';
@@ -29,27 +45,54 @@ $$.Apps.src.logs = class {
 		let app = this;
 		$.extend(true,app.options, options);
 		app.win = new $$.Window(app.options);
-		app.win.setLeft($$.Tools.autoAppend(app.menu));
-		app.win.setRight($$.Tools.autoAppend(app.menuRight));
+		//app.win.setLeft($$.Tools.autoAppend(app.menu));
+		app.generateRibbons();
 		$$.Apps.addCSS('logs');
 		app.listen();
 		app.update();
 	}
+
+	generateRibbons(){
+		let app = this;
+		app.win.setRibbonButtons($$.Tools.autoAppend(app.ribbons.buttons));
+		app.setRibbon('logs');
+	}
+	setRibbon(key){
+		let app = this;
+		app.ribbons.buttons.el.find('.active').removeClass('active');
+		app.ribbons.buttons[key].el.addClass('active');
+		app.win.setRibbonContent($$.Tools.autoAppend(app.ribbons.content[key]));
+		app.listen();
+	}
 	update(){
 		let app = this;
 		app.logs = $$.System.getLogs();
-		app.menu.items.info.el.html('Info <badge>'+app.logs.info.length+'</badge>');
-		app.menu.items.debug.el.html('Debug <badge>'+app.logs.debug.length+'</badge>');
-		app.menu.items.success.el.html('Success <badge>'+app.logs.success.length+'</badge>');
-		app.menu.items.warn.el.html('Warn <badge>'+app.logs.warn.length+'</badge>');
-		app.menu.items.error.el.html('Error <badge>'+app.logs.error.length+'</badge>');
-		app.menu.items[app.current].el.click();
+		app.ribbons.content.logs.info.el.html('Info <badge>'+app.logs.info.length+'</badge>');
+		app.ribbons.content.logs.debug.el.html('Debug <badge>'+app.logs.debug.length+'</badge>');
+		app.ribbons.content.logs.success.el.html('Success <badge>'+app.logs.success.length+'</badge>');
+		app.ribbons.content.logs.warn.el.html('Warn <badge>'+app.logs.warn.length+'</badge>');
+		app.ribbons.content.logs.error.el.html('Error <badge>'+app.logs.error.length+'</badge>');
+		app.ribbons.content.logs[app.current].el.click();
 	}
 	listen(){
 		let app = this;
-		$.each(app.menu.items,function(key,item){
+		$.each(app.ribbons.buttons,function(key,item){
+			if(!item.el){return;}
 			item.el.on('click',function(){
-				app.menu.el.find('.active').removeClass('active');
+				app.setRibbon(key);
+			})
+		});
+
+		$.each(app.ribbons.content.logs,function(key,item){
+			if(!item.el){return;}
+			item.el.on('click',function(){
+				if(key === 'clear'){
+					$$.System.clearLogs(app.current);
+					app.update();
+					console.log(123);
+					return;
+				}
+				app.ribbons.content.logs.el.find('.active').removeClass('active');
 				item.el.addClass('active');
 				app.current = key;
 				app.win.setContent();
@@ -61,12 +104,6 @@ $$.Apps.src.logs = class {
 					app.win.addContent('<pre class="'+key+'"><strong>'+log.msg+'</strong>'+payloadHtml+'<date>'+log.date+' '+log.time+'</date></pre><hr>');
 				})
 			})
-		})
-		$.each(app.menuRight.items,function(key,item){
-			item.el.on('click',function(){
-				$$.System.clearLogs(app.current);
-				app.update();
-			})
-		})
+		});
 	}
 }

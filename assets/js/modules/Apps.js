@@ -7,8 +7,8 @@ export default class Apps {
 	src = {};
 	running = {};
 	hashes={ //hashes for system apps (needs to be updated when changing apps)
-		logs:'',
-		info:'',
+		logs:1247913352,
+		contacts:1444184195,
 	};
 	appOptions= {};
 	constructor() {}
@@ -80,12 +80,12 @@ export default class Apps {
 	loadSrc(appname){
 		let apps = this;
 		$.getScript( 'assets/js/apps/'+appname+'.js', function(data) {
-			let md5hash = md5(data);
+			let srcHash = $$.System.hash(data);
 			if(apps.hashes[appname]){
 				let hash = apps.hashes[appname];
-				if(hash !== md5hash){
-					console.error('hash check failed: '+md5hash);
-					$$.System.log.error('hash check failed',{app:appname,expected_hash:hash,hash:md5hash});
+				if(hash !== srcHash){
+					console.error('hash check failed: '+srcHash);
+					$$.System.log.error('hash check failed',{app:appname,expected_hash:hash,hash:srcHash});
 					apps.src[appname] = null;
 					return;
 				}
@@ -94,7 +94,7 @@ export default class Apps {
 				}
 			}
 			else {
-				$$.System.log.warn('insecure app load - no hash provided',{app:appname,hash:md5hash});
+				$$.System.log.warn('insecure app load - no hash provided',{app:appname,hash:srcHash});
 			}
 			apps.run(appname);
 		});

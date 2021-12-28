@@ -28,6 +28,13 @@ body {
     border: 1px solid #d1d1d1;
     border-top: none;
     margin: 20px 0; }
+  body badge {
+    background-color: #0066B4;
+    padding: 0 10px;
+    border-radius: 10px;
+    font-size: 11px;
+    margin: 0 0 0 5px;
+    color: #fff; }
   body form.loginscreen {
     position: absolute;
     top: 0;
@@ -40,6 +47,10 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center; }
+    body form.loginscreen label {
+      color: #fff;
+      font-size: 16px;
+      padding: 10px; }
     body form.loginscreen input {
       height: 30px;
       width: 250px;
@@ -52,7 +63,11 @@ body {
       padding: 10px 10px;
       width: 272px;
       margin: 25px;
-      border-radius: 0; }
+      border-radius: 0;
+      outline: none;
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.5); }
   body desktop {
     display: flex;
     overflow: hidden; }
@@ -88,9 +103,9 @@ body {
       position: absolute;
       display: grid;
       grid-template-columns: 1fr;
-      grid-template-rows: auto 1fr auto;
+      grid-template-rows: auto auto 1fr auto;
       gap: 0 0;
-      grid-template-areas: "topbar" "content" "status"; }
+      grid-template-areas: "topbar" "ribbons" "content" "status"; }
       body desktop window resizehandle {
         width: 10px;
         height: 10px;
@@ -133,8 +148,7 @@ body {
         grid-template-rows: 30px;
         gap: 0 0;
         grid-template-areas: "icon title buttons";
-        grid-area: topbar;
-        border-bottom: 1px solid #dadbdc; }
+        grid-area: topbar; }
         body desktop window topbar img {
           grid-area: icon;
           align-self: center;
@@ -174,6 +188,79 @@ body {
             body desktop window topbar buttons [data-window="close"]:hover {
               background-color: #17eedc;
               filter: invert(1); }
+      body desktop window ribbons {
+        grid-area: ribbons;
+        overflow: hidden;
+        border-bottom: 1px solid #dadbdc; }
+        body desktop window ribbons i {
+          font-size: 18px;
+          padding: 0 5px; }
+        body desktop window ribbons buttons menu {
+          margin: 0;
+          padding: 0;
+          display: flex; }
+          body desktop window ribbons buttons menu item {
+            display: block;
+            width: fit-content;
+            padding: 3px 15px;
+            top: 1px;
+            position: relative;
+            margin-right: 1px;
+            border: 1px solid transparent; }
+            body desktop window ribbons buttons menu item:hover {
+              background-color: #FDFDFF;
+              border-color: #EBECEC;
+              border-bottom-color: #DADBDC; }
+            body desktop window ribbons buttons menu item.active {
+              background-color: #F5F6F7;
+              border: 1px solid #DADBDC;
+              border-bottom: 1px solid #F5F6F7; }
+            body desktop window ribbons buttons menu item:first-of-type {
+              margin-right: 0;
+              margin-left: 1px;
+              border: 1px solid #0066B4;
+              background-color: #0066B4;
+              color: #fff; }
+              body desktop window ribbons buttons menu item:first-of-type:hover {
+                background-color: #007DDD;
+                border-color: #007DDD; }
+        body desktop window ribbons content {
+          background-color: #F5F6F7;
+          border-top: 1px solid #DADBDC;
+          overflow: auto; }
+          body desktop window ribbons content:empty {
+            border: none; }
+          body desktop window ribbons content::-webkit-scrollbar {
+            width: 3px;
+            height: 3px; }
+          body desktop window ribbons content::-webkit-scrollbar-track {
+            background: transparent; }
+          body desktop window ribbons content::-webkit-scrollbar-thumb {
+            background: #bbb; }
+          body desktop window ribbons content::-webkit-scrollbar-thumb:hover {
+            background: #a4a4a4; }
+          body desktop window ribbons content menu {
+            display: flex;
+            min-height: 50px;
+            max-height: 90px;
+            margin: 5px;
+            padding: 0; }
+            body desktop window ribbons content menu hr {
+              margin: 0 5px;
+              border: 1px solid #E3E4E5;
+              border-left: 0;
+              padding: 0; }
+            body desktop window ribbons content menu item {
+              padding: 0 10px;
+              display: flex;
+              align-items: center;
+              border: 1px solid transparent; }
+              body desktop window ribbons content menu item:hover {
+                background-color: #E8EFF7;
+                border: 1px solid #A4CEF9; }
+              body desktop window ribbons content menu item.active {
+                background-color: #C9E0F7;
+                border: 1px solid #62A2E4; }
       body desktop window content {
         display: grid;
         grid-template-columns: auto 1fr auto;
@@ -217,11 +304,6 @@ body {
               align-items: center;
               padding: 0 5px;
               justify-content: space-between; }
-              body desktop window content left menu item badge, body desktop window content right menu item badge {
-                background-color: #dddddd;
-                padding: 0 10px;
-                border-radius: 10px;
-                font-size: 11px; }
               body desktop window content left menu item:hover, body desktop window content right menu item:hover {
                 background-color: #E5F3FF;
                 border-color: #E5F3FF; }
