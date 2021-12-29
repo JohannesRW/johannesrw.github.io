@@ -11,6 +11,5 @@ $$.Apps.src.settings = class {
 		let app = this;
 		$.extend(true,app.options, options);
 		app.win = new $$.Window(app.options);
-		app.win.setContent('SETTINGS');
 	}
 }

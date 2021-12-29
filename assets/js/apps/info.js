@@ -14,30 +14,31 @@ $$.Apps.src.info = class {
 		author:'<h2>Johannes Hundt</h2><a href="mailto:hundt.johannes@gmail.com">hundt.johannes@gmail.com</a>',
 		github:'<a href="//github.com/JohannesRW" target="_blank"><img src="assets/img/github.png" width="80%">JohannesRW@GitHub.com</a>',
 	};
-	menu={
-		el:$('<menu/>'),
-		items:{
-			about:{el:$('<item/>',{html:'About NOS'})},
-			author:{el:$('<item/>',{html:'Author'})},
-			github:{el:$('<item/>',{html:'GitHub'})},
-		}
+	elements={
+		menu: [
+			{title:'About',callback:()=>this.setContent('about')},
+			{title:'Author',callback:()=>this.setContent('author')},
+			{title:'GitHub',callback:()=>this.setContent('github')},
+		]
 	}
 	constructor(options={}) {
 		let app = this;
-		$.extend(true,app.options, options);
+		$.extend(true, app.options, options);
 		app.win = new $$.Window(app.options);
-		app.win.setLeft($$.Tools.autoAppend(app.menu));
-		app.listen();
-		app.menu.items.about.el.click();
+		app.init();
 	}
-	listen(){
+	init(){
 		let app = this;
-		$.each(app.menu.items,function(key,item){
-			item.el.on('click',function(){
-				app.menu.el.find('.active').removeClass('active');
-				item.el.addClass('active');
-				app.win.setContent(app.content[key]);
-			})
-		})
+		app.setMenu();
+		app.setContent('about');
+	}
+	setMenu(){
+		let app = this;
+		app.menu = new $$.Menu({},app.elements.menu,app);
+		app.win.setLeft(app.menu.el);
+	}
+	setContent(key){
+		let app = this;
+		app.win.setContent(app.content[key]);
 	}
 }

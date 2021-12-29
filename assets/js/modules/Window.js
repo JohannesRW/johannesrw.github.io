@@ -366,4 +366,9 @@ export default class Window {
 		let win = this;
 		win.elements.ribbons.content.el.append(el);
 	}
+	scrollContent(){
+		let win = this;
+		win.elements.content.center.el.scrollTop(win.elements.content.center.el[0].scrollHeight);
+		//win.elements.content.center.el.animate({ scrollTop: win.elements.content.center.el.prop("scrollHeight")}, 500);
+	}
 }

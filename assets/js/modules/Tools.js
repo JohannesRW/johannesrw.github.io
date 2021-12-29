@@ -4,6 +4,9 @@ export default class Tools {
 		let tools = this;
 		let returnElement = obj.el||parentElement;
 		$.each(obj,function(key,element){
+			if(key == 'callback'){
+				return;
+			}
 			if(key!=='el'){
 				returnElement.append(tools.autoAppend(element,returnElement));
 			}

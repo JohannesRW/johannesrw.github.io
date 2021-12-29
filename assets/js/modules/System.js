@@ -80,7 +80,6 @@ export default class System {
 			system.log.success('MongoDB connection established')
 			system.elements.status.mongodb.el.attr('src',system.elements.status.mongodb.success);
 			system.elements.status.mongodb.el.attr('title','MongoDB connection established.');
-			//system.login('johanneshundt',123);
 			system.login();
 		}).fail(function() {
 			system.database = false;

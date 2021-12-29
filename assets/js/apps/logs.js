@@ -8,102 +8,62 @@ $$.Apps.src.logs = class {
 		width:{current:500},
 		height:{current:450},
 	};
-	menu={
-		el:$('<menu/>'),
-		items:{
-			info:{el:$('<item/>')},
-			debug:{el:$('<item/>')},
-			success:{el:$('<item/>')},
-			warn:{el:$('<item/>')},
-			error:{el:$('<item/>')},
-		}
-	};
-	ribbons={
-		buttons:{
-			el:$('<menu/>'),
-			logs:{el:$('<item/>',{html:'Logs'})}
-		},
-		content:{
-			logs:{
-				el:$('<menu/>'),
-				info:{el:$('<item/>')},
-				hr01:{el:$('<hr/>')},
-				debug:{el:$('<item/>')},
-				hr02:{el:$('<hr/>')},
-				success:{el:$('<item/>')},
-				hr03:{el:$('<hr/>')},
-				warn:{el:$('<item/>')},
-				hr04:{el:$('<hr/>')},
-				error:{el:$('<item/>')},
-				hr:{el:$('<hr/>')},
-				clear:{el:$('<item/>',{html:'<i class="las la-trash"></i>Clear'})},
-			}
-		}
-	}
 	current = 'info';
+	elements={
+		ribbon: [
+			{
+				title:'Logs',
+				items:[
+					{title:'Info',icon:'las la-user-plus',callback:()=>this.setLogs('info')},
+					{title:'Debug',icon:'las la-user-edit',callback:()=>this.setLogs('debug')},
+					{title:'Success',icon:'las la-id-badge',callback:()=>this.setLogs('success')},
+					{title:'Warn',icon:'las la-user-times',callback:()=>this.setLogs('warn')},
+					{title:'Error',icon:'las la-user-times',callback:()=>this.setLogs('error')},
+					{title:'Clear',icon:'las la-user-times',noActive:true,callback:this.clearLogs}
+				]
+			}
+		],
+	}
 	constructor(options={}) {
 		let app = this;
 		$.extend(true,app.options, options);
-		app.win = new $$.Window(app.options);
-		//app.win.setLeft($$.Tools.autoAppend(app.menu));
-		app.generateRibbons();
 		$$.Apps.addCSS('logs');
-		app.listen();
+		app.win = new $$.Window(app.options);
+		app.init();
+	}
+	init(){
+		let app = this;
+		app.setRibbon();
 		app.update();
 	}
 
-	generateRibbons(){
+	setRibbon(){
 		let app = this;
-		app.win.setRibbonButtons($$.Tools.autoAppend(app.ribbons.buttons));
-		app.setRibbon('logs');
+		app.ribbon = new $$.Ribbon({},app.elements.ribbon,app);
 	}
-	setRibbon(key){
+	setLogs(key){
 		let app = this;
-		app.ribbons.buttons.el.find('.active').removeClass('active');
-		app.ribbons.buttons[key].el.addClass('active');
-		app.win.setRibbonContent($$.Tools.autoAppend(app.ribbons.content[key]));
-		app.listen();
+		app.current = key;
+		app.win.setContent();
+		$.each(app.logs[key],function(index,log){
+			let payloadHtml = '';
+			$.each(log.payload,function(payloadKey,payload){
+				payloadHtml += '<br>'+(payloadKey+':').padEnd(15,' ')+JSON.stringify(payload);
+			})
+			app.win.addContent('<pre class="'+key+'"><strong>'+log.msg+'</strong>'+payloadHtml+'<date>'+log.date+' '+log.time+'</date></pre><hr>');
+		})
+		app.win.scrollContent();
+	}
+
+	clearLogs(key=null){
+		let app = this;
+		key = key||app.current;
+		$$.System.clearLogs(key);
+		app.update();
 	}
 	update(){
 		let app = this;
 		app.logs = $$.System.getLogs();
-		app.ribbons.content.logs.info.el.html('Info <badge>'+app.logs.info.length+'</badge>');
-		app.ribbons.content.logs.debug.el.html('Debug <badge>'+app.logs.debug.length+'</badge>');
-		app.ribbons.content.logs.success.el.html('Success <badge>'+app.logs.success.length+'</badge>');
-		app.ribbons.content.logs.warn.el.html('Warn <badge>'+app.logs.warn.length+'</badge>');
-		app.ribbons.content.logs.error.el.html('Error <badge>'+app.logs.error.length+'</badge>');
-		app.ribbons.content.logs[app.current].el.click();
-	}
-	listen(){
-		let app = this;
-		$.each(app.ribbons.buttons,function(key,item){
-			if(!item.el){return;}
-			item.el.on('click',function(){
-				app.setRibbon(key);
-			})
-		});
-
-		$.each(app.ribbons.content.logs,function(key,item){
-			if(!item.el){return;}
-			item.el.on('click',function(){
-				if(key === 'clear'){
-					$$.System.clearLogs(app.current);
-					app.update();
-					console.log(123);
-					return;
-				}
-				app.ribbons.content.logs.el.find('.active').removeClass('active');
-				item.el.addClass('active');
-				app.current = key;
-				app.win.setContent();
-				$.each(app.logs[key],function(index,log){
-					let payloadHtml = '';
-					$.each(log.payload,function(payloadKey,payload){
-						payloadHtml += '<br>'+(payloadKey+':').padEnd(15,' ')+JSON.stringify(payload);
-					})
-					app.win.addContent('<pre class="'+key+'"><strong>'+log.msg+'</strong>'+payloadHtml+'<date>'+log.date+' '+log.time+'</date></pre><hr>');
-				})
-			})
-		});
+		app.setLogs(app.current);
 	}
 }
