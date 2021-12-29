@@ -1,6 +1,6 @@
 let i18n = {
 	title:'Contacts',
-	address:'Address',
+	file:'Contact',
 	contact:{
 		website:'Website',
 		street:'Street',
@@ -18,36 +18,13 @@ let i18n = {
 	actions:{
 		add:'Add',
 		edit:'Edit',
+		copy:'Copy',
 		share:'Share',
 		delete:'Delete'
 	},
-	save:'Save'
+	save:'Save',
+	saveCopy:'Save copy'
 }
-/*let i18n = {
-	title:'Kontakte',
-	address:'Anschrift',
-	contact:{
-		website:'Webseite',
-		street:'Straße',
-		number:'Nummer',
-		zip:'PLZ',
-		city:'Ort',
-		email:'E-Mail',
-		phone:'Telefon',
-		mobile:'Mobil',
-		name:{
-			first:'Vorname',
-			last:'Nachname',
-		},
-	},
-	actions:{
-		add:'Hinzufügen',
-		edit:'Bearbeiten',
-		share:'Teilen',
-		delete:'Löschen'
-	},
-	save:'Speichern'
-}*/
 
 $$.Apps.src.contacts = class {
 	options = {
@@ -64,12 +41,13 @@ $$.Apps.src.contacts = class {
 		menu: [],
 		ribbon: [
 			{
-				title:i18n.contact,
+				title:i18n.file,
 				items:[
-					{title:i18n.actions.add,icon:'las la-user-plus',callback:this.addContact},
-					{title:i18n.actions.edit,icon:'las la-user-edit',callback:this.editContact},
-					{title:i18n.actions.share,icon:'las la-id-badge',callback:this.shareContact},
-					{title:i18n.actions.delete,icon:'las la-user-times',callback:this.deleteContact},
+					{title:i18n.actions.add,icon:'las la-plus',callback:this.addContact},
+					{title:i18n.actions.edit,icon:'las la-edit',callback:this.editContact},
+					{title:i18n.actions.copy,icon:'las la-copy',callback:()=>this.editContact(null,true)},
+					{title:i18n.actions.share,icon:'las la-share-alt',callback:this.shareContact},
+					{title:i18n.actions.delete,icon:'las la-times',callback:this.deleteContact},
 				]
 			}
 		],
@@ -140,6 +118,7 @@ $$.Apps.src.contacts = class {
 			}
 		},
 	}
+
 	constructor(options = {}) {
 		let app = this;
 		$.extend(true, app.options, options);
@@ -183,7 +162,7 @@ $$.Apps.src.contacts = class {
 		let app = this;
 		app.current = contact;
 		let content = '<h1>' + contact.name.first + ' ' + contact.name.last + '</h1>' +
-			'<h3>'+i18n.address+'</h3>' +
+			'<h3>'+i18n.file+'</h3>' +
 			contact.private.address.street + ' ' + contact.private.address.number + '<br>' +
 			contact.private.address.zip + ' ' + contact.private.address.city + '<br><br>' +
 			(contact.private.contact.mail ? '<strong>'+i18n.contact.email+'</strong><br><a href="mailto:' + contact.private.contact.mail + '">' + contact.private.contact.mail + '</a><br>' : '') +
@@ -200,12 +179,12 @@ $$.Apps.src.contacts = class {
 		})
 		app.win.setContent(content);
 	}
-	editContact(contact=null){
+	editContact(contact=null,copy=false){
 		let app = this;
 		contact = contact||app.current;
 		if(!contact){return;}
 		let formValues = {
-			'id':contact._id,
+			'id':!copy?contact._id:null,
 			'name[first]':contact.name.first,
 			'name[last]':contact.name.last,
 			'website':contact.website,
@@ -219,7 +198,7 @@ $$.Apps.src.contacts = class {
 		}
 		let options = {
 			buttons:{
-				save:{label:i18n.save,icon:'las la-save',callback:app.saveContact}
+				save:{label:!copy?i18n.save:i18n.saveCopy,icon:'las la-save',callback:app.saveContact}
 			}
 		}
 		app.form = new $$.Form(options,app.elements.form,app);
