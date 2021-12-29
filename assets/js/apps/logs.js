@@ -14,11 +14,11 @@ $$.Apps.src.logs = class {
 			{
 				title:'Logs',
 				items:[
-					{title:'Info',callback:()=>this.setLogs('info')},
-					{title:'Debug',callback:()=>this.setLogs('debug')},
-					{title:'Success',callback:()=>this.setLogs('success')},
-					{title:'Warn',callback:()=>this.setLogs('warn')},
-					{title:'Error',callback:()=>this.setLogs('error')}
+					{title:'Info',icon:'las la-file-alt',callback:()=>this.setLogs('info')},
+					{title:'Debug',icon:'las la-file-alt',callback:()=>this.setLogs('debug')},
+					{title:'Success',icon:'las la-file-alt',callback:()=>this.setLogs('success')},
+					{title:'Warn',icon:'las la-file-alt',callback:()=>this.setLogs('warn')},
+					{title:'Error',icon:'las la-file-alt',callback:()=>this.setLogs('error')}
 				]
 			},
 			{
