@@ -13,6 +13,7 @@ export default class Menu {
 	}
 	build() {
 		let menu = this;
+		let count = 0;
 		menu.elements.el = menu.el = $('<menu/>');
 		if(menu.options.search){
 			menu.elements.search = {el: $('<input>', {type: 'text', class: 'search'})};
@@ -33,7 +34,9 @@ export default class Menu {
 				menu.elements[key].el.addClass('active');
 				item.callback.call(menu.app);
 			});
-		})
+			count++;
+		});
+		menu.app.win.setStatus('Showing ' + count + ' of ' + count + ' Items');
 	}
 	search(query) {
 		let menu = this;

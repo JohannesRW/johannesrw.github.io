@@ -14,12 +14,17 @@ $$.Apps.src.logs = class {
 			{
 				title:'Logs',
 				items:[
-					{title:'Info',icon:'las la-user-plus',callback:()=>this.setLogs('info')},
-					{title:'Debug',icon:'las la-user-edit',callback:()=>this.setLogs('debug')},
-					{title:'Success',icon:'las la-id-badge',callback:()=>this.setLogs('success')},
-					{title:'Warn',icon:'las la-user-times',callback:()=>this.setLogs('warn')},
-					{title:'Error',icon:'las la-user-times',callback:()=>this.setLogs('error')},
-					{title:'Clear',icon:'las la-user-times',noActive:true,callback:this.clearLogs}
+					{title:'Info',callback:()=>this.setLogs('info')},
+					{title:'Debug',callback:()=>this.setLogs('debug')},
+					{title:'Success',callback:()=>this.setLogs('success')},
+					{title:'Warn',callback:()=>this.setLogs('warn')},
+					{title:'Error',callback:()=>this.setLogs('error')}
+				]
+			},
+			{
+				title:'Tools',
+				items:[
+					{title:'Clear',icon:'las la-times',noActive:true,callback:this.clearLogs}
 				]
 			}
 		],
