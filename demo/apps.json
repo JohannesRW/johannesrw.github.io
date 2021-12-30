@@ -1,4 +1,10 @@
 {
+	"logs": {
+		"icon": "fa-duotone fa-file-waveform",
+		"run": "logs",
+		"title": "Logs",
+		"_id": "61cd9db5941469e5d67f0fd0"
+	},
 	"contacts": {
 		"icon": "fa-duotone fa-address-book",
 		"run": "contacts",
