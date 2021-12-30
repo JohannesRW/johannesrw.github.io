@@ -17,17 +17,21 @@ export class System {
 		},
 		loginScreen: {
 			el: $('<form>', {class: 'loginscreen', css: {display: 'none'}}),
+			logo:{el:$('<img/>',{src:'assets/img/nos.png'})},
+			title:{el:$('<h1/>',{html:'NodeOS'})},
 			username: {
-				label: {el: $('<label>', {html: 'Username'})},
-				input: {el: $('<input>', {type: 'text'})}
+				input: {el: $('<input>', {type: 'text',placeholder:'Username'})}
 			},
-			password: {
-				label: {el: $('<label>', {html: 'Password'})},
-				input: {el: $('<input>', {type: 'password'})}
-			},
-			button: {
-				el: $('<button>', {type: 'submit', html: 'Login'})
+			group:{
+				el:$('<group/>'),
+				password: {
+					input: {el: $('<input>', {type: 'password',placeholder:'Password'})}
+				},
+				button: {
+					el: $('<button>', {type: 'submit', html: '<i class="fa-light fa-arrow-right"></i>'})
+				}
 			}
+
 		}
 	}
 	database = false;
@@ -88,7 +92,7 @@ export class System {
 		system.elements.loginScreen.el.on('submit', function (event) {
 			event.preventDefault();
 			let username = system.elements.loginScreen.username.input.el.val();
-			let password = system.elements.loginScreen.password.input.el.val();
+			let password = system.elements.loginScreen.group.password.input.el.val();
 			$$.User.login(username, password);
 		})
 	}

@@ -43,32 +43,41 @@ body form.loginscreen {
   left: 0;
   right: 0;
   background-color: #15234a;
+  background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5)), url("/assets/img/wallpaper/default.jpg");
   z-index: 99999;
   display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center; }
-  body form.loginscreen label {
-    color: #fff;
-    font-size: 16px;
-    padding: 10px; }
-  body form.loginscreen input {
-    height: 30px;
+  body form.loginscreen img {
     width: 250px;
-    font-size: 16px;
+    margin-top: -150px;
+    filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.5)); }
+  body form.loginscreen h1 {
+    color: #fff;
+    font-weight: 100;
+    font-size: 40px; }
+  body form.loginscreen input {
+    height: 35px;
+    width: 300px;
+    font-size: 14px;
     background-color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     outline: none;
-    padding: 5px 10px; }
-  body form.loginscreen button {
-    padding: 10px 10px;
-    width: 272px;
-    margin: 25px;
+    padding: 0 10px;
+    margin: 10px; }
+  body form.loginscreen group input {
+    width: 263px;
+    margin-right: 0; }
+  body form.loginscreen group button {
+    height: 37px;
+    width: 37px;
     border-radius: 0;
     outline: none;
     color: #fff;
-    background-color: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.5); }
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    margin-right: 10px; }
 
 desktop {
   display: flex;
