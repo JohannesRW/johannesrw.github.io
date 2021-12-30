@@ -8,7 +8,7 @@ window.$$ = new class {
 	//core
 	System = new System();
 	Apps = new Apps();
-	//ui
+	//ui components
 	Desktop = new Desktop();
 	Taskbar = new Taskbar();
 	StartMenu = new StartMenu();
