@@ -1,36 +1,33 @@
-import System from './modules/System.js';
-import UI from './modules/UI.js';
-import Apps from "./modules/Apps.js";
-import Tools from "./modules/Tools.js";
-import Window from './modules/Window.js';
-import Ribbon from './modules/Ribbon.js';
-import Form from './modules/Form.js';
-import Menu from './modules/Menu.js';
+import {System,Apps} from './modules/Core.js';
+import {Desktop,Taskbar,StartMenu} from './modules/Ui.js';
+import {Window,Ribbon,Form,Menu,Tools} from './modules/Runtime.js';
 
 window.$$ = new class {
 	version = '0.0.2';
 	USERID = null;
+	//core
+	System = new System();
+	Apps = new Apps();
+	//ui
+	Desktop = new Desktop();
+	Taskbar = new Taskbar();
+	StartMenu = new StartMenu();
+	//runtime
 	Window = Window;
 	Ribbon = Ribbon;
 	Form = Form;
 	Menu = Menu;
 	Tools = Tools;
-	System = new System();
-	UI = new UI();
-	Apps = new Apps();
-	constructor() {
-	}
+
 	init() {
-		this.info();
-		this.UI.init();
-		this.System.init();
-		this.Apps.init();
-	}
-	info() {
-		this.System.log.info('NodeOS', {
-			version: this.version,
-			author: '<a href="//github.com/JohannesRW" target="_blank">Johannes Hundt</a>'
-		});
+		let os = this;
+		//core
+		os.System.init();
+		os.Apps.init();
+		//ui
+		os.Desktop.init();
+		os.Taskbar.init();
+		os.StartMenu.init();
 	}
 }
 $$.init();

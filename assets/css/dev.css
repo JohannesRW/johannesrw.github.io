@@ -149,13 +149,13 @@ body {
         gap: 0 0;
         grid-template-areas: "icon title buttons";
         grid-area: topbar; }
-        body desktop window topbar img {
+        body desktop window topbar i {
           grid-area: icon;
           align-self: center;
           justify-self: center;
-          height: 16px;
-          color: rgba(0, 0, 0, 0.7);
-          margin: 0 -5px 0 5px; }
+          margin: 0 -5px 0 5px;
+          font-size: 16px;
+          color: #444444; }
         body desktop window topbar title {
           margin-left: 10px;
           font-size: 13px;
@@ -166,7 +166,8 @@ body {
           grid-area: title;
           color: #000;
           display: block;
-          align-self: center; }
+          align-self: center;
+          height: 20px; }
         body desktop window topbar buttons {
           grid-area: buttons;
           display: flex;
@@ -370,27 +371,21 @@ body {
     gap: 0 0;
     grid-template-areas: "start search apps info clock showdesktop";
     grid-area: taskbar; }
-    body taskbar img {
-      color: #ffffff;
-      width: 24px;
-      margin-right: 2px;
-      display: flex;
-      align-items: center;
-      padding: 0 12px;
-      border-top: 2px solid transparent;
-      border-bottom: 2px solid transparent; }
-      body taskbar img:hover {
-        background-color: rgba(255, 255, 255, 0.15); }
     body taskbar start {
       grid-area: start;
       width: 48px;
-      background-repeat: no-repeat;
-      background-size: 18px;
-      background-position: center;
-      background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iMzUiCiAgIGhlaWdodD0iMzUiCiAgIHZpZXdCb3g9IjAgMCA5LjI2MDQxOTggOS4yNjA0MTY5IgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmc1IgogICBpbmtzY2FwZTp2ZXJzaW9uPSIxLjEuMSAoM2JmNWFlMGQyNSwgMjAyMS0wOS0yMCkiCiAgIHNvZGlwb2RpOmRvY25hbWU9IndpbmRvd3Muc3ZnIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxzb2RpcG9kaTpuYW1lZHZpZXcKICAgICBpZD0ibmFtZWR2aWV3NyIKICAgICBwYWdlY29sb3I9IiNmZmZmZmYiCiAgICAgYm9yZGVyY29sb3I9IiM2NjY2NjYiCiAgICAgYm9yZGVyb3BhY2l0eT0iMS4wIgogICAgIGlua3NjYXBlOnBhZ2VzaGFkb3c9IjIiCiAgICAgaW5rc2NhcGU6cGFnZW9wYWNpdHk9IjAuMCIKICAgICBpbmtzY2FwZTpwYWdlY2hlY2tlcmJvYXJkPSIwIgogICAgIGlua3NjYXBlOmRvY3VtZW50LXVuaXRzPSJtbSIKICAgICBzaG93Z3JpZD0iZmFsc2UiCiAgICAgdW5pdHM9InB4IgogICAgIGlua3NjYXBlOnpvb209IjYuNzU1MTU4OSIKICAgICBpbmtzY2FwZTpjeD0iMjQuMDU1Njg5IgogICAgIGlua3NjYXBlOmN5PSI1My4zNjY2MjEiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIxOTIwIgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjEwMTciCiAgICAgaW5rc2NhcGU6d2luZG93LXg9Ii04IgogICAgIGlua3NjYXBlOndpbmRvdy15PSItOCIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIxIgogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9ImxheWVyMSIgLz4KICA8ZGVmcwogICAgIGlkPSJkZWZzMiIgLz4KICA8ZwogICAgIGlua3NjYXBlOmxhYmVsPSJFYmVuZSAxIgogICAgIGlua3NjYXBlOmdyb3VwbW9kZT0ibGF5ZXIiCiAgICAgaWQ9ImxheWVyMSI+CiAgICA8ZwogICAgICAgaWQ9Imc1MjE4IgogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEuNzYyNTQxOCwtMC45NDAwMjIzMikiPgogICAgICA8cGF0aAogICAgICAgICBzdHlsZT0iZmlsbDojZmZmZmZmO2ZpbGwtb3BhY2l0eToxO3N0cm9rZTojZmZmZmZmO3N0cm9rZS13aWR0aDowLjEzMjI5MjtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIgogICAgICAgICBkPSJtIDIuMTIzMzkyNiw4LjYwMTcwNjQgMy4zNTMyMjMsMC40MzI2NTMgLTEuN2UtNSwtMy4yMzMwMTUgLTMuMzUzMjI0LC0wLjAxMjAzIHoiCiAgICAgICAgIGlkPSJwYXRoODY5IgogICAgICAgICBzb2RpcG9kaTpub2RldHlwZXM9ImNjY2NjIiAvPgogICAgICA8cGF0aAogICAgICAgICBzdHlsZT0iZmlsbDojZmZmZmZmO2ZpbGwtb3BhY2l0eToxO3N0cm9rZTojZmZmZmZmO3N0cm9rZS13aWR0aDowLjEzMjI5MjtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIgogICAgICAgICBkPSJtIDIuMTIzMzc1Niw1LjQyODc1NzQgMy4zNjUyMzYsMS44N2UtNCAwLjAyMzk0LC0zLjM2NTQxMyAtMy4zNzcxNzksMC4zMzY2MDQgeiIKICAgICAgICAgaWQ9InBhdGg4NjktNSIKICAgICAgICAgc29kaXBvZGk6bm9kZXR5cGVzPSJjY2NjYyIgLz4KICAgICAgPHBhdGgKICAgICAgICAgc3R5bGU9ImZpbGw6I2ZmZmZmZjtmaWxsLW9wYWNpdHk6MTtzdHJva2U6I2ZmZmZmZjtzdHJva2Utd2lkdGg6MC4xMzIyOTI7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlLW1pdGVybGltaXQ6NDtzdHJva2UtZGFzaGFycmF5Om5vbmU7c3Ryb2tlLW9wYWNpdHk6MSIKICAgICAgICAgZD0ibSA1Ljg0OTI2NTYsOS4wNjY0OTA0IDQuNjM4NjAzNCwwLjYwMDgzMiAtMi4zZS01LC0zLjg4MTcxMiAtNC42MTQ1Nzc0LDAuMDI0MDIgeiIKICAgICAgICAgaWQ9InBhdGg4NjktMiIKICAgICAgICAgc29kaXBvZGk6bm9kZXR5cGVzPSJjY2NjYyIgLz4KICAgICAgPHBhdGgKICAgICAgICAgc3R5bGU9ImZpbGw6I2ZmZmZmZjtmaWxsLW9wYWNpdHk6MTtzdHJva2U6I2ZmZmZmZjtzdHJva2Utd2lkdGg6MC4xMzIyOTI7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlLW1pdGVybGltaXQ6NDtzdHJva2UtZGFzaGFycmF5Om5vbmU7c3Ryb2tlLW9wYWNpdHk6MSIKICAgICAgICAgZD0ibSA1Ljg3MzI2NzYsNS40MDA5MjY0IDQuNjAzMTYxNCwwLjAxMjAzIC0zLjRlLTUsLTQuMDM4MzE4IC00LjYwMzE2MTQsMC42MTMwMDcgeiIKICAgICAgICAgaWQ9InBhdGg4NjktMSIKICAgICAgICAgc29kaXBvZGk6bm9kZXR5cGVzPSJjY2NjYyIgLz4KICAgIDwvZz4KICA8L2c+Cjwvc3ZnPgo="); }
+      display: flex; }
+      body taskbar start i {
+        color: #fff;
+        align-self: center;
+        justify-self: center;
+        text-align: center;
+        width: 100%;
+        font-size: 18px; }
       body taskbar start:hover {
-        background-color: rgba(255, 255, 255, 0.15);
-        background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iMzUiCiAgIGhlaWdodD0iMzUiCiAgIHZpZXdCb3g9IjAgMCA5LjI2MDQxOTggOS4yNjA0MTY5IgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmc1IgogICBzb2RpcG9kaTpkb2NuYW1lPSJ3aW5kb3dzX2JsdWUuc3ZnIgogICBpbmtzY2FwZTp2ZXJzaW9uPSIxLjEuMSAoM2JmNWFlMGQyNSwgMjAyMS0wOS0yMCkiCiAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIgogICB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIGlkPSJuYW1lZHZpZXc3IgogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBib3JkZXJvcGFjaXR5PSIxLjAiCiAgICAgaW5rc2NhcGU6cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMC4wIgogICAgIGlua3NjYXBlOnBhZ2VjaGVja2VyYm9hcmQ9IjAiCiAgICAgaW5rc2NhcGU6ZG9jdW1lbnQtdW5pdHM9Im1tIgogICAgIHNob3dncmlkPSJmYWxzZSIKICAgICB1bml0cz0icHgiCiAgICAgaW5rc2NhcGU6em9vbT0iNi43NTUxNTg5IgogICAgIGlua3NjYXBlOmN4PSIyNC4wNTU2ODkiCiAgICAgaW5rc2NhcGU6Y3k9IjUzLjM2NjYyMSIKICAgICBpbmtzY2FwZTp3aW5kb3ctd2lkdGg9IjE5MjAiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0iMTAxNyIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0iLTgiCiAgICAgaW5rc2NhcGU6d2luZG93LXk9Ii04IgogICAgIGlua3NjYXBlOndpbmRvdy1tYXhpbWl6ZWQ9IjEiCiAgICAgaW5rc2NhcGU6Y3VycmVudC1sYXllcj0ic3RhcnRJY29uIiAvPgogIDxkZWZzCiAgICAgaWQ9ImRlZnMyIiAvPgogIDxnCiAgICAgaW5rc2NhcGU6bGFiZWw9IkViZW5lIDEiCiAgICAgaW5rc2NhcGU6Z3JvdXBtb2RlPSJsYXllciIKICAgICBpZD0ibGF5ZXIxIj4KICAgIDxnCiAgICAgICBpZD0ic3RhcnRJY29uIgogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEuNzYyNTQxOCwtMC45NDAwMjIzMikiPgogICAgICA8cGF0aAogICAgICAgICBzdHlsZT0iZmlsbDojNDI5Y2UzO2ZpbGwtb3BhY2l0eToxO3N0cm9rZTojNDI5Y2UzO3N0cm9rZS13aWR0aDowLjEzMjI5MjtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIgogICAgICAgICBkPSJtIDIuMTIzMzkyNiw4LjYwMTcwNjQgMy4zNTMyMjMsMC40MzI2NTMgLTEuN2UtNSwtMy4yMzMwMTUgLTMuMzUzMjI0LC0wLjAxMjAzIHoiCiAgICAgICAgIGlkPSJwYXRoODY5IgogICAgICAgICBzb2RpcG9kaTpub2RldHlwZXM9ImNjY2NjIiAvPgogICAgICA8cGF0aAogICAgICAgICBzdHlsZT0iZmlsbDojNDI5Y2UzO2ZpbGwtb3BhY2l0eToxO3N0cm9rZTojNDI5Y2UzO3N0cm9rZS13aWR0aDowLjEzMjI5MjtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIgogICAgICAgICBkPSJtIDIuMTIzMzc1Niw1LjQyODc1NzQgMy4zNjUyMzYsMS44N2UtNCAwLjAyMzk0LC0zLjM2NTQxMyAtMy4zNzcxNzksMC4zMzY2MDQgeiIKICAgICAgICAgaWQ9InBhdGg4NjktNSIKICAgICAgICAgc29kaXBvZGk6bm9kZXR5cGVzPSJjY2NjYyIgLz4KICAgICAgPHBhdGgKICAgICAgICAgc3R5bGU9ImZpbGw6IzQyOWNlMztmaWxsLW9wYWNpdHk6MTtzdHJva2U6IzQyOWNlMztzdHJva2Utd2lkdGg6MC4xMzIyOTI7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlLW1pdGVybGltaXQ6NDtzdHJva2UtZGFzaGFycmF5Om5vbmU7c3Ryb2tlLW9wYWNpdHk6MSIKICAgICAgICAgZD0ibSA1Ljg0OTI2NTYsOS4wNjY0OTA0IDQuNjM4NjAzNCwwLjYwMDgzMiAtMi4zZS01LC0zLjg4MTcxMiAtNC42MTQ1Nzc0LDAuMDI0MDIgeiIKICAgICAgICAgaWQ9InBhdGg4NjktMiIKICAgICAgICAgc29kaXBvZGk6bm9kZXR5cGVzPSJjY2NjYyIgLz4KICAgICAgPHBhdGgKICAgICAgICAgc3R5bGU9ImZpbGw6IzQyOWNlMztmaWxsLW9wYWNpdHk6MTtzdHJva2U6IzQyOWNlMztzdHJva2Utd2lkdGg6MC4xMzIyOTI7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlLW1pdGVybGltaXQ6NDtzdHJva2UtZGFzaGFycmF5Om5vbmU7c3Ryb2tlLW9wYWNpdHk6MSIKICAgICAgICAgZD0ibSA1Ljg3MzI2NzYsNS40MDA5MjY0IDQuNjAzMTYxNCwwLjAxMjAzIC0zLjRlLTUsLTQuMDM4MzE4IC00LjYwMzE2MTQsMC42MTMwMDcgeiIKICAgICAgICAgaWQ9InBhdGg4NjktMSIKICAgICAgICAgc29kaXBvZGk6bm9kZXR5cGVzPSJjY2NjYyIgLz4KICAgIDwvZz4KICA8L2c+Cjwvc3ZnPgo="); }
+        background-color: rgba(255, 255, 255, 0.15); }
+        body taskbar start:hover i {
+          color: #429CE3; }
     body taskbar input {
       background-color: #F2F2F2;
       grid-area: search;
@@ -411,11 +406,23 @@ body {
     body taskbar apps {
       grid-area: apps;
       display: flex; }
-      body taskbar apps img.active {
-        border-bottom: 2px solid #83C0EF;
-        background-color: rgba(255, 255, 255, 0.2); }
-        body taskbar apps img.active:hover {
-          background-color: rgba(255, 255, 255, 0.3); }
+      body taskbar apps item {
+        border-top: 2px solid transparent;
+        border-bottom: 2px solid transparent;
+        display: flex;
+        align-items: center;
+        margin-right: 2px; }
+        body taskbar apps item:hover {
+          background-color: rgba(255, 255, 255, 0.15); }
+        body taskbar apps item.active {
+          border-bottom: 2px solid #83C0EF;
+          background-color: rgba(255, 255, 255, 0.2); }
+          body taskbar apps item.active:hover {
+            background-color: rgba(255, 255, 255, 0.3); }
+        body taskbar apps item i {
+          color: #ffffff;
+          font-size: 22px;
+          padding: 0 12px; }
     body taskbar info {
       grid-area: info;
       display: flex; }

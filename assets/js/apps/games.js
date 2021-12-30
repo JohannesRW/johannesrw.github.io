@@ -3,6 +3,8 @@ $$.Apps.src.games = class {
 		appname:'games',
 		title:'Games',
 		version:'0.0.1',
+		icon:'fa-duotone fa-gamepad-modern',
+		iconColor:'#91ff00',
 		status:false,
 		resizable:true,
 		maximized:true,
