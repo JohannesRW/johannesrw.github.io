@@ -11,8 +11,6 @@ export class Window {
 		icon:'fa-duotone fa-window-flip',
 		iconColor:null,
 		windowIcon:true,
-		hasLeft:true,
-		hasRight:true,
 		running:true,
 		top: {
 			current:0
@@ -127,12 +125,6 @@ export class Window {
 		}
 		if(!win.options.status){
 			win.elements.status.el.remove();
-		}
-		if(!win.options.hasLeft){
-			win.elements.content.left.el.remove();
-		}
-		if(!win.options.hasRight){
-			win.elements.content.right.el.remove();
 		}
 		win.applySize();
 		win.applyPosition();
@@ -321,7 +313,7 @@ export class Window {
 				left:{current:win.options.left.current},
 				running:win.options.running,
 			}
-			$$.Apps.setAppOptions(appname,options);
+			$$.User.setAppOptions(appname,options);
 		}
 	}
 	setStatus(el=''){
@@ -374,7 +366,6 @@ export class Window {
 		//win.elements.content.center.el.animate({ scrollTop: win.elements.content.center.el.prop("scrollHeight")}, 500);
 	}
 }
-
 export class Ribbon {
 	options = {};
 	elements={
@@ -392,14 +383,13 @@ export class Ribbon {
 	build() {
 		let ribbon = this;
 		ribbon.elements.buttons = {el: $('<menu/>')};
-		$.each(ribbon.items,function(key,element){
-			let buttonKey = '_'+key;
+		$.each(ribbon.items,function(buttonKey,element){
 			ribbon.elements.buttons[buttonKey] = {el: $('<item/>', {html: element.title})};
 			ribbon.elements.buttons[buttonKey].el.on('click',function(){ribbon.set(buttonKey)});
 			ribbon.elements.items[buttonKey] = {el: $('<menu/>')};
-			$.each(element.items,function(key,item){
-				let itemKey = '_'+key;
-				ribbon.elements.items[buttonKey][itemKey] = {el: $('<item/>', {html: item.title,'data-noactive':item.noActive||null}),callback:item.callback};
+			$.each(element.items,function(itemKey,item){
+				ribbon.elements.items[buttonKey][itemKey] = {el: $('<item/>', {html: '<span>'+item.title+'</span><badge></badge>','data-noactive':item.noActive||null}),callback:item.callback};
+
 				if(item.icon){
 					let icon = $('<i/>',{class:item.icon});
 					if(item.color){
@@ -410,7 +400,15 @@ export class Ribbon {
 			})
 		})
 		ribbon.app.win.setRibbonButtons($$.Tools.autoAppend(ribbon.elements.buttons));
-		ribbon.set('_0');
+		ribbon.setFirst();
+	}
+	clearActive(){
+		let ribbon = this;
+		ribbon.app.win.elements.ribbons.el.find('content .active').removeClass('active');
+	}
+	setFirst(){
+		let ribbon = this;
+		ribbon.set(Object.keys(ribbon.items)[0]);
 	}
 	set(key) {
 		let ribbon = this;
@@ -431,7 +429,6 @@ export class Ribbon {
 		})
 	}
 }
-
 export class Form {
 	options = {};
 	elements = {}
@@ -522,7 +519,6 @@ export class Form {
 		form.elements.trigger('reset');
 	}
 }
-
 export class Menu {
 	options = {
 		search:true,
@@ -561,32 +557,40 @@ export class Menu {
 			});
 			count++;
 		});
-		menu.app.win.setStatus('Showing ' + count + ' of ' + count + ' Items');
+		if(menu.app.win){
+			menu.app.win.setStatus('Showing ' + count + ' of ' + count + ' Items');
+		}
 	}
-	search(query) {
+	search(query,autoOpen=false) {
 		let menu = this;
 		let items = menu.elements.el.find('item');
 		let count = items.length;
 		let showing = 0;
-		let clicked = false;
 		query = query.replace(' ','').toLowerCase();
 		$.each(items,function(key,item){
 			item = $(item);
 			if (item.data('search').search(query) !== -1) {
 				item.css({display: 'flex'});
-				if(!clicked){
+				if(autoOpen){
 					item.click();
-					clicked=true;
+					autoOpen=false;
 				}
 				showing++;
 			} else {
 				item.css({display: 'none'});
 			}
 		})
-		menu.app.win.setStatus('Showing ' + showing + ' of ' + count + ' Items');
+		if(menu.app.win){
+			menu.app.win.setStatus('Showing ' + showing + ' of ' + count + ' Items');
+		}
+	}
+	set(key){
+		let menu = this;
+		if(menu.elements[key]){
+			menu.elements[key].el.click();
+		}
 	}
 }
-
 export class Tools {
 	static throttles = {};
 	static autoAppend(obj,parentElement=false){

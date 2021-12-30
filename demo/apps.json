@@ -1,0 +1,7 @@
+[
+	{"icon":"fa-duotone fa-address-book","run":"contacts","title":"Contacts","_id":"61cdaa85941469e5d67f0fd5"},
+	{"icon":"fa-duotone fa-gamepad-modern","run":"games","title":"Games","_id":"61cdaa8d941469e5d67f0fd6"},
+	{"icon":"fa-duotone fa-circle-info","run":"info","title":"Info","_id":"61cdaaa0941469e5d67f0fd7"},
+	{"icon":"fa-duotone fa-calculator-simple","run":"calc","title":"Calc","_id":"61cdaab1941469e5d67f0fd8"},
+	{"icon":"fa-solid fa-gear","run":"settings","title":"Settings","_id":"61cdaab9941469e5d67f0fd9"}
+]

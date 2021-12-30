@@ -35,410 +35,426 @@ body {
     font-size: 11px;
     margin: 0 0 0 5px;
     color: #fff; }
-  body form.loginscreen {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #15234a;
-    z-index: 99999;
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; }
-    body form.loginscreen label {
+
+body form.loginscreen {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #15234a;
+  z-index: 99999;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  body form.loginscreen label {
+    color: #fff;
+    font-size: 16px;
+    padding: 10px; }
+  body form.loginscreen input {
+    height: 30px;
+    width: 250px;
+    font-size: 16px;
+    background-color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    outline: none;
+    padding: 5px 10px; }
+  body form.loginscreen button {
+    padding: 10px 10px;
+    width: 272px;
+    margin: 25px;
+    border-radius: 0;
+    outline: none;
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5); }
+
+desktop {
+  display: flex;
+  overflow: hidden; }
+
+taskbar {
+  background-color: rgba(0, 0, 0, 0.72);
+  height: 40px;
+  width: 100%;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: auto auto 1fr auto auto auto;
+  grid-template-rows: 1fr;
+  gap: 0 0;
+  grid-template-areas: "start search apps info clock showdesktop";
+  grid-area: taskbar; }
+  taskbar start {
+    grid-area: start;
+    width: 48px;
+    display: flex; }
+    taskbar start i {
       color: #fff;
-      font-size: 16px;
-      padding: 10px; }
-    body form.loginscreen input {
-      height: 30px;
-      width: 250px;
-      font-size: 16px;
-      background-color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      outline: none;
-      padding: 5px 10px; }
-    body form.loginscreen button {
-      padding: 10px 10px;
-      width: 272px;
-      margin: 25px;
-      border-radius: 0;
-      outline: none;
-      color: #fff;
-      background-color: rgba(255, 255, 255, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.5); }
-  body desktop {
+      align-self: center;
+      justify-self: center;
+      text-align: center;
+      width: 100%;
+      font-size: 18px; }
+    taskbar start:hover {
+      background-color: rgba(255, 255, 255, 0.15); }
+      taskbar start:hover i {
+        color: #429CE3; }
+  taskbar input {
+    background-color: #F2F2F2;
+    grid-area: search;
+    width: 300px;
+    padding: 0 5px 0 39px;
+    font-size: 14.75px;
+    border: none;
+    outline: none;
+    background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iMzUiCiAgIGhlaWdodD0iMzUiCiAgIHZpZXdCb3g9IjAgMCA5LjI2MDQxNjIgOS4yNjA0MTY5IgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmc1IgogICBpbmtzY2FwZTp2ZXJzaW9uPSIxLjEuMSAoM2JmNWFlMGQyNSwgMjAyMS0wOS0yMCkiCiAgIHNvZGlwb2RpOmRvY25hbWU9InNlYXJjaC5zdmciCiAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIgogICB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIGlkPSJuYW1lZHZpZXc3IgogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBib3JkZXJvcGFjaXR5PSIxLjAiCiAgICAgaW5rc2NhcGU6cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMC4wIgogICAgIGlua3NjYXBlOnBhZ2VjaGVja2VyYm9hcmQ9IjAiCiAgICAgaW5rc2NhcGU6ZG9jdW1lbnQtdW5pdHM9Im1tIgogICAgIHNob3dncmlkPSJmYWxzZSIKICAgICB1bml0cz0icHgiCiAgICAgaW5rc2NhcGU6em9vbT0iMC43MzY4NDQyNiIKICAgICBpbmtzY2FwZTpjeD0iMzQ1LjM5MTg1IgogICAgIGlua3NjYXBlOmN5PSIzMDMuMzIwNTQiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIxOTIwIgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjEwMTciCiAgICAgaW5rc2NhcGU6d2luZG93LXg9Ii04IgogICAgIGlua3NjYXBlOndpbmRvdy15PSItOCIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIxIgogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9ImxheWVyMSIgLz4KICA8ZGVmcwogICAgIGlkPSJkZWZzMiIgLz4KICA8ZwogICAgIGlua3NjYXBlOmxhYmVsPSJFYmVuZSAxIgogICAgIGlua3NjYXBlOmdyb3VwbW9kZT0ibGF5ZXIiCiAgICAgaWQ9ImxheWVyMSI+CiAgICA8ZwogICAgICAgaWQ9ImcxMjI1IgogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTc0LjY4Nzg3OCwtMTM0LjI5NDU1KSI+CiAgICAgIDxlbGxpcHNlCiAgICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuNTI5MTY3O3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lIgogICAgICAgICBpZD0icGF0aDg1OCIKICAgICAgICAgY3g9IjgwLjc0NzI4NCIKICAgICAgICAgY3k9IjEzNy44NDA0MiIKICAgICAgICAgcng9IjIuNjY1MzM4MyIKICAgICAgICAgcnk9IjIuNjY1MzM4IiAvPgogICAgICA8cGF0aAogICAgICAgICBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDowLjUyOTE2NztzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIgogICAgICAgICBkPSJtIDc4LjcyNzQ4NCwxMzkuNzcwNDYgLTMuNjgwNTMxLDMuNTAxIgogICAgICAgICBpZD0icGF0aDExNDEiIC8+CiAgICA8L2c+CiAgPC9nPgo8L3N2Zz4K");
+    background-repeat: no-repeat;
+    background-size: 17px;
+    background-position-x: 11px;
+    background-position-y: 11px; }
+    taskbar input:hover, taskbar input:active {
+      background-color: #fff; }
+    taskbar input::placeholder {
+      color: #2D2D2D; }
+  taskbar apps {
+    grid-area: apps;
+    display: flex; }
+    taskbar apps item {
+      border-top: 2px solid transparent;
+      border-bottom: 2px solid transparent;
+      display: flex;
+      align-items: center;
+      margin-right: 2px; }
+      taskbar apps item:hover {
+        background-color: rgba(255, 255, 255, 0.15); }
+      taskbar apps item.active {
+        border-bottom: 2px solid #83C0EF;
+        background-color: rgba(255, 255, 255, 0.2); }
+        taskbar apps item.active:hover {
+          background-color: rgba(255, 255, 255, 0.3); }
+      taskbar apps item i {
+        color: #ffffff;
+        font-size: 22px;
+        padding: 0 12px; }
+  taskbar info {
+    grid-area: info;
+    display: flex; }
+    taskbar info img {
+      width: 15px;
+      padding: 0 5px; }
+  taskbar clock {
+    letter-spacing: -0.5px;
+    grid-area: clock;
     display: flex;
-    overflow: hidden; }
-    body desktop startmenu {
-      background-color: rgba(0, 0, 0, 0.72);
-      width: 320px;
-      max-height: 650px;
+    color: #ffffff;
+    text-align: center;
+    align-self: center;
+    margin: 0 9px; }
+  taskbar showdesktop {
+    width: 4px;
+    border-left: 1px solid rgba(255, 255, 255, 0.5); }
+    taskbar showdesktop:hover {
+      background-color: rgba(255, 255, 255, 0.2); }
+
+desktop startmenu {
+  background-color: rgba(0, 0, 0, 0.72);
+  width: 320px;
+  max-height: 650px;
+  height: 100%;
+  display: none;
+  z-index: 2000;
+  position: relative;
+  backdrop-filter: blur(10px);
+  align-self: self-end;
+  flex-direction: column;
+  overflow-y: auto; }
+  desktop startmenu menu {
+    margin: 0;
+    padding: 0;
+    color: #fff; }
+    desktop startmenu menu item {
+      display: flex;
+      height: 40px;
+      align-items: center;
+      padding: 0 10px; }
+      desktop startmenu menu item:hover {
+        background-color: rgba(255, 255, 255, 0.25); }
+      desktop startmenu menu item i {
+        color: #fff;
+        padding: 0 10px 0 0;
+        width: 15px; }
+      desktop startmenu menu item span {
+        color: #fff;
+        font-weight: 100; }
+
+desktop window {
+  user-select: none;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 0 0;
+  grid-template-areas: "topbar" "ribbons" "content" "status"; }
+  desktop window resizehandle {
+    width: 10px;
+    height: 10px;
+    position: absolute; }
+    desktop window resizehandle[data-direction="nw"] {
+      top: -5px;
+      left: -5px;
+      cursor: nw-resize; }
+    desktop window resizehandle[data-direction="ne"] {
+      top: -5px;
+      right: -5px;
+      cursor: ne-resize; }
+    desktop window resizehandle[data-direction="sw"] {
+      bottom: -5px;
+      left: -5px;
+      cursor: sw-resize; }
+    desktop window resizehandle[data-direction="se"] {
+      bottom: -5px;
+      right: -5px;
+      cursor: se-resize; }
+    desktop window resizehandle[data-direction="w"] {
       height: 100%;
-      display: none;
-      z-index: 2000;
-      position: relative;
-      backdrop-filter: blur(10px);
-      align-self: self-end;
-      flex-direction: column;
-      overflow-y: auto; }
-      body desktop startmenu item {
-        display: flex;
-        height: 40px;
-        align-items: center; }
-        body desktop startmenu item:hover {
-          background-color: rgba(255, 255, 255, 0.25); }
-        body desktop startmenu item i {
-          color: #fff;
-          padding: 10px; }
-        body desktop startmenu item span {
-          color: #fff;
-          font-weight: 100; }
-    body desktop window {
-      user-select: none;
-      box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(0, 0, 0, 0.3);
-      background-color: #fff;
-      position: absolute;
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: auto auto 1fr auto;
-      gap: 0 0;
-      grid-template-areas: "topbar" "ribbons" "content" "status"; }
-      body desktop window resizehandle {
-        width: 10px;
-        height: 10px;
-        position: absolute; }
-        body desktop window resizehandle[data-direction="nw"] {
-          top: -5px;
-          left: -5px;
-          cursor: nw-resize; }
-        body desktop window resizehandle[data-direction="ne"] {
-          top: -5px;
-          right: -5px;
-          cursor: ne-resize; }
-        body desktop window resizehandle[data-direction="sw"] {
-          bottom: -5px;
-          left: -5px;
-          cursor: sw-resize; }
-        body desktop window resizehandle[data-direction="se"] {
-          bottom: -5px;
-          right: -5px;
-          cursor: se-resize; }
-        body desktop window resizehandle[data-direction="w"] {
-          height: 100%;
-          left: -5px;
-          cursor: w-resize; }
-        body desktop window resizehandle[data-direction="e"] {
-          height: 100%;
-          right: -5px;
-          cursor: e-resize; }
-        body desktop window resizehandle[data-direction="n"] {
-          width: 100%;
-          top: -5px;
-          cursor: n-resize; }
-        body desktop window resizehandle[data-direction="s"] {
-          width: 100%;
-          bottom: -5px;
-          cursor: s-resize; }
-      body desktop window topbar {
-        display: grid;
-        grid-template-columns: auto 1fr 135px;
-        grid-template-rows: 30px;
-        gap: 0 0;
-        grid-template-areas: "icon title buttons";
-        grid-area: topbar; }
-        body desktop window topbar i {
-          grid-area: icon;
-          align-self: center;
-          justify-self: center;
-          margin: 0 -5px 0 5px;
-          font-size: 16px;
-          color: #444444; }
-        body desktop window topbar title {
-          margin-left: 10px;
-          font-size: 13px;
-          user-select: none;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          grid-area: title;
-          color: #000;
-          display: block;
-          align-self: center;
-          height: 20px; }
-        body desktop window topbar buttons {
-          grid-area: buttons;
-          display: flex;
-          justify-content: right; }
-          body desktop window topbar buttons div {
-            width: 45px;
-            height: 100%;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 23%; }
-            body desktop window topbar buttons div:hover {
-              background-color: rgba(0, 0, 0, 0.1); }
-          body desktop window topbar buttons [data-window="minimize"] {
-            background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iMjAiCiAgIGhlaWdodD0iMjAiCiAgIHZpZXdCb3g9IjAgMCA1LjI5MTY2NjQgNS4yOTE2NjY4IgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmc1IgogICBpbmtzY2FwZTp2ZXJzaW9uPSIxLjEuMSAoM2JmNWFlMGQyNSwgMjAyMS0wOS0yMCkiCiAgIHNvZGlwb2RpOmRvY25hbWU9Im1pbmltaXplLnN2ZyIKICAgeG1sbnM6aW5rc2NhcGU9Imh0dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiCiAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8c29kaXBvZGk6bmFtZWR2aWV3CiAgICAgaWQ9Im5hbWVkdmlldzciCiAgICAgcGFnZWNvbG9yPSIjZmZmZmZmIgogICAgIGJvcmRlcmNvbG9yPSIjNjY2NjY2IgogICAgIGJvcmRlcm9wYWNpdHk9IjEuMCIKICAgICBpbmtzY2FwZTpwYWdlc2hhZG93PSIyIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwLjAiCiAgICAgaW5rc2NhcGU6cGFnZWNoZWNrZXJib2FyZD0iMCIKICAgICBpbmtzY2FwZTpkb2N1bWVudC11bml0cz0ibW0iCiAgICAgc2hvd2dyaWQ9ImZhbHNlIgogICAgIGlua3NjYXBlOnpvb209IjEuODU0MTY4MSIKICAgICBpbmtzY2FwZTpjeD0iLTEyOC4wODk3OSIKICAgICBpbmtzY2FwZTpjeT0iMTEuMDU2MTcxIgogICAgIGlua3NjYXBlOndpbmRvdy13aWR0aD0iMTkyMCIKICAgICBpbmtzY2FwZTp3aW5kb3ctaGVpZ2h0PSIxMDE3IgogICAgIGlua3NjYXBlOndpbmRvdy14PSItOCIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iLTgiCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMSIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJsYXllcjMiCiAgICAgdW5pdHM9InB4IiAvPgogIDxkZWZzCiAgICAgaWQ9ImRlZnMyIiAvPgogIDxnCiAgICAgaW5rc2NhcGU6Z3JvdXBtb2RlPSJsYXllciIKICAgICBpZD0ibGF5ZXIzIgogICAgIGlua3NjYXBlOmxhYmVsPSJtaW5pbWl6ZSIKICAgICBzdHlsZT0iZGlzcGxheTppbmxpbmUiPgogICAgPHBhdGgKICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuNTI2Mzc1O3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lO3N0cm9rZS1vcGFjaXR5OjEiCiAgICAgICBkPSJNIDAsMi45MDkwMjA4IEggNS4yOTE2NjY3IgogICAgICAgaWQ9InBhdGgxMjc4IiAvPgogIDwvZz4KPC9zdmc+Cg=="); }
-          body desktop window topbar buttons [data-window="maximize"] {
-            background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iMjAiCiAgIGhlaWdodD0iMjAiCiAgIHZpZXdCb3g9IjAgMCA1LjI5MTY2NjQgNS4yOTE2NjY4IgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmc1IgogICBpbmtzY2FwZTp2ZXJzaW9uPSIxLjEuMSAoM2JmNWFlMGQyNSwgMjAyMS0wOS0yMCkiCiAgIHNvZGlwb2RpOmRvY25hbWU9Im1heGltaXplLnN2ZyIKICAgeG1sbnM6aW5rc2NhcGU9Imh0dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiCiAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8c29kaXBvZGk6bmFtZWR2aWV3CiAgICAgaWQ9Im5hbWVkdmlldzciCiAgICAgcGFnZWNvbG9yPSIjZmZmZmZmIgogICAgIGJvcmRlcmNvbG9yPSIjNjY2NjY2IgogICAgIGJvcmRlcm9wYWNpdHk9IjEuMCIKICAgICBpbmtzY2FwZTpwYWdlc2hhZG93PSIyIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwLjAiCiAgICAgaW5rc2NhcGU6cGFnZWNoZWNrZXJib2FyZD0iMCIKICAgICBpbmtzY2FwZTpkb2N1bWVudC11bml0cz0ibW0iCiAgICAgc2hvd2dyaWQ9ImZhbHNlIgogICAgIGlua3NjYXBlOnpvb209IjIuMjcyMTU5NyIKICAgICBpbmtzY2FwZTpjeD0iLTEyNy44NTE5MyIKICAgICBpbmtzY2FwZTpjeT0iMTAuNzgyNjkzIgogICAgIGlua3NjYXBlOndpbmRvdy13aWR0aD0iMTkyMCIKICAgICBpbmtzY2FwZTp3aW5kb3ctaGVpZ2h0PSIxMDE3IgogICAgIGlua3NjYXBlOndpbmRvdy14PSItOCIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iLTgiCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMSIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJsYXllcjQiCiAgICAgdW5pdHM9InB4IiAvPgogIDxkZWZzCiAgICAgaWQ9ImRlZnMyIiAvPgogIDxnCiAgICAgaW5rc2NhcGU6Z3JvdXBtb2RlPSJsYXllciIKICAgICBpZD0ibGF5ZXI0IgogICAgIGlua3NjYXBlOmxhYmVsPSJtYXhpbWl6ZSIKICAgICBzdHlsZT0iZGlzcGxheTppbmxpbmUiPgogICAgPHJlY3QKICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuNTI3NzM5O3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lO3N0cm9rZS1vcGFjaXR5OjEiCiAgICAgICBpZD0icmVjdDQzIgogICAgICAgd2lkdGg9IjQuNzYzOTI3OSIKICAgICAgIGhlaWdodD0iNC43MzgyMDkyIgogICAgICAgeD0iMC4yNjM4Njk0IgogICAgICAgeT0iMC4yNjM4Njk0IiAvPgogIDwvZz4KPC9zdmc+Cg=="); }
-          body desktop window topbar buttons [data-window="close"] {
-            background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iMjAiCiAgIGhlaWdodD0iMjAiCiAgIHZpZXdCb3g9IjAgMCA1LjI5MTY2NjQgNS4yOTE2NjY4IgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmc1IgogICBpbmtzY2FwZTp2ZXJzaW9uPSIxLjEuMSAoM2JmNWFlMGQyNSwgMjAyMS0wOS0yMCkiCiAgIHNvZGlwb2RpOmRvY25hbWU9ImNsb3NlLnN2ZyIKICAgeG1sbnM6aW5rc2NhcGU9Imh0dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiCiAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8c29kaXBvZGk6bmFtZWR2aWV3CiAgICAgaWQ9Im5hbWVkdmlldzciCiAgICAgcGFnZWNvbG9yPSIjZmZmZmZmIgogICAgIGJvcmRlcmNvbG9yPSIjNjY2NjY2IgogICAgIGJvcmRlcm9wYWNpdHk9IjEuMCIKICAgICBpbmtzY2FwZTpwYWdlc2hhZG93PSIyIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwLjAiCiAgICAgaW5rc2NhcGU6cGFnZWNoZWNrZXJib2FyZD0iMCIKICAgICBpbmtzY2FwZTpkb2N1bWVudC11bml0cz0ibW0iCiAgICAgc2hvd2dyaWQ9ImZhbHNlIgogICAgIGlua3NjYXBlOnpvb209IjEuNjA3NjYwMiIKICAgICBpbmtzY2FwZTpjeD0iLTEyNy44MjU1MiIKICAgICBpbmtzY2FwZTpjeT0iMTgyLjU2MzQ2IgogICAgIGlua3NjYXBlOndpbmRvdy13aWR0aD0iMTkyMCIKICAgICBpbmtzY2FwZTp3aW5kb3ctaGVpZ2h0PSIxMDE3IgogICAgIGlua3NjYXBlOndpbmRvdy14PSItOCIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iLTgiCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMSIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJsYXllcjIiCiAgICAgdW5pdHM9InB4IiAvPgogIDxkZWZzCiAgICAgaWQ9ImRlZnMyIiAvPgogIDxnCiAgICAgaW5rc2NhcGU6Z3JvdXBtb2RlPSJsYXllciIKICAgICBpZD0ibGF5ZXIyIgogICAgIGlua3NjYXBlOmxhYmVsPSJjbG9zZSI+CiAgICA8YQogICAgICAgaWQ9ImExNDg1IgogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE0My45MjgyMSwtNDYuODE2ODY2KSI+CiAgICAgIDxnCiAgICAgICAgIGlkPSJnMTQ4MyIKICAgICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTcuNzMyNzEzLC0xOC4wMTQxODQpIj4KICAgICAgICA8ZwogICAgICAgICAgIGlkPSJnMTQ3OCI+CiAgICAgICAgICA8cGF0aAogICAgICAgICAgICAgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC41MjkxNjc7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlLW1pdGVybGltaXQ6NDtzdHJva2UtZGFzaGFycmF5Om5vbmU7c3Ryb2tlLW9wYWNpdHk6MSIKICAgICAgICAgICAgIGQ9Im0gMTI2LjM4MDc2LDY5LjgwNDk2NCA0Ljg3ODg0LC00Ljc4NTAxOCIKICAgICAgICAgICAgIGlkPSJwYXRoMTM5MyIgLz4KICAgICAgICA8L2c+CiAgICAgICAgPHBhdGgKICAgICAgICAgICBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDowLjUyOTE2NztzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIgogICAgICAgICAgIGQ9Im0gMTMxLjI1OTYsNjkuODA0OTY0IC00Ljg3ODg0LC00Ljc4NTAxOCIKICAgICAgICAgICBpZD0icGF0aDEzOTUiIC8+CiAgICAgIDwvZz4KICAgIDwvYT4KICA8L2c+Cjwvc3ZnPgo="); }
-            body desktop window topbar buttons [data-window="close"]:hover {
-              background-color: #17eedc;
-              filter: invert(1); }
-      body desktop window ribbons {
-        grid-area: ribbons;
-        overflow: hidden;
-        border-bottom: 1px solid #dadbdc; }
-        body desktop window ribbons i {
-          font-size: 18px;
-          padding: 0 5px; }
-        body desktop window ribbons buttons menu {
-          margin: 0;
-          padding: 0;
-          display: flex; }
-          body desktop window ribbons buttons menu item {
-            display: block;
-            width: fit-content;
-            padding: 3px 15px;
-            top: 1px;
-            position: relative;
-            margin-right: 1px;
-            border: 1px solid transparent; }
-            body desktop window ribbons buttons menu item:hover {
-              background-color: #FDFDFF;
-              border-color: #EBECEC;
-              border-bottom-color: #DADBDC; }
-            body desktop window ribbons buttons menu item.active {
-              background-color: #F5F6F7;
-              border: 1px solid #DADBDC;
-              border-bottom: 1px solid #F5F6F7; }
-            body desktop window ribbons buttons menu item:first-of-type {
-              margin-right: 0;
-              margin-left: 1px;
-              border: 1px solid #0066B4;
-              background-color: #0066B4;
-              color: #fff; }
-              body desktop window ribbons buttons menu item:first-of-type:hover {
-                background-color: #007DDD;
-                border-color: #007DDD; }
-        body desktop window ribbons content {
-          background-color: #F5F6F7;
-          border-top: 1px solid #DADBDC;
-          overflow: auto; }
-          body desktop window ribbons content:empty {
-            border: none; }
-          body desktop window ribbons content::-webkit-scrollbar {
-            width: 3px;
-            height: 3px; }
-          body desktop window ribbons content::-webkit-scrollbar-track {
-            background: transparent; }
-          body desktop window ribbons content::-webkit-scrollbar-thumb {
-            background: #bbb; }
-          body desktop window ribbons content::-webkit-scrollbar-thumb:hover {
-            background: #a4a4a4; }
-          body desktop window ribbons content menu {
-            display: flex;
-            min-height: 50px;
-            max-height: 90px;
-            margin: 5px;
-            padding: 0; }
-            body desktop window ribbons content menu hr {
-              margin: 0 5px;
-              border: 1px solid #E3E4E5;
-              border-left: 0;
-              padding: 0; }
-            body desktop window ribbons content menu item {
-              padding: 0 10px;
-              display: flex;
-              align-items: center;
-              border: 1px solid transparent; }
-              body desktop window ribbons content menu item:hover {
-                background-color: #E8EFF7;
-                border: 1px solid #A4CEF9; }
-              body desktop window ribbons content menu item.active {
-                background-color: #C9E0F7;
-                border: 1px solid #62A2E4; }
-      body desktop window content {
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        grid-template-rows: 1fr;
-        gap: 0 0;
-        grid-template-areas: "left center right";
-        grid-area: content;
-        overflow: hidden; }
-        body desktop window content left {
-          grid-area: left;
-          border-right: 1px solid #F7F7F7; }
-        body desktop window content left, body desktop window content right {
-          overflow: auto; }
-          body desktop window content left menu, body desktop window content right menu {
-            display: flex;
-            margin: 10px 0 0 0;
-            flex-direction: column;
-            padding: 0; }
-            body desktop window content left menu input, body desktop window content right menu input {
-              border-radius: 0;
-              outline: none;
-              border: none;
-              border-bottom: 1px solid #D9D9D9;
-              margin: 0 5px 10px 5px;
-              padding: 0 5px;
-              height: 20px; }
-              body desktop window content left menu input.search, body desktop window content right menu input.search {
-                background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iMzUiCiAgIGhlaWdodD0iMzUiCiAgIHZpZXdCb3g9IjAgMCA5LjI2MDQxNjIgOS4yNjA0MTY5IgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmc1IgogICBpbmtzY2FwZTp2ZXJzaW9uPSIxLjEuMSAoM2JmNWFlMGQyNSwgMjAyMS0wOS0yMCkiCiAgIHNvZGlwb2RpOmRvY25hbWU9InNlYXJjaC5zdmciCiAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIgogICB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIGlkPSJuYW1lZHZpZXc3IgogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBib3JkZXJvcGFjaXR5PSIxLjAiCiAgICAgaW5rc2NhcGU6cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMC4wIgogICAgIGlua3NjYXBlOnBhZ2VjaGVja2VyYm9hcmQ9IjAiCiAgICAgaW5rc2NhcGU6ZG9jdW1lbnQtdW5pdHM9Im1tIgogICAgIHNob3dncmlkPSJmYWxzZSIKICAgICB1bml0cz0icHgiCiAgICAgaW5rc2NhcGU6em9vbT0iMC43MzY4NDQyNiIKICAgICBpbmtzY2FwZTpjeD0iMzQ1LjM5MTg1IgogICAgIGlua3NjYXBlOmN5PSIzMDMuMzIwNTQiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIxOTIwIgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjEwMTciCiAgICAgaW5rc2NhcGU6d2luZG93LXg9Ii04IgogICAgIGlua3NjYXBlOndpbmRvdy15PSItOCIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIxIgogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9ImxheWVyMSIgLz4KICA8ZGVmcwogICAgIGlkPSJkZWZzMiIgLz4KICA8ZwogICAgIGlua3NjYXBlOmxhYmVsPSJFYmVuZSAxIgogICAgIGlua3NjYXBlOmdyb3VwbW9kZT0ibGF5ZXIiCiAgICAgaWQ9ImxheWVyMSI+CiAgICA8ZwogICAgICAgaWQ9ImcxMjI1IgogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTc0LjY4Nzg3OCwtMTM0LjI5NDU1KSI+CiAgICAgIDxlbGxpcHNlCiAgICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuNTI5MTY3O3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lIgogICAgICAgICBpZD0icGF0aDg1OCIKICAgICAgICAgY3g9IjgwLjc0NzI4NCIKICAgICAgICAgY3k9IjEzNy44NDA0MiIKICAgICAgICAgcng9IjIuNjY1MzM4MyIKICAgICAgICAgcnk9IjIuNjY1MzM4IiAvPgogICAgICA8cGF0aAogICAgICAgICBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDowLjUyOTE2NztzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIgogICAgICAgICBkPSJtIDc4LjcyNzQ4NCwxMzkuNzcwNDYgLTMuNjgwNTMxLDMuNTAxIgogICAgICAgICBpZD0icGF0aDExNDEiIC8+CiAgICA8L2c+CiAgPC9nPgo8L3N2Zz4K");
-                background-repeat: no-repeat;
-                background-size: 12px;
-                background-position-y: 5px;
-                padding: 0 5px 0 15px;
-                width: 120px; }
-            body desktop window content left menu hr, body desktop window content right menu hr {
-              margin: 0; }
-            body desktop window content left menu item, body desktop window content right menu item {
-              height: 22px;
-              border: 1px solid transparent;
-              margin: 0 1px;
-              min-width: 120px;
-              display: flex;
-              align-items: center;
-              padding: 0 5px;
-              justify-content: space-between; }
-              body desktop window content left menu item:hover, body desktop window content right menu item:hover {
-                background-color: #E5F3FF;
-                border-color: #E5F3FF; }
-              body desktop window content left menu item.active, body desktop window content right menu item.active {
-                background-color: #CDE8FF; }
-                body desktop window content left menu item.active:hover, body desktop window content right menu item.active:hover {
-                  border-color: #99D1FF; }
-        body desktop window content center {
-          overflow: auto;
-          padding: 0 5px;
-          grid-area: center;
-          text-align: left; }
-          body desktop window content center form group[data-group="root"] {
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap; }
-            body desktop window content center form group[data-group="root"] group[data-hasinputgroups] {
-              display: flex;
-              width: 100%;
-              flex-wrap: wrap; }
-            body desktop window content center form group[data-group="root"] group[data-hasinputs] {
-              display: block;
-              margin: 5px 0; }
-              body desktop window content center form group[data-group="root"] group[data-hasinputs] label {
-                display: block;
-                padding: 5px 0; }
-              body desktop window content center form group[data-group="root"] group[data-hasinputs] input {
-                padding: 5px;
-                border: 1px solid #D9D9D9;
-                outline: none;
-                margin-right: 20px; }
-          body desktop window content center form button {
-            margin: 20px 0;
-            height: 24px;
-            min-width: 90px;
-            padding: 0 15px;
-            border-radius: 0;
-            background-color: #E1E1E1;
-            border: 1px solid #ADADAD; }
-            body desktop window content center form button:hover {
-              background-color: #E5F1FB;
-              border: 1px solid #0078D7; }
-        body desktop window content right {
-          grid-area: right;
-          border-left: 1px solid #F7F7F7; }
-      body desktop window status {
-        grid-area: status;
-        height: 18px;
-        display: flex;
-        font-size: 11px;
-        padding: 0 5px;
-        color: rgba(0, 0, 0, 0.65); }
-        body desktop window status version {
-          margin-left: 5px; }
-  body taskbar {
-    background-color: rgba(0, 0, 0, 0.72);
-    height: 40px;
-    width: 100%;
-    bottom: 0;
+      left: -5px;
+      cursor: w-resize; }
+    desktop window resizehandle[data-direction="e"] {
+      height: 100%;
+      right: -5px;
+      cursor: e-resize; }
+    desktop window resizehandle[data-direction="n"] {
+      width: 100%;
+      top: -5px;
+      cursor: n-resize; }
+    desktop window resizehandle[data-direction="s"] {
+      width: 100%;
+      bottom: -5px;
+      cursor: s-resize; }
+  desktop window topbar {
     display: grid;
-    grid-template-columns: auto auto 1fr auto auto auto;
+    grid-template-columns: auto 1fr 135px;
+    grid-template-rows: 30px;
+    gap: 0 0;
+    grid-template-areas: "icon title buttons";
+    grid-area: topbar; }
+    desktop window topbar i {
+      grid-area: icon;
+      align-self: center;
+      justify-self: center;
+      margin: 0 -5px 0 5px;
+      font-size: 16px;
+      color: #444444; }
+    desktop window topbar title {
+      margin-left: 10px;
+      font-size: 13px;
+      user-select: none;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      grid-area: title;
+      color: #000;
+      display: block;
+      align-self: center;
+      height: 20px; }
+    desktop window topbar buttons {
+      grid-area: buttons;
+      display: flex;
+      justify-content: right; }
+      desktop window topbar buttons div {
+        width: 45px;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 23%; }
+        desktop window topbar buttons div:hover {
+          background-color: rgba(0, 0, 0, 0.1); }
+      desktop window topbar buttons [data-window="minimize"] {
+        background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iMjAiCiAgIGhlaWdodD0iMjAiCiAgIHZpZXdCb3g9IjAgMCA1LjI5MTY2NjQgNS4yOTE2NjY4IgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmc1IgogICBpbmtzY2FwZTp2ZXJzaW9uPSIxLjEuMSAoM2JmNWFlMGQyNSwgMjAyMS0wOS0yMCkiCiAgIHNvZGlwb2RpOmRvY25hbWU9Im1pbmltaXplLnN2ZyIKICAgeG1sbnM6aW5rc2NhcGU9Imh0dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiCiAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8c29kaXBvZGk6bmFtZWR2aWV3CiAgICAgaWQ9Im5hbWVkdmlldzciCiAgICAgcGFnZWNvbG9yPSIjZmZmZmZmIgogICAgIGJvcmRlcmNvbG9yPSIjNjY2NjY2IgogICAgIGJvcmRlcm9wYWNpdHk9IjEuMCIKICAgICBpbmtzY2FwZTpwYWdlc2hhZG93PSIyIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwLjAiCiAgICAgaW5rc2NhcGU6cGFnZWNoZWNrZXJib2FyZD0iMCIKICAgICBpbmtzY2FwZTpkb2N1bWVudC11bml0cz0ibW0iCiAgICAgc2hvd2dyaWQ9ImZhbHNlIgogICAgIGlua3NjYXBlOnpvb209IjEuODU0MTY4MSIKICAgICBpbmtzY2FwZTpjeD0iLTEyOC4wODk3OSIKICAgICBpbmtzY2FwZTpjeT0iMTEuMDU2MTcxIgogICAgIGlua3NjYXBlOndpbmRvdy13aWR0aD0iMTkyMCIKICAgICBpbmtzY2FwZTp3aW5kb3ctaGVpZ2h0PSIxMDE3IgogICAgIGlua3NjYXBlOndpbmRvdy14PSItOCIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iLTgiCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMSIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJsYXllcjMiCiAgICAgdW5pdHM9InB4IiAvPgogIDxkZWZzCiAgICAgaWQ9ImRlZnMyIiAvPgogIDxnCiAgICAgaW5rc2NhcGU6Z3JvdXBtb2RlPSJsYXllciIKICAgICBpZD0ibGF5ZXIzIgogICAgIGlua3NjYXBlOmxhYmVsPSJtaW5pbWl6ZSIKICAgICBzdHlsZT0iZGlzcGxheTppbmxpbmUiPgogICAgPHBhdGgKICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuNTI2Mzc1O3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lO3N0cm9rZS1vcGFjaXR5OjEiCiAgICAgICBkPSJNIDAsMi45MDkwMjA4IEggNS4yOTE2NjY3IgogICAgICAgaWQ9InBhdGgxMjc4IiAvPgogIDwvZz4KPC9zdmc+Cg=="); }
+      desktop window topbar buttons [data-window="maximize"] {
+        background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iMjAiCiAgIGhlaWdodD0iMjAiCiAgIHZpZXdCb3g9IjAgMCA1LjI5MTY2NjQgNS4yOTE2NjY4IgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmc1IgogICBpbmtzY2FwZTp2ZXJzaW9uPSIxLjEuMSAoM2JmNWFlMGQyNSwgMjAyMS0wOS0yMCkiCiAgIHNvZGlwb2RpOmRvY25hbWU9Im1heGltaXplLnN2ZyIKICAgeG1sbnM6aW5rc2NhcGU9Imh0dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiCiAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8c29kaXBvZGk6bmFtZWR2aWV3CiAgICAgaWQ9Im5hbWVkdmlldzciCiAgICAgcGFnZWNvbG9yPSIjZmZmZmZmIgogICAgIGJvcmRlcmNvbG9yPSIjNjY2NjY2IgogICAgIGJvcmRlcm9wYWNpdHk9IjEuMCIKICAgICBpbmtzY2FwZTpwYWdlc2hhZG93PSIyIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwLjAiCiAgICAgaW5rc2NhcGU6cGFnZWNoZWNrZXJib2FyZD0iMCIKICAgICBpbmtzY2FwZTpkb2N1bWVudC11bml0cz0ibW0iCiAgICAgc2hvd2dyaWQ9ImZhbHNlIgogICAgIGlua3NjYXBlOnpvb209IjIuMjcyMTU5NyIKICAgICBpbmtzY2FwZTpjeD0iLTEyNy44NTE5MyIKICAgICBpbmtzY2FwZTpjeT0iMTAuNzgyNjkzIgogICAgIGlua3NjYXBlOndpbmRvdy13aWR0aD0iMTkyMCIKICAgICBpbmtzY2FwZTp3aW5kb3ctaGVpZ2h0PSIxMDE3IgogICAgIGlua3NjYXBlOndpbmRvdy14PSItOCIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iLTgiCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMSIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJsYXllcjQiCiAgICAgdW5pdHM9InB4IiAvPgogIDxkZWZzCiAgICAgaWQ9ImRlZnMyIiAvPgogIDxnCiAgICAgaW5rc2NhcGU6Z3JvdXBtb2RlPSJsYXllciIKICAgICBpZD0ibGF5ZXI0IgogICAgIGlua3NjYXBlOmxhYmVsPSJtYXhpbWl6ZSIKICAgICBzdHlsZT0iZGlzcGxheTppbmxpbmUiPgogICAgPHJlY3QKICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuNTI3NzM5O3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lO3N0cm9rZS1vcGFjaXR5OjEiCiAgICAgICBpZD0icmVjdDQzIgogICAgICAgd2lkdGg9IjQuNzYzOTI3OSIKICAgICAgIGhlaWdodD0iNC43MzgyMDkyIgogICAgICAgeD0iMC4yNjM4Njk0IgogICAgICAgeT0iMC4yNjM4Njk0IiAvPgogIDwvZz4KPC9zdmc+Cg=="); }
+      desktop window topbar buttons [data-window="close"] {
+        background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iMjAiCiAgIGhlaWdodD0iMjAiCiAgIHZpZXdCb3g9IjAgMCA1LjI5MTY2NjQgNS4yOTE2NjY4IgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmc1IgogICBpbmtzY2FwZTp2ZXJzaW9uPSIxLjEuMSAoM2JmNWFlMGQyNSwgMjAyMS0wOS0yMCkiCiAgIHNvZGlwb2RpOmRvY25hbWU9ImNsb3NlLnN2ZyIKICAgeG1sbnM6aW5rc2NhcGU9Imh0dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiCiAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8c29kaXBvZGk6bmFtZWR2aWV3CiAgICAgaWQ9Im5hbWVkdmlldzciCiAgICAgcGFnZWNvbG9yPSIjZmZmZmZmIgogICAgIGJvcmRlcmNvbG9yPSIjNjY2NjY2IgogICAgIGJvcmRlcm9wYWNpdHk9IjEuMCIKICAgICBpbmtzY2FwZTpwYWdlc2hhZG93PSIyIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwLjAiCiAgICAgaW5rc2NhcGU6cGFnZWNoZWNrZXJib2FyZD0iMCIKICAgICBpbmtzY2FwZTpkb2N1bWVudC11bml0cz0ibW0iCiAgICAgc2hvd2dyaWQ9ImZhbHNlIgogICAgIGlua3NjYXBlOnpvb209IjEuNjA3NjYwMiIKICAgICBpbmtzY2FwZTpjeD0iLTEyNy44MjU1MiIKICAgICBpbmtzY2FwZTpjeT0iMTgyLjU2MzQ2IgogICAgIGlua3NjYXBlOndpbmRvdy13aWR0aD0iMTkyMCIKICAgICBpbmtzY2FwZTp3aW5kb3ctaGVpZ2h0PSIxMDE3IgogICAgIGlua3NjYXBlOndpbmRvdy14PSItOCIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iLTgiCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMSIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJsYXllcjIiCiAgICAgdW5pdHM9InB4IiAvPgogIDxkZWZzCiAgICAgaWQ9ImRlZnMyIiAvPgogIDxnCiAgICAgaW5rc2NhcGU6Z3JvdXBtb2RlPSJsYXllciIKICAgICBpZD0ibGF5ZXIyIgogICAgIGlua3NjYXBlOmxhYmVsPSJjbG9zZSI+CiAgICA8YQogICAgICAgaWQ9ImExNDg1IgogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE0My45MjgyMSwtNDYuODE2ODY2KSI+CiAgICAgIDxnCiAgICAgICAgIGlkPSJnMTQ4MyIKICAgICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTcuNzMyNzEzLC0xOC4wMTQxODQpIj4KICAgICAgICA8ZwogICAgICAgICAgIGlkPSJnMTQ3OCI+CiAgICAgICAgICA8cGF0aAogICAgICAgICAgICAgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC41MjkxNjc7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlLW1pdGVybGltaXQ6NDtzdHJva2UtZGFzaGFycmF5Om5vbmU7c3Ryb2tlLW9wYWNpdHk6MSIKICAgICAgICAgICAgIGQ9Im0gMTI2LjM4MDc2LDY5LjgwNDk2NCA0Ljg3ODg0LC00Ljc4NTAxOCIKICAgICAgICAgICAgIGlkPSJwYXRoMTM5MyIgLz4KICAgICAgICA8L2c+CiAgICAgICAgPHBhdGgKICAgICAgICAgICBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDowLjUyOTE2NztzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIgogICAgICAgICAgIGQ9Im0gMTMxLjI1OTYsNjkuODA0OTY0IC00Ljg3ODg0LC00Ljc4NTAxOCIKICAgICAgICAgICBpZD0icGF0aDEzOTUiIC8+CiAgICAgIDwvZz4KICAgIDwvYT4KICA8L2c+Cjwvc3ZnPgo="); }
+        desktop window topbar buttons [data-window="close"]:hover {
+          background-color: #17eedc;
+          filter: invert(1); }
+  desktop window ribbons {
+    grid-area: ribbons;
+    overflow: hidden;
+    border-bottom: 1px solid #dadbdc; }
+    desktop window ribbons i {
+      font-size: 18px;
+      padding: 0 5px; }
+    desktop window ribbons buttons menu {
+      margin: 0;
+      padding: 0;
+      display: flex; }
+      desktop window ribbons buttons menu item {
+        display: block;
+        width: fit-content;
+        padding: 3px 15px;
+        top: 1px;
+        position: relative;
+        margin-right: 1px;
+        border: 1px solid transparent; }
+        desktop window ribbons buttons menu item:hover {
+          background-color: #FDFDFF;
+          border-color: #EBECEC;
+          border-bottom-color: #DADBDC; }
+        desktop window ribbons buttons menu item.active {
+          background-color: #F5F6F7;
+          border: 1px solid #DADBDC;
+          border-bottom: 1px solid #F5F6F7; }
+        desktop window ribbons buttons menu item:first-of-type {
+          margin-right: 0;
+          margin-left: 1px;
+          border: 1px solid #0066B4;
+          background-color: #0066B4;
+          color: #fff; }
+          desktop window ribbons buttons menu item:first-of-type:hover {
+            background-color: #007DDD;
+            border-color: #007DDD; }
+    desktop window ribbons content {
+      background-color: #F5F6F7;
+      border-top: 1px solid #DADBDC;
+      overflow: auto; }
+      desktop window ribbons content:empty {
+        border: none; }
+      desktop window ribbons content::-webkit-scrollbar {
+        width: 3px;
+        height: 3px; }
+      desktop window ribbons content::-webkit-scrollbar-track {
+        background: transparent; }
+      desktop window ribbons content::-webkit-scrollbar-thumb {
+        background: #bbb; }
+      desktop window ribbons content::-webkit-scrollbar-thumb:hover {
+        background: #a4a4a4; }
+      desktop window ribbons content menu {
+        display: flex;
+        min-height: 50px;
+        max-height: 90px;
+        margin: 5px;
+        padding: 0; }
+        desktop window ribbons content menu hr {
+          margin: 0 5px;
+          border: 1px solid #E3E4E5;
+          border-left: 0;
+          padding: 0; }
+        desktop window ribbons content menu item {
+          padding: 0 10px;
+          display: flex;
+          align-items: center;
+          border: 1px solid transparent; }
+          desktop window ribbons content menu item[disabled] {
+            filter: opacity(0.5);
+            pointer-events: none; }
+          desktop window ribbons content menu item:hover {
+            background-color: #E8EFF7;
+            border: 1px solid #A4CEF9; }
+          desktop window ribbons content menu item.active {
+            background-color: #C9E0F7;
+            border: 1px solid #62A2E4; }
+  desktop window content {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr;
     gap: 0 0;
-    grid-template-areas: "start search apps info clock showdesktop";
-    grid-area: taskbar; }
-    body taskbar start {
-      grid-area: start;
-      width: 48px;
-      display: flex; }
-      body taskbar start i {
-        color: #fff;
-        align-self: center;
-        justify-self: center;
-        text-align: center;
-        width: 100%;
-        font-size: 18px; }
-      body taskbar start:hover {
-        background-color: rgba(255, 255, 255, 0.15); }
-        body taskbar start:hover i {
-          color: #429CE3; }
-    body taskbar input {
-      background-color: #F2F2F2;
-      grid-area: search;
-      width: 300px;
-      padding: 0 5px 0 39px;
-      font-size: 14.75px;
-      border: none;
-      outline: none;
-      background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iMzUiCiAgIGhlaWdodD0iMzUiCiAgIHZpZXdCb3g9IjAgMCA5LjI2MDQxNjIgOS4yNjA0MTY5IgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmc1IgogICBpbmtzY2FwZTp2ZXJzaW9uPSIxLjEuMSAoM2JmNWFlMGQyNSwgMjAyMS0wOS0yMCkiCiAgIHNvZGlwb2RpOmRvY25hbWU9InNlYXJjaC5zdmciCiAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIgogICB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIGlkPSJuYW1lZHZpZXc3IgogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBib3JkZXJvcGFjaXR5PSIxLjAiCiAgICAgaW5rc2NhcGU6cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMC4wIgogICAgIGlua3NjYXBlOnBhZ2VjaGVja2VyYm9hcmQ9IjAiCiAgICAgaW5rc2NhcGU6ZG9jdW1lbnQtdW5pdHM9Im1tIgogICAgIHNob3dncmlkPSJmYWxzZSIKICAgICB1bml0cz0icHgiCiAgICAgaW5rc2NhcGU6em9vbT0iMC43MzY4NDQyNiIKICAgICBpbmtzY2FwZTpjeD0iMzQ1LjM5MTg1IgogICAgIGlua3NjYXBlOmN5PSIzMDMuMzIwNTQiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIxOTIwIgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjEwMTciCiAgICAgaW5rc2NhcGU6d2luZG93LXg9Ii04IgogICAgIGlua3NjYXBlOndpbmRvdy15PSItOCIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIxIgogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9ImxheWVyMSIgLz4KICA8ZGVmcwogICAgIGlkPSJkZWZzMiIgLz4KICA8ZwogICAgIGlua3NjYXBlOmxhYmVsPSJFYmVuZSAxIgogICAgIGlua3NjYXBlOmdyb3VwbW9kZT0ibGF5ZXIiCiAgICAgaWQ9ImxheWVyMSI+CiAgICA8ZwogICAgICAgaWQ9ImcxMjI1IgogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTc0LjY4Nzg3OCwtMTM0LjI5NDU1KSI+CiAgICAgIDxlbGxpcHNlCiAgICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuNTI5MTY3O3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lIgogICAgICAgICBpZD0icGF0aDg1OCIKICAgICAgICAgY3g9IjgwLjc0NzI4NCIKICAgICAgICAgY3k9IjEzNy44NDA0MiIKICAgICAgICAgcng9IjIuNjY1MzM4MyIKICAgICAgICAgcnk9IjIuNjY1MzM4IiAvPgogICAgICA8cGF0aAogICAgICAgICBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDowLjUyOTE2NztzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIgogICAgICAgICBkPSJtIDc4LjcyNzQ4NCwxMzkuNzcwNDYgLTMuNjgwNTMxLDMuNTAxIgogICAgICAgICBpZD0icGF0aDExNDEiIC8+CiAgICA8L2c+CiAgPC9nPgo8L3N2Zz4K");
-      background-repeat: no-repeat;
-      background-size: 17px;
-      background-position-x: 11px;
-      background-position-y: 11px; }
-      body taskbar input:hover, body taskbar input:active {
-        background-color: #fff; }
-      body taskbar input::placeholder {
-        color: #2D2D2D; }
-    body taskbar apps {
-      grid-area: apps;
-      display: flex; }
-      body taskbar apps item {
-        border-top: 2px solid transparent;
-        border-bottom: 2px solid transparent;
+    grid-template-areas: "left center right";
+    grid-area: content;
+    overflow: hidden; }
+    desktop window content left {
+      grid-area: left;
+      border-right: 1px solid #F7F7F7; }
+    desktop window content left, desktop window content right {
+      overflow: auto; }
+      desktop window content left:empty, desktop window content right:empty {
+        display: none; }
+      desktop window content left menu, desktop window content right menu {
         display: flex;
-        align-items: center;
-        margin-right: 2px; }
-        body taskbar apps item:hover {
-          background-color: rgba(255, 255, 255, 0.15); }
-        body taskbar apps item.active {
-          border-bottom: 2px solid #83C0EF;
-          background-color: rgba(255, 255, 255, 0.2); }
-          body taskbar apps item.active:hover {
-            background-color: rgba(255, 255, 255, 0.3); }
-        body taskbar apps item i {
-          color: #ffffff;
-          font-size: 22px;
-          padding: 0 12px; }
-    body taskbar info {
-      grid-area: info;
-      display: flex; }
-      body taskbar info img {
-        width: 15px;
-        padding: 0 5px; }
-    body taskbar clock {
-      letter-spacing: -0.5px;
-      grid-area: clock;
-      display: flex;
-      color: #ffffff;
-      text-align: center;
-      align-self: center;
-      margin: 0 9px; }
-    body taskbar showdesktop {
-      width: 4px;
-      border-left: 1px solid rgba(255, 255, 255, 0.5); }
-      body taskbar showdesktop:hover {
-        background-color: rgba(255, 255, 255, 0.2); }
+        margin: 10px 0 0 0;
+        flex-direction: column;
+        padding: 0; }
+        desktop window content left menu input, desktop window content right menu input {
+          border-radius: 0;
+          outline: none;
+          border: none;
+          border-bottom: 1px solid #D9D9D9;
+          margin: 0 5px 10px 5px;
+          padding: 0 5px;
+          height: 20px; }
+          desktop window content left menu input.search, desktop window content right menu input.search {
+            background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iMzUiCiAgIGhlaWdodD0iMzUiCiAgIHZpZXdCb3g9IjAgMCA5LjI2MDQxNjIgOS4yNjA0MTY5IgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmc1IgogICBpbmtzY2FwZTp2ZXJzaW9uPSIxLjEuMSAoM2JmNWFlMGQyNSwgMjAyMS0wOS0yMCkiCiAgIHNvZGlwb2RpOmRvY25hbWU9InNlYXJjaC5zdmciCiAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIgogICB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIGlkPSJuYW1lZHZpZXc3IgogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBib3JkZXJvcGFjaXR5PSIxLjAiCiAgICAgaW5rc2NhcGU6cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMC4wIgogICAgIGlua3NjYXBlOnBhZ2VjaGVja2VyYm9hcmQ9IjAiCiAgICAgaW5rc2NhcGU6ZG9jdW1lbnQtdW5pdHM9Im1tIgogICAgIHNob3dncmlkPSJmYWxzZSIKICAgICB1bml0cz0icHgiCiAgICAgaW5rc2NhcGU6em9vbT0iMC43MzY4NDQyNiIKICAgICBpbmtzY2FwZTpjeD0iMzQ1LjM5MTg1IgogICAgIGlua3NjYXBlOmN5PSIzMDMuMzIwNTQiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIxOTIwIgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjEwMTciCiAgICAgaW5rc2NhcGU6d2luZG93LXg9Ii04IgogICAgIGlua3NjYXBlOndpbmRvdy15PSItOCIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIxIgogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9ImxheWVyMSIgLz4KICA8ZGVmcwogICAgIGlkPSJkZWZzMiIgLz4KICA8ZwogICAgIGlua3NjYXBlOmxhYmVsPSJFYmVuZSAxIgogICAgIGlua3NjYXBlOmdyb3VwbW9kZT0ibGF5ZXIiCiAgICAgaWQ9ImxheWVyMSI+CiAgICA8ZwogICAgICAgaWQ9ImcxMjI1IgogICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTc0LjY4Nzg3OCwtMTM0LjI5NDU1KSI+CiAgICAgIDxlbGxpcHNlCiAgICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuNTI5MTY3O3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lIgogICAgICAgICBpZD0icGF0aDg1OCIKICAgICAgICAgY3g9IjgwLjc0NzI4NCIKICAgICAgICAgY3k9IjEzNy44NDA0MiIKICAgICAgICAgcng9IjIuNjY1MzM4MyIKICAgICAgICAgcnk9IjIuNjY1MzM4IiAvPgogICAgICA8cGF0aAogICAgICAgICBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDowLjUyOTE2NztzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIgogICAgICAgICBkPSJtIDc4LjcyNzQ4NCwxMzkuNzcwNDYgLTMuNjgwNTMxLDMuNTAxIgogICAgICAgICBpZD0icGF0aDExNDEiIC8+CiAgICA8L2c+CiAgPC9nPgo8L3N2Zz4K");
+            background-repeat: no-repeat;
+            background-size: 12px;
+            background-position-y: 5px;
+            padding: 0 5px 0 15px;
+            width: 120px; }
+        desktop window content left menu hr, desktop window content right menu hr {
+          margin: 0; }
+        desktop window content left menu item, desktop window content right menu item {
+          height: 22px;
+          border: 1px solid transparent;
+          margin: 0 1px;
+          min-width: 120px;
+          display: flex;
+          align-items: center;
+          padding: 0 5px;
+          justify-content: space-between; }
+          desktop window content left menu item:hover, desktop window content right menu item:hover {
+            background-color: #E5F3FF;
+            border-color: #E5F3FF; }
+          desktop window content left menu item.active, desktop window content right menu item.active {
+            background-color: #CDE8FF; }
+            desktop window content left menu item.active:hover, desktop window content right menu item.active:hover {
+              border-color: #99D1FF; }
+    desktop window content center {
+      overflow: auto;
+      padding: 0 5px;
+      grid-area: center;
+      text-align: left; }
+      desktop window content center form group[data-group="root"] {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap; }
+        desktop window content center form group[data-group="root"] group[data-hasinputgroups] {
+          display: flex;
+          width: 100%;
+          flex-wrap: wrap; }
+        desktop window content center form group[data-group="root"] group[data-hasinputs] {
+          display: block;
+          margin: 5px 0; }
+          desktop window content center form group[data-group="root"] group[data-hasinputs] label {
+            display: block;
+            padding: 5px 0; }
+          desktop window content center form group[data-group="root"] group[data-hasinputs] input {
+            padding: 5px;
+            border: 1px solid #D9D9D9;
+            outline: none;
+            margin-right: 20px; }
+      desktop window content center form button {
+        margin: 20px 0;
+        height: 24px;
+        min-width: 90px;
+        padding: 0 15px;
+        border-radius: 0;
+        background-color: #E1E1E1;
+        border: 1px solid #ADADAD; }
+        desktop window content center form button:hover {
+          background-color: #E5F1FB;
+          border: 1px solid #0078D7; }
+    desktop window content right {
+      grid-area: right;
+      border-left: 1px solid #F7F7F7; }
+  desktop window status {
+    grid-area: status;
+    height: 18px;
+    display: flex;
+    font-size: 11px;
+    padding: 0 5px;
+    color: rgba(0, 0, 0, 0.65); }
+    desktop window status version {
+      margin-left: 5px; }

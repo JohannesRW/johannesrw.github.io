@@ -3,21 +3,19 @@ $$.Apps.src.games = class {
 		appname:'games',
 		title:'Games',
 		version:'0.0.1',
-		icon:'fa-duotone fa-gamepad-modern',
 		iconColor:'#91ff00',
 		status:false,
 		resizable:true,
 		maximized:true,
-		hasRight: false
 	}
 	elements={
-		menu: [
-			{title:'Hole.io',callback:()=>this.setGame('//hole-io.com/')},
-			{title:'Slither.io',callback:()=>this.setGame('//slither.io/')},
-			{title:'SuperHex.io',callback:()=>this.setGame('//superhex.io/')},
-			{title:'Paper.io',callback:()=>this.setGame('//paper-io.com/')},
-			{title:'Among Us',callback:()=>this.setGame('//amongusplay.online/')}
-		]
+		menu: {
+			holeio: {title: 'Hole.io', callback: () => this.setGame('//hole-io.com/')},
+			slitherio: {title: 'Slither.io', callback: () => this.setGame('//slither.io/')},
+			superhexio: {title: 'SuperHex.io', callback: () => this.setGame('//superhex.io/')},
+			paperio: {title: 'Paper.io', callback: () => this.setGame('//paper-io.com/')},
+			amongus: {title: 'Among Us', callback: () => this.setGame('//amongusplay.online/')}
+		}
 	}
 
 	constructor(options={}) {

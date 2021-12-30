@@ -85,25 +85,37 @@ export class Taskbar {
 				taskbar.removeActive();
 			})
 		});
+		taskbar.elements.search.el.on('click',function(){
+			$(this).select();
+		})
 	}
 	height(){
 		let taskbar = this;
 		return taskbar.elements.el.outerHeight();
 	}
-	destroy(){
-		let taskbar = this;
-		taskbar.elements.el.remove();
-		$$.System.removeCSS('taskbar');
-	}
 }
 export class StartMenu {
+	elements = {
+		el:$('<startmenu/>'),
+		menu: []
+	}
 	init(){
 		let startmenu = this;
-		$$.Desktop.elements.el.append($$.Tools.autoAppend(startmenu.elements));
+		$$.Desktop.elements.el.append(startmenu.elements.el);
+		startmenu.setMenu();
+		startmenu.listen();
 	}
-	elements={
-		el:$('<startmenu/>'),
-		logout:{el:$('<logout/>')}
+	listen(){
+		let startmenu = this;
+		$$.Taskbar.elements.search.el.on('keyup',function(){
+			$$.StartMenu.show();
+			startmenu.menu.search($(this).val(),false);
+		})
+	}
+	setMenu(){
+		let startmenu = this;
+		startmenu.menu = new $$.Menu({search:false},startmenu.elements.menu,startmenu);
+		startmenu.elements.el.html(startmenu.menu.el);
 	}
 	hide(){
 		let startmenu = this;
@@ -118,21 +130,7 @@ export class StartMenu {
 	}
 	add(icon='',title,appname){
 		let startmenu = this;
-		let item = {
-			el: $('<item/>'),
-			icon: {el:$('<i/>',{class:'$$-'+icon})},
-			title: {el:$('<span/>',{html:title})}
-		}
-		item.el.append(item.icon.el);
-		item.el.append(item.title.el);
-		startmenu.elements.el.append($$.Tools.autoAppend(item));
-		item.el.on('click',function(event){
-			$$.Apps.run(appname);
-		})
-	}
-	destroy(){
-		let startmenu = this;
-		startmenu.elements.el.remove();
-		$$.System.removeCSS('startmenu');
+		startmenu.elements.menu.push({title:title,icon:icon,callback:()=>$$.Apps.run(appname)})
+		startmenu.setMenu();
 	}
 }

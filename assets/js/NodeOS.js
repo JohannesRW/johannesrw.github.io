@@ -1,13 +1,13 @@
-import {System,Apps} from './modules/Core.js';
+import {System,Apps,User} from './modules/Core.js';
 import {Desktop,Taskbar,StartMenu} from './modules/UI.js';
 import {Window,Ribbon,Form,Menu,Tools} from './modules/Runtime.js';
 
 window.$$ = new class {
 	version = '0.0.2';
-	USERID = null;
 	//core
 	System = new System();
 	Apps = new Apps();
+	User = new User();
 	//ui components
 	Desktop = new Desktop();
 	Taskbar = new Taskbar();
@@ -21,10 +21,7 @@ window.$$ = new class {
 
 	init() {
 		let os = this;
-		//core
 		os.System.init();
-		os.Apps.init();
-		//ui
 		os.Desktop.init();
 		os.Taskbar.init();
 		os.StartMenu.init();

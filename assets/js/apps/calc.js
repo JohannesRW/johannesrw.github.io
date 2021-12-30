@@ -4,7 +4,6 @@ $$.Apps.src.calc = class {
 	operator='';
 	options={
 		appname:'calc',
-		icon:'fa-duotone fa-calculator-simple',
 		windowIcon:false,
 		title:'Calculator',
 		version:'0.0.1',
@@ -12,8 +11,6 @@ $$.Apps.src.calc = class {
 		resizable:false,
 		width:{current:320},
 		height:{current:460},
-		hasLeft: false,
-		hasRight: false
 	}
 	elements={
 		history:{
