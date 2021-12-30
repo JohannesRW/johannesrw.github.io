@@ -12,6 +12,7 @@ export class Window {
 		iconColor:null,
 		windowIcon:true,
 		running:true,
+		centerContent:false,
 		top: {
 			current:0
 		},
@@ -125,6 +126,9 @@ export class Window {
 		}
 		if(!win.options.status){
 			win.elements.status.el.remove();
+		}
+		if(win.options.centerContent){
+			win.elements.content.center.el.css({'text-align':'center'});
 		}
 		win.applySize();
 		win.applyPosition();
@@ -561,7 +565,7 @@ export class Menu {
 			menu.app.win.setStatus('Showing ' + count + ' of ' + count + ' Items');
 		}
 	}
-	search(query,autoOpen=false) {
+	search(query,autoClickFirst=true) {
 		let menu = this;
 		let items = menu.elements.el.find('item');
 		let count = items.length;
@@ -571,9 +575,9 @@ export class Menu {
 			item = $(item);
 			if (item.data('search').search(query) !== -1) {
 				item.css({display: 'flex'});
-				if(autoOpen){
+				if(autoClickFirst){
 					item.click();
-					autoOpen=false;
+					autoClickFirst=false;
 				}
 				showing++;
 			} else {

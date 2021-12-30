@@ -6,6 +6,7 @@ $$.Apps.src.info = class {
 		resizable:false,
 		width:{current:500},
 		height:{current:450},
+		centerContent:true,
 	};
 	content = {
 		about:'<h1>NOS</h1><h4>v'+$$.version+'</h4><img src="assets/img/nos.png" width="75"><h3>NodeOperatingSystem</h3><p>Built with Node.JS, JQuery, Express and MongoDB</p><p>&copy; 2021 Johannes Hundt</p>',
