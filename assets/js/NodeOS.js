@@ -1,5 +1,5 @@
 import {System,Apps} from './modules/Core.js';
-import {Desktop,Taskbar,StartMenu} from './modules/Ui.js';
+import {Desktop,Taskbar,StartMenu} from './modules/UI.js';
 import {Window,Ribbon,Form,Menu,Tools} from './modules/Runtime.js';
 
 window.$$ = new class {
