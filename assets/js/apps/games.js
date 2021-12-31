@@ -8,7 +8,7 @@ $$.Apps.src.games = class {
 		resizable:true,
 		maximized:true,
 	}
-	elements={
+	templates={
 		menu: {
 			holeio: {title: 'Hole.io', callback: () => this.setGame('//hole-io.com/')},
 			slitherio: {title: 'Slither.io', callback: () => this.setGame('//slither.io/')},
@@ -17,7 +17,6 @@ $$.Apps.src.games = class {
 			amongus: {title: 'Among Us', callback: () => this.setGame('//amongusplay.online/')}
 		}
 	}
-
 	constructor(options={}) {
 		let app = this;
 		$.extend(true,app.options, options);
@@ -30,7 +29,7 @@ $$.Apps.src.games = class {
 	}
 	setMenu(){
 		let app = this;
-		app.menu = new $$.Menu({},app.elements.menu,app);
+		app.menu = new $$.Menu({},app.templates.menu,app);
 		app.win.setLeft(app.menu.el);
 	}
 	setGame(url){

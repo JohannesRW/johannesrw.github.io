@@ -19,8 +19,7 @@ window.$$ = new class {
 	Menu = Menu;
 	Tools = Tools;
 	Alert = Alert;
-
-
+	NotImplemented = (msg=null)=>new $$.Alert({type:'warning', title:'Not implemented',msg:'This function has not yet been implemented.<br>'+msg});
 	init() {
 		let os = this;
 		os.System.init();

@@ -8,7 +8,7 @@ $$.Apps.src.logs = class {
 		height: {current: 450},
 	};
 	currentType = 'info';
-	elements = {
+	templates = {
 		ribbon: {
 			logs: {
 				title: 'Logs',
@@ -56,53 +56,45 @@ $$.Apps.src.logs = class {
 					}
 				}
 			}
-		}
+		},
+		logs: (type, logs) =>
+			`${Object.keys(logs).map(function (logKey) {
+				return `<pre class="${type}"><strong>${logs[logKey].msg}</strong>
+				${Object.keys(logs[logKey].payload).map(function (payloadKey) {
+					return `<br>${(payloadKey + ':').padEnd(15, ' ') + JSON.stringify(logs[logKey].payload[payloadKey])}`;
+				}).join('')}
+				<date>${logs[logKey].date} ${logs[logKey].time}</date></pre><hr>`;
+			}).join('')}`
 	}
 	constructor(options = {}) {
 		let app = this;
-		$.extend(true, app.options, options);//extend default options with user options
-		$$.Apps.addCSS('logs');//load css ("assets/css/apps/logs.css")
-		app.win = new $$.Window(app.options);//create new window with current options
-		app.init();//initialize app
-	}
-	init() {
-		let app = this;
-		app.setRibbon();//generate ribbons
-		app.update();//update app
-	}
-	setRibbon() {
-		let app = this;
-		app.ribbon = new $$.Ribbon({}, app.elements.ribbon, app);//auto generate ribbon
+		$.extend(true, app.options, options);
+		$$.Apps.addCSS('logs');
+		app.win = new $$.Window(app.options);
+		app.ribbon = new $$.Ribbon({}, app.templates.ribbon, app);
+		app.update();
 	}
 	setLogs(type) {
 		let app = this;
-		app.currentType = type; //set current type of logs
-		app.win.setContent(); //clear window content
-		$.each(app.logs[type], function (index, log) { //loop through each log of requested type
-			let payloadHtml = '';
-			$.each(log.payload, function (payloadKey, payload) {//add additional info to entry
-				payloadHtml += '<br>' + (payloadKey + ':').padEnd(15, ' ') + JSON.stringify(payload);
-			})
-			//add entry to window content
-			app.win.addContent('<pre class="' + type + '"><strong>' + log.msg + '</strong>' + payloadHtml + '<date>' + log.date + ' ' + log.time + '</date></pre><hr>');
-		})
-		app.win.scrollContent();//scroll down
+		app.currentType = type;
+		app.win.setContent(app.templates.logs(type, app.logs[type]));
+		app.win.scrollContent();
 	}
 	clearLogs(type = null) {
 		let app = this;
-		type = type || app.currentType;//use given type or current type
-		$$.System.clearLogs(type);//clear logs of type from system
-		app.ribbon.set('logs');//set ribbon menu to "logs"
-		app.update();//update app
+		type = type || app.currentType;
+		$$.System.clearLogs(type);
+		app.ribbon.set('logs');
+		app.update();
 	}
 	update() {
 		let app = this;
-		app.logs = $$.System.getLogs();//get all logs from system
-		$.each(app.ribbon.elements.items.logs,function(key,item){
-			if(app.logs[key]) {
-				$('badge', item.el).html(app.logs[key].length);//update badges
+		app.logs = $$.System.getLogs();
+		$.each(app.ribbon.elements.items.logs, function (key, item) {
+			if (app.logs[key]) {
+				$('badge', item.el).html(app.logs[key].length);
 			}
 		})
-		app.setLogs(app.currentType);//output logs
+		app.setLogs(app.currentType);
 	}
 }

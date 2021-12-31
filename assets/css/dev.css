@@ -212,7 +212,7 @@ desktop startmenu {
         font-weight: 100; }
 
 body blocker {
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(2px);
   background-color: transparent;
   position: absolute;
   top: 0;

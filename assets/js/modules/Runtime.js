@@ -559,6 +559,7 @@ export class Form {
 export class Menu {
 	options = {
 		search:true,
+		sorted:false,
 	};
 	elements={}
 	items = {};
@@ -572,6 +573,9 @@ export class Menu {
 	build() {
 		let menu = this;
 		let count = 0;
+		if(menu.options.sorted){
+			menu.sort();
+		}
 		menu.elements.el = menu.el = $('<menu/>');
 		if(menu.options.search){
 			menu.elements.search = {el: $('<input>', {type: 'text', class: 'search'})};
@@ -637,6 +641,24 @@ export class Menu {
 		if(menu.elements[key]){
 			menu.elements[key].el.click();
 		}
+	}
+	sort(){
+		let menu = this;
+		let _items = menu.items;
+		menu.items = {};
+		let sortable = [];
+		let key;
+		for (key in _items) {
+			if (_items.hasOwnProperty(key)) {
+				sortable.push({'key': key, 'value': _items[key].search??_items[key].title.replace(' ','').toLowerCase()});
+			}
+		}
+		sortable.sort(function(a, b) {
+			return a.value > b.value?1:-1;
+		});
+		$.each(sortable,function(index,item){
+			menu.items[item.key] = _items[item.key];
+		})
 	}
 }
 export class Tools {

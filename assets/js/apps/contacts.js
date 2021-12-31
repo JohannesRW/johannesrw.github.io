@@ -1,51 +1,39 @@
-let i18n = {
-	title: 'Contacts',
-	file: 'Contact',
-	contact: {
-		website: 'Website',
-		street: 'Street',
-		number: 'Number',
-		zip: 'Zip',
-		city: 'City',
-		email: 'E-Mail',
-		phone: 'Phone',
-		mobile: 'Mobile',
-		name: {
-			first: 'First name',
-			last: 'Last name',
-		},
-	},
-	actions: {
-		add: 'Add',
-		edit: 'Edit',
-		copy: 'Copy',
-		share: 'Share',
-		delete: 'Delete'
-	},
-	save: 'Save',
-	saveCopy: 'Save copy'
-}
 $$.Apps.src.contacts = class {
 	options = {
 		appname: 'contacts',
-		title: i18n.title,
+		title: 'Contacts',
 		version: '0.0.1',
 		resizable: true,
 		iconColor: '#0095ff',
 		width: {current: 700},
 		height: {current: 600},
 	};
-	elements = {
-		menu: [],
+	templates = {
+		contactDetails:(contact)=>`<h1>${contact.name.first} ${contact.name.last}</h1>
+			<h3>Contact</h3>
+			${contact.private.address.street} ${contact.private.address.number}<br>
+			${contact.private.address.zip} ${contact.private.address.city}<br><br>
+			${contact.private.contact.mail?`<strong>E-Mail</strong><br><a href="mailto:${contact.private.contact.mail}">${contact.private.contact.mail}</a><br>`:''}
+			${contact.private.contact.phone?`<strong>Phone</strong><br><a href="tel:${contact.private.contact.phone}">${contact.private.contact.phone}</a><br>`:''}
+			${contact.private.contact.mobile?`<strong>Mobile</strong><br><a href="tel:${contact.private.contact.mobile}">${contact.private.contact.mobile}</a><br>`:''}
+			${Object.keys(contact.jobs).map(function (key) {
+				return `<hr><h2>${contact.jobs[key].title}</h2>
+				${contact.jobs[key].address.company}<br>
+				${contact.jobs[key].address.street} ${contact.jobs[key].address.number}<br>
+				${contact.jobs[key].address.zip} ${contact.jobs[key].address.city}<br><br>
+				${contact.jobs[key].contact.mail?`<strong>E-Mail</strong><br><a href="mailto:${contact.jobs[key].contact.mail}">${contact.jobs[key].contact.mail}</a><br>`:''}
+				${contact.jobs[key].contact.phone?`<strong>Phone</strong><br><a href="tel:${contact.jobs[key].contact.phone}">${contact.jobs[key].contact.phone}</a><br>`:''}
+				${contact.jobs[key].contact.mobile?`<strong>Mobile</strong><br><a href="tel:${contact.jobs[key].contact.mobile}">${contact.jobs[key].contact.mobile}</a><br>`:''}`;
+			}).join('')}`,
 		ribbon: {
 			contact: {
-				title: i18n.file,
+				title: 'Contact',
 				items: {
-					add: {title: i18n.actions.add, icon: 'fa-light fa-plus', callback: this.addContact},
-					edit: {title: i18n.actions.edit, icon: 'fa-light fa-pen', callback: this.editContact},
-					copy: {title: i18n.actions.copy, icon: 'fa-light fa-copy', callback: () => this.editContact(null, true)},
-					share: {title: i18n.actions.share, icon: 'fa-light fa-share-nodes', callback: this.shareContact},
-					delete: {title: i18n.actions.delete, noActive:true,icon: 'fa-light fa-xmark', callback: this._deleteContact},
+					add: {title: 'Add', icon: 'fa-light fa-plus', callback: this.addContact},
+					edit: {title: 'Edit', icon: 'fa-light fa-pen', callback: this.editContact},
+					copy: {title: 'Copy', icon: 'fa-light fa-copy', callback: () => this.editContact(null, true)},
+					share: {title: 'Share', icon: 'fa-light fa-share-nodes', callback: this.shareContact},
+					delete: {title: 'Delete', noActive:true,icon: 'fa-light fa-xmark', callback: this.confirmDelete},
 				}
 			}
 		},
@@ -55,42 +43,42 @@ $$.Apps.src.contacts = class {
 			},
 			name: {
 				first: {
-					label: i18n.contact.name.first,
+					label: 'First name',
 					type: 'text',
 					name: 'name.first'
 				},
 				last: {
-					label: i18n.contact.name.last,
+					label: 'Last name',
 					type: 'text',
 					name: 'name.last'
 				}
 			},
 			website: {
-				label: i18n.contact.website,
+				label: 'Website',
 				type: 'text'
 			},
 			private: {
 				address: {
 					groupStreet: {
 						street: {
-							label: i18n.contact.street,
+							label: 'Street',
 							type: 'text',
 							name: 'private.address.street'
 						},
 						number: {
-							label: i18n.contact.number,
+							label: 'Number',
 							type: 'text',
 							name: 'private.address.number'
 						}
 					},
 					groupCity: {
 						zip: {
-							label: i18n.contact.zip,
+							label: 'Zip',
 							type: 'text',
 							name: 'private.address.zip'
 						},
 						city: {
-							label: i18n.contact.city,
+							label: 'City',
 							type: 'text',
 							name: 'private.address.city'
 						}
@@ -98,65 +86,54 @@ $$.Apps.src.contacts = class {
 				},
 				contact: {
 					mail: {
-						label: i18n.contact.email,
+						label: 'Mail',
 						type: 'text',
 						name: 'private.contact.mail'
 					},
 					phone: {
-						label: i18n.contact.phone,
+						label: 'Phone',
 						type: 'text',
 						name: 'private.contact.phone'
 					},
 					mobile: {
-						label: i18n.contact.mobile,
+						label: 'Mobile',
 						type: 'text',
 						name: 'private.contact.mobile'
 					}
 				}
 			}
-		},
+		}
 	}
 	constructor(options = {}) {
 		let app = this;
 		$.extend(true, app.options, options);
 		$$.Apps.addCSS('contacts');
 		app.win = new $$.Window(app.options);
+		app.ribbon = new $$.Ribbon({}, app.templates.ribbon, app);
 		app.getContacts();
-	}
-	init() {
-		let app = this;
-		app.setMenu();
-		app.setRibbon();
+		app.disableRibbonElements();
 	}
 	getContacts() {
 		let app = this;
-		let url = '/contacts/list';
-		if (!$$.System.database || !$$.User.id) { //USE DEMO DATA IF NO DB CONNECTION OR NO LOGIN
-			url = '/demo/contacts.json';
-		}
+		let url = ($$.System.database && $$.User.id)?'/contacts/list':'/demo/contacts.json';
 		$.getJSON(url).done(function (data) {
 			app.contacts = data;
-			app.sort();
-		}).always(function () {
-			app.init();
+			app.setMenu();
+		}).fail(function () {
+			app.win.close();
 		});
 	}
 	setMenu() {
 		let app = this;
-		app.elements.menu = {};
+		app.templates.menu = {};
 		$.each(app.contacts, function (key, contact) {
-			app.elements.menu[key] = {
-				title: contact.name.first + ' ' + contact.name.last,
+			app.templates.menu[key] = {
+				title: `${contact.name.first} ${contact.name.last}`,
 				callback: () => app.setContact(contact)
 			}
 		})
-		app.menu = new $$.Menu({}, app.elements.menu, app);
+		app.menu = new $$.Menu({sorted:true}, app.templates.menu, app);
 		app.win.setLeft(app.menu.el);
-	}
-	setRibbon() {
-		let app = this;
-		app.ribbon = new $$.Ribbon({}, app.elements.ribbon, app);
-		app.disableRibbonElements();
 	}
 	disableRibbonElements(){
 		let app = this;
@@ -176,26 +153,11 @@ $$.Apps.src.contacts = class {
 	}
 	setContact(contact) {
 		let app = this;
-		app.enableRibbonElements(contact.permissions.owner==$$.User.id);
-		app.ribbon.clearActive();
+		let editable = contact.permissions.owner==$$.User.id;
 		app.current = contact;
-		let content = '<h1>' + contact.name.first + ' ' + contact.name.last + '</h1>' +
-			'<h3>' + i18n.file + '</h3>' +
-			contact.private.address.street + ' ' + contact.private.address.number + '<br>' +
-			contact.private.address.zip + ' ' + contact.private.address.city + '<br><br>' +
-			(contact.private.contact.mail ? '<strong>' + i18n.contact.email + '</strong><br><a href="mailto:' + contact.private.contact.mail + '">' + contact.private.contact.mail + '</a><br>' : '') +
-			(contact.private.contact.phone ? '<strong>' + i18n.contact.phone + '</strong><br><a href="tel:' + contact.private.contact.phone + '">' + contact.private.contact.phone + '</a><br>' : '') +
-			(contact.private.contact.mobile ? '<strong>' + i18n.contact.mobile + '</strong><br><a href="tel:' + contact.private.contact.mobile + '">' + contact.private.contact.mobile + '</a><br>' : '');
-		$.each(contact.jobs, function (key, job) {
-			content += '<hr><h2>' + job.title + '</h2>' +
-				job.address.company + '<br>' +
-				job.address.street + ' ' + job.address.number + '<br>' +
-				job.address.zip + ' ' + job.address.city + '<br><br>' +
-				(job.contact.mail ? '<strong>' + i18n.contact.email + '</strong><br><a href="mailto:' + job.contact.mail + '">' + job.contact.mail + '</a><br>' : '') +
-				(job.contact.phone ? '<strong>' + i18n.contact.phone + '</strong><br><a href="tel:' + job.contact.phone + '">' + job.contact.phone + '</a><br>' : '') +
-				(job.contact.mobile ? '<strong>' + i18n.contact.mobile + '</strong><br><a href="tel:' + job.contact.mobile + '">' + job.contact.mobile + '</a><br>' : '');
-		})
-		app.win.setContent(content);
+		app.ribbon.clearActive();
+		app.win.setContent(app.templates.contactDetails(contact));
+		app.enableRibbonElements(editable);
 	}
 	editContact(contact = null, copy = false) {
 		let app = this;
@@ -218,10 +180,10 @@ $$.Apps.src.contacts = class {
 		}
 		let options = {
 			buttons: {
-				save: {label: !copy ? i18n.save : i18n.saveCopy, callback: app.saveContact}
+				save: {label: !copy ? 'Save' : 'Save copy', callback: app.saveContact}
 			}
 		}
-		app.form = new $$.Form(options, app.elements.form, app);
+		app.form = new $$.Form(options, app.templates.form, app);
 		app.form.set(formValues);
 		app.win.setContent(app.form.el);
 	}
@@ -229,10 +191,10 @@ $$.Apps.src.contacts = class {
 		let app = this;
 		let options = {
 			buttons: {
-				save: {label: i18n.save, callback: app.saveContact}
+				save: {label: 'Save', callback: app.saveContact}
 			}
 		}
-		app.form = new $$.Form(options, app.elements.form, app);
+		app.form = new $$.Form(options, app.templates.form, app);
 		app.win.setContent(app.form.el);
 	}
 	saveContact() {
@@ -245,48 +207,22 @@ $$.Apps.src.contacts = class {
 		}
 		delete formData._id;
 		$.post(url,formData,function(data){
-			app.contacts[data._id] = data;//add/replace contact
-			app.sort();//sort contacts
-			app.setMenu();//rebuild menu
-			app.menu.set(data._id);//click on edited/new item
-		})
-	}
-	sort(){
-		//TODO: make sort a menu function, give sort key like search key
-		let app = this;
-		let _contacts = app.contacts;
-		app.contacts = {};
-		let sortable = [];
-		let key;
-		for (key in _contacts) {
-			if (_contacts.hasOwnProperty(key)) {
-				sortable.push({'key': key, 'value': (_contacts[key].name.first+_contacts[key].name.last).toLowerCase()});
-			}
-		}
-		sortable.sort(function(a, b) {
-			return a.value > b.value?1:-1;
-		});
-		$.each(sortable,function(index,item){
-			app.contacts[item.key] = _contacts[item.key];
+			app.contacts[data._id] = data;
+			app.setMenu();
+			app.menu.set(data._id);
 		})
 	}
 	shareContact() {
-		let app = this;
-		let options = {
-			type:'warning',
-			msg:'Not implemented yet.'
-		};
-		new $$.Alert(options);
+		$$.NotImplemented('Share Contact');
 	}
-	_deleteContact() {
+	confirmDelete() {
 		let app = this;
 		let contact = app.current;
-		let options = {
+		new $$.Alert({
 			type:'delete',
 			msg:'Permanently delete this contact?<br>'+contact.name.first+' '+contact.name.last,
 			callback:()=>app.deleteContact(app.current),
-		};
-		new $$.Alert(options);
+		});
 	}
 	deleteContact(contact){
 		let app = this;
@@ -294,7 +230,6 @@ $$.Apps.src.contacts = class {
 		let url = 'contacts/delete/'+contact._id;
 		$.get(url,function(data){
 			delete app.contacts[contact._id];
-			app.sort();
 			app.setMenu();
 			app.menu.clickFirst();
 		})
