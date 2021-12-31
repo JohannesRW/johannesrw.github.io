@@ -479,9 +479,17 @@ export class Form {
 			return false;
 		})
 	}
-	serialize() {
+	serialize(array=false) {
 		let form = this;
-		return form.elements.el.serializeArray()
+		let formDataArray = form.elements.el.serializeArray();
+		if(array){
+			return formDataArray;
+		}
+		let formDataObject = {};
+		$.each(formDataArray,function(index,item){
+			formDataObject[item.name] = item.value;
+		})
+		return formDataObject;
 	}
 	get() {
 		let form = this;
@@ -613,6 +621,17 @@ export class Menu {
 			menu.app.win.setStatus('Showing ' + showing + ' of ' + count + ' Items');
 		}
 	}
+	clickFirst(){
+		let menu = this;
+		let key = Object.keys(menu.items)[0];
+		menu.elements[key].el.click();
+	}
+	remove(key){
+		let menu = this;
+		menu.elements[key].el.remove();
+		delete menu.items[key];
+		menu.clickFirst();
+	}
 	set(key){
 		let menu = this;
 		if(menu.elements[key]){
@@ -673,7 +692,7 @@ export class Alert {
 		},
 		delete:{
 			icon:'fa-duotone fa-trash',
-			iconColor:'#fff',
+			iconColor:'#444',
 			title:'Delete',
 		},
 		warning:{
@@ -759,7 +778,7 @@ export class Alert {
 	build(){
 		let alert = this;
 		alert.win = new $$.Window(alert.windowOptions);
-		alert.win.setContent('<group><i class="'+alert.types[alert.options.type].icon+'" style="color:'+alert.options.iconColor+'"></i><msg>'+alert.options.msg+'</msg></group>');
+		alert.win.setContent('<group><i class="'+alert.types[alert.options.type].icon+'" style="color:'+alert.types[alert.options.type].iconColor+'"></i><msg>'+alert.options.msg+'</msg></group>');
 		alert.win.addContent($$.Tools.autoAppend(alert.elements.buttons[alert.options.type]))
 	}
 	listen(){

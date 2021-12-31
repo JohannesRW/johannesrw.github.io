@@ -50,19 +50,19 @@ $$.Apps.src.contacts = class {
 			}
 		},
 		form: {
-			id: {
+			_id: {
 				type: 'hidden'
 			},
 			name: {
 				first: {
 					label: i18n.contact.name.first,
 					type: 'text',
-					name: 'name[first]'
+					name: 'name.first'
 				},
 				last: {
 					label: i18n.contact.name.last,
 					type: 'text',
-					name: 'name[last]'
+					name: 'name.last'
 				}
 			},
 			website: {
@@ -75,24 +75,24 @@ $$.Apps.src.contacts = class {
 						street: {
 							label: i18n.contact.street,
 							type: 'text',
-							name: 'private[address][street]'
+							name: 'private.address.street'
 						},
 						number: {
 							label: i18n.contact.number,
 							type: 'text',
-							name: 'private[address][number]'
+							name: 'private.address.number'
 						}
 					},
 					groupCity: {
 						zip: {
 							label: i18n.contact.zip,
 							type: 'text',
-							name: 'private[address][zip]'
+							name: 'private.address.zip'
 						},
 						city: {
 							label: i18n.contact.city,
 							type: 'text',
-							name: 'private[address][city]'
+							name: 'private.address.city'
 						}
 					}
 				},
@@ -100,17 +100,17 @@ $$.Apps.src.contacts = class {
 					mail: {
 						label: i18n.contact.email,
 						type: 'text',
-						name: 'private[contact][mail]'
+						name: 'private.contact.mail'
 					},
 					phone: {
 						label: i18n.contact.phone,
 						type: 'text',
-						name: 'private[contact][phone]'
+						name: 'private.contact.phone'
 					},
 					mobile: {
 						label: i18n.contact.mobile,
 						type: 'text',
-						name: 'private[contact][mobile]'
+						name: 'private.contact.mobile'
 					}
 				}
 			}
@@ -136,13 +136,14 @@ $$.Apps.src.contacts = class {
 		}
 		$.getJSON(url).done(function (data) {
 			app.contacts = data;
+			app.sort();
 		}).always(function () {
 			app.init();
 		});
 	}
 	setMenu() {
 		let app = this;
-		app.elements.menu = [];
+		app.elements.menu = {};
 		$.each(app.contacts, function (key, contact) {
 			app.elements.menu[key] = {
 				title: contact.name.first + ' ' + contact.name.last,
@@ -164,16 +165,18 @@ $$.Apps.src.contacts = class {
 		app.ribbon.elements.items.contact.share.el.attr('disabled',true);
 		app.ribbon.elements.items.contact.delete.el.attr('disabled',true);
 	}
-	enableRibbonElements(){
+	enableRibbonElements(editable=true){
 		let app = this;
-		app.ribbon.elements.items.contact.edit.el.attr('disabled',false);
+		if(editable){
+			app.ribbon.elements.items.contact.edit.el.attr('disabled',false);
+			app.ribbon.elements.items.contact.share.el.attr('disabled',false);
+			app.ribbon.elements.items.contact.delete.el.attr('disabled',false);
+		}
 		app.ribbon.elements.items.contact.copy.el.attr('disabled',false);
-		app.ribbon.elements.items.contact.share.el.attr('disabled',false);
-		app.ribbon.elements.items.contact.delete.el.attr('disabled',false);
 	}
 	setContact(contact) {
 		let app = this;
-		app.enableRibbonElements();
+		app.enableRibbonElements(contact.permissions.owner==$$.User.id);
 		app.ribbon.clearActive();
 		app.current = contact;
 		let content = '<h1>' + contact.name.first + ' ' + contact.name.last + '</h1>' +
@@ -201,17 +204,17 @@ $$.Apps.src.contacts = class {
 			return;
 		}
 		let formValues = {
-			'id': !copy ? contact._id : null,
-			'name[first]': contact.name.first,
-			'name[last]': contact.name.last,
+			'_id': !copy ? contact._id : null,
+			'name.first': contact.name.first,
+			'name.last': contact.name.last,
 			'website': contact.website,
-			'private[address][street]': contact.private.address.street,
-			'private[address][number]': contact.private.address.number,
-			'private[address][zip]': contact.private.address.zip,
-			'private[address][city]': contact.private.address.city,
-			'private[contact][mail]': contact.private.contact.mail,
-			'private[contact][phone]': contact.private.contact.phone,
-			'private[contact][mobile]': contact.private.contact.mobile,
+			'private.address.street': contact.private.address.street,
+			'private.address.number': contact.private.address.number,
+			'private.address.zip': contact.private.address.zip,
+			'private.address.city': contact.private.address.city,
+			'private.contact.mail': contact.private.contact.mail,
+			'private.contact.phone': contact.private.contact.phone,
+			'private.contact.mobile': contact.private.contact.mobile,
 		}
 		let options = {
 			buttons: {
@@ -234,18 +237,66 @@ $$.Apps.src.contacts = class {
 	}
 	saveContact() {
 		let app = this;
-		console.log(app.form.serialize());
+		if (!$$.System.database || !$$.User.id) {return;}
+		let url = 'contacts/save/';
+		let formData = app.form.serialize();
+		if(formData._id){
+			url += formData._id;
+		}
+		delete formData._id;
+		$.post(url,formData,function(data){
+			app.contacts[data._id] = data;//add/replace contact
+			app.sort();//sort contacts
+			app.setMenu();//rebuild menu
+			app.menu.set(data._id);//click on edited/new item
+		})
+	}
+	sort(){
+		//TODO: make sort a menu function, give sort key like search key
+		let app = this;
+		let _contacts = app.contacts;
+		app.contacts = {};
+		let sortable = [];
+		let key;
+		for (key in _contacts) {
+			if (_contacts.hasOwnProperty(key)) {
+				sortable.push({'key': key, 'value': (_contacts[key].name.first+_contacts[key].name.last).toLowerCase()});
+			}
+		}
+		sortable.sort(function(a, b) {
+			return a.value > b.value?1:-1;
+		});
+		$.each(sortable,function(index,item){
+			app.contacts[item.key] = _contacts[item.key];
+		})
 	}
 	shareContact() {
 		let app = this;
+		let options = {
+			type:'warning',
+			msg:'Not implemented yet.'
+		};
+		new $$.Alert(options);
 	}
 	_deleteContact() {
 		let app = this;
 		let contact = app.current;
-		let alert = new $$.Alert({callback:()=>app.deleteContact(app.current),type:'delete',msg:'Permanently delete this contact?<br>'+contact.name.first+' '+contact.name.last});
+		let options = {
+			type:'delete',
+			msg:'Permanently delete this contact?<br>'+contact.name.first+' '+contact.name.last,
+			callback:()=>app.deleteContact(app.current),
+		};
+		new $$.Alert(options);
 	}
 	deleteContact(contact){
 		let app = this;
-		console.log('DELETE CONTACT',contact,app);
+		if (!$$.System.database || !$$.User.id) {return;}
+		let url = 'contacts/delete/'+contact._id;
+		$.get(url,function(data){
+			delete app.contacts[contact._id];
+			app.sort();
+			app.setMenu();
+			app.menu.clickFirst();
+		})
 	}
 }

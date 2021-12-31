@@ -271,6 +271,8 @@ desktop window {
     height: unset !important; }
     desktop window[data-app="alert"] ribbons {
       display: none; }
+    desktop window[data-app="alert"] topbar i {
+      filter: unset !important; }
     desktop window[data-app="alert"] topbar buttons div[data-window="minimize"] {
       display: none; }
     desktop window[data-app="alert"] content center {

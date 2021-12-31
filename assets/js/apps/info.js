@@ -9,7 +9,7 @@ $$.Apps.src.info = class {
 		centerContent:true,
 	};
 	content = {
-		about:'<h1>NOS</h1><h4>v'+$$.version+'</h4><img src="assets/img/nos.png" width="75"><h3>NodeOperatingSystem</h3><p>Built with Node.JS, JQuery, Express and MongoDB</p><p>&copy; 2021 Johannes Hundt</p>',
+		about:'<img src="assets/img/nos.png" width="75"><h3>NodeOperatingSystem</h3><h4>v'+$$.version+'</h4><p>Built with Node.JS, JQuery, Express and MongoDB</p><p>&copy; 2022 Johannes Hundt</p>',
 		author:'<h2>Johannes Hundt</h2><a href="mailto:hundt.johannes@gmail.com">hundt.johannes@gmail.com</a>',
 		github:'<a href="//github.com/JohannesRW" target="_blank"><img src="assets/img/github.png" width="80%">JohannesRW@GitHub.com</a>',
 	};
