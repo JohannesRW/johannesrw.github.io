@@ -1,6 +1,6 @@
 import {System,Apps,User} from './modules/Core.js';
 import {Desktop,Taskbar,StartMenu} from './modules/UI.js';
-import {Window,Ribbon,Form,Menu,Tools} from './modules/Runtime.js';
+import {Window,Ribbon,Form,Menu,Tools,Alert} from './modules/Runtime.js';
 
 window.$$ = new class {
 	version = '0.0.2';
@@ -18,6 +18,8 @@ window.$$ = new class {
 	Form = Form;
 	Menu = Menu;
 	Tools = Tools;
+	Alert = Alert;
+
 
 	init() {
 		let os = this;

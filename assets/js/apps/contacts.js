@@ -45,7 +45,7 @@ $$.Apps.src.contacts = class {
 					edit: {title: i18n.actions.edit, icon: 'fa-light fa-pen', callback: this.editContact},
 					copy: {title: i18n.actions.copy, icon: 'fa-light fa-copy', callback: () => this.editContact(null, true)},
 					share: {title: i18n.actions.share, icon: 'fa-light fa-share-nodes', callback: this.shareContact},
-					delete: {title: i18n.actions.delete, noActive:true,icon: 'fa-light fa-xmark', callback: this.deleteContact},
+					delete: {title: i18n.actions.delete, noActive:true,icon: 'fa-light fa-xmark', callback: this._deleteContact},
 				}
 			}
 		},
@@ -239,7 +239,13 @@ $$.Apps.src.contacts = class {
 	shareContact() {
 		let app = this;
 	}
-	deleteContact() {
+	_deleteContact() {
 		let app = this;
+		let contact = app.current;
+		let alert = new $$.Alert({callback:()=>app.deleteContact(app.current),type:'delete',msg:'Permanently delete this contact?<br>'+contact.name.first+' '+contact.name.last});
+	}
+	deleteContact(contact){
+		let app = this;
+		console.log('DELETE CONTACT',contact,app);
 	}
 }

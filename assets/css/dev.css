@@ -35,6 +35,18 @@ body {
     font-size: 11px;
     margin: 0 0 0 5px;
     color: #fff; }
+  body button {
+    margin: 20px 0;
+    height: 24px;
+    min-width: 90px;
+    padding: 0 15px;
+    border-radius: 0;
+    background-color: #E1E1E1;
+    border: 1px solid #ADADAD;
+    outline: none; }
+    body button:hover, body button:focus, body button:focus-visible {
+      background-color: #E5F1FB;
+      border: 1px solid #0078D7; }
 
 body form.loginscreen {
   position: absolute;
@@ -77,7 +89,9 @@ body form.loginscreen {
     color: #fff;
     background-color: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.5);
-    margin-right: 10px; }
+    margin: 0 10px 0 0;
+    min-width: unset;
+    padding: 0; }
 
 desktop {
   display: flex;
@@ -197,6 +211,15 @@ desktop startmenu {
         color: #fff;
         font-weight: 100; }
 
+body blocker {
+  backdrop-filter: blur(5px);
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; }
+
 desktop window {
   user-select: none;
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
@@ -244,6 +267,31 @@ desktop window {
       width: 100%;
       bottom: -5px;
       cursor: s-resize; }
+  desktop window[data-app="alert"] {
+    height: unset !important; }
+    desktop window[data-app="alert"] ribbons {
+      display: none; }
+    desktop window[data-app="alert"] topbar buttons div[data-window="minimize"] {
+      display: none; }
+    desktop window[data-app="alert"] content center {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #F0F0F0;
+      padding: 10px; }
+      desktop window[data-app="alert"] content center group {
+        display: flex; }
+        desktop window[data-app="alert"] content center group i {
+          align-self: center;
+          font-size: 40px;
+          margin: 10px; }
+        desktop window[data-app="alert"] content center group msg {
+          margin: 10px; }
+      desktop window[data-app="alert"] content center buttons {
+        display: block;
+        text-align: right; }
+        desktop window[data-app="alert"] content center buttons button {
+          margin: 5px; }
   desktop window topbar {
     display: grid;
     grid-template-columns: auto 1fr 135px;
@@ -444,17 +492,6 @@ desktop window {
             border: 1px solid #D9D9D9;
             outline: none;
             margin-right: 20px; }
-      desktop window content center form button {
-        margin: 20px 0;
-        height: 24px;
-        min-width: 90px;
-        padding: 0 15px;
-        border-radius: 0;
-        background-color: #E1E1E1;
-        border: 1px solid #ADADAD; }
-        desktop window content center form button:hover {
-          background-color: #E5F1FB;
-          border: 1px solid #0078D7; }
     desktop window content right {
       grid-area: right;
       border-left: 1px solid #F7F7F7; }

@@ -13,6 +13,9 @@ export class Window {
 		windowIcon:true,
 		running:true,
 		centerContent:false,
+		type:'default',
+		save:true,
+		blocking:false,
 		top: {
 			current:0
 		},
@@ -111,6 +114,7 @@ export class Window {
 	applyOptions(){
 		let win = this;
 		win.elements.el.attr('data-app',win.options.appname);
+		win.elements.el.attr('data-type',win.options.type);
 		if(win.options.windowIcon){
 			win.elements.topbar.icon.el.addClass(win.options.icon);
 			if(win.options.iconColor){
@@ -132,6 +136,21 @@ export class Window {
 		}
 		win.applySize();
 		win.applyPosition();
+		if(win.options.blocking){
+			win.block();
+		}
+	}
+	block(){
+		let win = this;
+		win.elements.blocker = {
+			el:$('<blocker/>'),
+		}
+		$('body').append(win.elements.blocker.el);
+		win.elements.blocker.el.css({zIndex:$$.Desktop.zindex+9});
+	}
+	unblock(){
+		let win = this;
+		win.elements.blocker.el.remove();
 	}
 	applySize(){
 		let win = this;
@@ -248,6 +267,10 @@ export class Window {
 	}
 	bringToFront(){
 		let win = this;
+		if(win.options.blocking){
+			win.elements.el.css({zIndex:$$.Desktop.zindex+10});
+			return;
+		}
 		$$.Taskbar.removeActive();
 		win.taskbarIcon.addClass('active');
 		if(win.elements.el.css('z-index') != $$.Desktop.zindex){
@@ -260,6 +283,9 @@ export class Window {
 		win.save();
 		$$.Apps.kill(win.options.appname);
 		win.elements.el.remove();
+		if(win.options.blocking){
+			win.unblock();
+		}
 		win.taskbarIcon.remove();
 	}
 	minimize(){
@@ -306,6 +332,7 @@ export class Window {
 	}
 	save(){
 		let win = this;
+		if(!win.options.save){return;}
 		let appname = win.options.appname;
 		if(appname !== 'undefined'){
 			let options = {
@@ -393,7 +420,6 @@ export class Ribbon {
 			ribbon.elements.items[buttonKey] = {el: $('<menu/>')};
 			$.each(element.items,function(itemKey,item){
 				ribbon.elements.items[buttonKey][itemKey] = {el: $('<item/>', {html: '<span>'+item.title+'</span><badge></badge>','data-noactive':item.noActive||null}),callback:item.callback};
-
 				if(item.icon){
 					let icon = $('<i/>',{class:item.icon});
 					if(item.color){
@@ -419,7 +445,7 @@ export class Ribbon {
 		ribbon.elements.buttons.el.find('.active').removeClass('active');
 		ribbon.elements.buttons[key].el.addClass('active');
 		ribbon.elements.items[key].el.find('hr').remove();
-		ribbon.app.win.setRibbonContent($$.Tools.autoAppend(ribbon.elements.items[key]));
+		ribbon.app.win.setRibbonContent($$.Tools.autoAppend(ribbon.elements.items[key],null,['callback']));
 		$.each(ribbon.elements.items[key],function(itemKey,item){
 			if(itemKey === 'el'){return;}
 			item.el.after('<hr>');
@@ -490,7 +516,6 @@ export class Form {
 				if (groupKey !== 'root') {
 					group.attr('data-hasinputgroups', true)
 				}
-				;
 				let inputGroup = $('<group/>', {'data-group': key, 'data-hasinputs': true});
 				let label = $('<label/>', {html: item.label ?? ''});
 				let input = $('<input/>', {type: item.type, name: item.name ?? key, value: item.value ?? null});
@@ -597,15 +622,15 @@ export class Menu {
 }
 export class Tools {
 	static throttles = {};
-	static autoAppend(obj,parentElement=false){
+	static autoAppend(obj,parentElement=false,ignore=[]){
 		let tools = this;
 		let returnElement = obj.el||parentElement;
 		$.each(obj,function(key,element){
-			if(key == 'callback'){
+			if(ignore.indexOf(key)!==-1){
 				return;
 			}
 			if(key!=='el'){
-				returnElement.append(tools.autoAppend(element,returnElement));
+				returnElement.append(tools.autoAppend(element,returnElement,ignore));
 			}
 		})
 		return returnElement;
@@ -627,5 +652,134 @@ export class Tools {
 			}
 			callback();
 		}
+	}
+}
+export class Alert {
+	options={
+		type:'info',
+		title:null,
+		msg:null,
+	};
+	types={
+		info:{
+			icon:'fa-solid fa-circle-info',
+			iconColor:'#0095ff',
+			title:'Info',
+		},
+		bool:{
+			icon:'fa-solid fa-circle-question',
+			iconColor:'#0095ff',
+			title:'',
+		},
+		delete:{
+			icon:'fa-duotone fa-trash',
+			iconColor:'#fff',
+			title:'Delete',
+		},
+		warning:{
+			icon:'fa-solid fa-triangle-exclamation',
+			iconColor:'#ffbc00',
+			title:'Warning'
+		},
+		error:{
+			icon:'fa-solid fa-circle-exclamation',
+			iconColor:'#bd0000',
+			title:'Error'
+		}
+	}
+	windowOptions={
+		appname:'alert',
+		status:false,
+		resizable:false,
+		width:{current:400},
+		height:{current:200},
+		top: {current:0},
+		left: {current:0},
+		type:'alert',
+		save:false
+	}
+	elements={
+		buttons:{
+			info:{
+				el:$('<buttons/>'),
+				close:{
+					el:$('<button/>',{html:'Close'})
+				}
+			},
+			bool:{
+				el:$('<buttons/>'),
+				callback:{
+					el:$('<button/>',{html:'Yes'})
+				},
+				close:{
+					el:$('<button/>',{html:'No'})
+				}
+			},
+			delete:{
+				el:$('<buttons/>'),
+				callback:{
+					el:$('<button/>',{html:'Delete'})
+				},
+				close:{
+					el:$('<button/>',{html:'Abort'})
+				}
+			},
+			warning:{
+				el:$('<buttons/>'),
+				close:{
+					el:$('<button/>',{html:'Close'})
+				}
+			},
+			error:{
+				el:$('<buttons/>'),
+				close:{
+					el:$('<button/>',{html:'Close'})
+				}
+			}
+		}
+	}
+	constructor(options={}) {
+		let alert = this;
+		$.extend(true,alert.options, options);
+		alert.applyOptions();
+		alert.build();
+		alert.listen();
+	}
+	applyOptions(){
+		let alert = this;
+		alert.windowOptions.title = alert.options.title||alert.types[alert.options.type].title;
+		alert.windowOptions.icon = alert.types[alert.options.type].icon;
+		alert.windowOptions.iconColor = alert.types[alert.options.type].iconColor;
+		alert.windowOptions.top.current = $$.Desktop.height()/2-alert.windowOptions.height.current/2;
+		alert.windowOptions.left.current = $$.Desktop.width()/2-alert.windowOptions.width.current/2;
+		if(alert.options.callback && alert.elements.buttons[alert.options.type].callback){
+			alert.windowOptions.blocking = true;
+		}
+	}
+	build(){
+		let alert = this;
+		alert.win = new $$.Window(alert.windowOptions);
+		alert.win.setContent('<group><i class="'+alert.types[alert.options.type].icon+'" style="color:'+alert.options.iconColor+'"></i><msg>'+alert.options.msg+'</msg></group>');
+		alert.win.addContent($$.Tools.autoAppend(alert.elements.buttons[alert.options.type]))
+	}
+	listen(){
+		let alert = this;
+		alert.elements.buttons[alert.options.type].close.el.on('click',function(){
+			alert.close();
+		});
+		if(alert.options.callback && alert.elements.buttons[alert.options.type].callback){
+			alert.elements.buttons[alert.options.type].callback.el.on('click',function(){
+				alert.close();
+				alert.options.callback();
+			});
+			alert.elements.buttons[alert.options.type].callback.el.focus();
+		}
+		else {
+			alert.elements.buttons[alert.options.type].close.el.focus();
+		}
+	}
+	close(){
+		let alert = this;
+		alert.win.close();
 	}
 }
