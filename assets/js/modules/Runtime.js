@@ -1,7 +1,7 @@
 export class Window {
 	mousePosition = {}
 	options = {
-		appname:'undefined',
+		appName:'undefined',
 		maximized: false,
 		minimized: false,
 		resizable:true,
@@ -35,6 +35,7 @@ export class Window {
 			current:300,
 		}
 	}
+	// noinspection HtmlDeprecatedTag
 	elements={
 		el:$('<window/>'),
 		resizeHandles: {
@@ -113,7 +114,7 @@ export class Window {
 	}
 	applyOptions(){
 		let win = this;
-		win.elements.el.attr('data-app',win.options.appname);
+		win.elements.el.attr('data-app',win.options.appName);
 		win.elements.el.attr('data-type',win.options.type);
 		if(win.options.windowIcon){
 			win.elements.topbar.icon.el.addClass(win.options.icon);
@@ -146,7 +147,7 @@ export class Window {
 			el:$('<blocker/>'),
 		}
 		$('body').append(win.elements.blocker.el);
-		win.elements.blocker.el.css({zIndex:$$.Desktop.zindex+9});
+		win.elements.blocker.el.css({zIndex:$$.Desktop.zIndex+9});
 	}
 	unblock(){
 		let win = this;
@@ -182,15 +183,19 @@ export class Window {
 			handle.el.on('mousedown',function(event){win.resize.call(win,event,handle.el.data('direction'))});
 		})
 	}
-	resize(event,direction){
+	setStart(mouseX,mouseY){
 		let win = this;
-		if(!win.options.resizable || win.options.maximized){return;}
-		win.mousePosition.x = event.clientX;
-		win.mousePosition.y = event.clientY;
+		win.mousePosition.x = mouseX;
+		win.mousePosition.y = mouseY;
 		win.options.top.start = parseInt(win.options.top.current);
 		win.options.left.start = parseInt(win.options.left.current);
 		win.options.width.start = parseInt(win.options.width.current);
 		win.options.height.start = parseInt(win.options.height.current);
+	}
+	resize(event,direction){
+		let win = this;
+		if(!win.options.resizable || win.options.maximized){return;}
+		win.setStart(event.clientX,event.clientY);
 		$(document).on('mousemove.window',function(event){
 			let offsetX = event.clientX - win.mousePosition.x;
 			let offsetY = event.clientY - win.mousePosition.y;
@@ -244,10 +249,7 @@ export class Window {
 	drag(event){
 		let win = this;
 		if(!win.options.draggable || win.options.maximized){return;}
-		win.mousePosition.x = event.clientX;
-		win.mousePosition.y = event.clientY;//
-		win.options.top.start = parseInt(win.options.top.current);
-		win.options.left.start = parseInt(win.options.left.current);
+		win.setStart(event.clientX,event.clientY);
 		$(document).on('mousemove.window',function(event){
 			let offsetX = event.clientX - win.mousePosition.x;
 			let offsetY = event.clientY - win.mousePosition.y;
@@ -267,21 +269,22 @@ export class Window {
 	}
 	bringToFront(){
 		let win = this;
+		$$.Desktop.clearActive();
 		if(win.options.blocking){
-			win.elements.el.css({zIndex:$$.Desktop.zindex+10});
+			win.elements.el.css({zIndex:$$.Desktop.zIndex+10});
 			return;
 		}
 		$$.Taskbar.removeActive();
 		win.taskbarIcon.addClass('active');
-		if(win.elements.el.css('z-index') != $$.Desktop.zindex){
-			win.elements.el.css({zIndex:++$$.Desktop.zindex});
+		if(parseInt(win.elements.el.css('z-index')) !== $$.Desktop.zIndex){
+			win.elements.el.css({zIndex:++$$.Desktop.zIndex});
 		}
 	}
 	close(){
 		let win = this;
 		win.options.running = false;
 		win.save();
-		$$.Apps.kill(win.options.appname);
+		$$.Apps.kill(win.options.appName);
 		win.elements.el.remove();
 		if(win.options.blocking){
 			win.unblock();
@@ -318,7 +321,7 @@ export class Window {
 	}
 	toggle(){
 		let win = this;
-		if(win.elements.el.css('display') == 'none' || win.elements.el.css('z-index') != $$.Desktop.zindex){
+		if(win.elements.el.css('display') === 'none' || parseInt(win.elements.el.css('z-index')) !== $$.Desktop.zIndex){
 			win.restore();
 		}
 		else {
@@ -333,8 +336,8 @@ export class Window {
 	save(){
 		let win = this;
 		if(!win.options.save){return;}
-		let appname = win.options.appname;
-		if(appname !== 'undefined'){
+		let appName = win.options.appName;
+		if(appName !== 'undefined'){
 			let options = {
 				maximized:win.options.maximized,
 				minimized:win.options.minimized,
@@ -344,7 +347,7 @@ export class Window {
 				left:{current:win.options.left.current},
 				running:win.options.running,
 			}
-			$$.User.setAppOptions(appname,options);
+			$$.User.setAppOptions(appName,options);
 		}
 	}
 	setStatus(el=''){
@@ -419,7 +422,7 @@ export class Ribbon {
 			ribbon.elements.buttons[buttonKey].el.on('click',function(){ribbon.set(buttonKey)});
 			ribbon.elements.items[buttonKey] = {el: $('<menu/>')};
 			$.each(element.items,function(itemKey,item){
-				ribbon.elements.items[buttonKey][itemKey] = {el: $('<item/>', {html: '<span>'+item.title+'</span><badge></badge>','data-noactive':item.noActive||null}),callback:item.callback};
+				ribbon.elements.items[buttonKey][itemKey] = {el: $('<item/>', {html: '<span>'+item.title+'</span><badge></badge>','data-noActive':item.noActive||null}),callback:item.callback};
 				if(item.icon){
 					let icon = $('<i/>',{class:item.icon});
 					if(item.color){
@@ -450,7 +453,7 @@ export class Ribbon {
 			if(itemKey === 'el'){return;}
 			item.el.after('<hr>');
 			item.el.on('click',function(){
-				if(!item.el.attr('data-noactive')){
+				if(!item.el.attr('data-noActive')){
 					ribbon.elements.items[key].el.find('.active').removeClass('active');
 					item.el.addClass('active');
 				}
@@ -520,17 +523,42 @@ export class Form {
 		let form = this;
 		let group = $('<group/>', {'data-group': groupKey});
 		$.each(obj, function (key, item) {
+			if(key === 'label'){
+				group.append(`<h2>${item}</h2>`);
+				return;
+			}
 			if (item.type) {
 				if (groupKey !== 'root') {
-					group.attr('data-hasinputgroups', true)
+					group.attr('data-hasInputGroups', 'true')
 				}
-				let inputGroup = $('<group/>', {'data-group': key, 'data-hasinputs': true});
-				let label = $('<label/>', {html: item.label ?? ''});
-				let input = $('<input/>', {type: item.type, name: item.name ?? key, value: item.value ?? null});
-				inputGroup.append(label);
-				inputGroup.append(input);
-				group.append(inputGroup);
-				form.input[item.name ?? key] = input;
+				if(item.type === 'toggle' || item.type === 'checkbox'){
+					let inputGroup = $('<flexGroup/>', {'data-group': key, 'data-hasInputs': 'true'});
+					let label = $('<label/>', {html: item.label ?? ''});
+					let input = $('<input/>', {type: 'checkbox', name: item.name ?? key, checked: item.value ?? false, class:item.type});
+					inputGroup.append(input);
+					inputGroup.append(label);
+					group.append(inputGroup);
+					form.input[item.name ?? key] = input;
+					if(item.callback) {
+						input.on('change', function () {
+							item.callback.call(form.app, input.is(":checked"))
+						})
+					}
+				}
+				else {
+					let inputGroup = $('<group/>', {'data-group': key, 'data-hasInputs': 'true'});
+					let label = $('<label/>', {html: item.label ?? ''});
+					let input = $('<input/>', {type: item.type, name: item.name ?? key, value: item.value ?? null});
+					inputGroup.append(label);
+					inputGroup.append(input);
+					group.append(inputGroup);
+					form.input[item.name ?? key] = input;
+					if(item.callback){
+						input.on('click',function(){
+							item.callback.call(form.app,input.val());
+						})
+					}
+				}
 			} else {
 				group.append(form.getInputs(item, key));
 			}
@@ -560,6 +588,8 @@ export class Menu {
 	options = {
 		search:true,
 		sorted:false,
+		doubleClick:false,
+		forceHighlight:false,
 	};
 	elements={}
 	items = {};
@@ -591,16 +621,27 @@ export class Menu {
 				menu.elements[key].el.prepend('<i class="'+item.icon+'"></i> ');
 			}
 			menu.elements.el.append(menu.elements[key].el);
-			menu.elements[key].el.on('click',function(){
+			let trigger = menu.options.doubleClick?'dblclick':'click';
+			menu.elements[key].el.on(trigger,function(){
 				menu.elements.el.find('.active').removeClass('active');
 				menu.elements[key].el.addClass('active');
 				item.callback.call(menu.app);
 			});
+			if(menu.options.doubleClick&&menu.options.forceHighlight){
+				menu.elements[key].el.on('click',function(){
+					menu.elements.el.find('.active').removeClass('active');
+					menu.elements[key].el.addClass('active');
+				});
+			}
 			count++;
 		});
 		if(menu.app.win){
 			menu.app.win.setStatus('Showing ' + count + ' of ' + count + ' Items');
 		}
+	}
+	clearActive(){
+		let menu = this;
+		menu.elements.el.find('.active').removeClass('active');
 	}
 	search(query,autoClickFirst=true) {
 		let menu = this;
@@ -729,7 +770,7 @@ export class Alert {
 		}
 	}
 	windowOptions={
-		appname:'alert',
+		appName:'alert',
 		status:false,
 		resizable:false,
 		width:{current:400},

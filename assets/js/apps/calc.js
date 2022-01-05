@@ -3,7 +3,7 @@ $$.Apps.src.calc = class {
 	current='';
 	operator='';
 	options={
-		appname:'calc',
+		appName:'calc',
 		windowIcon:false,
 		title:'Calculator',
 		version:'0.0.1',
@@ -44,7 +44,7 @@ $$.Apps.src.calc = class {
 			_2:{el:$('<button/>',{html:'2',type:'digit'})},
 			_3:{el:$('<button/>',{html:'3',type:'digit'})},
 			plus:{el:$('<button/>',{html:'+'})},
-			plusminus:{el:$('<button/>',{html:'&plusmn;',type:'digit'})},
+			plusMinus:{el:$('<button/>',{html:'&plusmn;',type:'digit'})},
 			_0:{el:$('<button/>',{html:'0',type:'digit'})},
 			decimal:{el:$('<button/>',{html:',',type:'digit'})},
 			equals:{el:$('<button/>',{html:'='})}
@@ -77,7 +77,7 @@ $$.Apps.src.calc = class {
 		//operators
 		app.elements.buttons.percent.el.on('click',function(){app.current = app.current/100;app.update();});
 		app.elements.buttons.decimal.el.on('click',function(){app.current += '.';app.update();});
-		app.elements.buttons.plusminus.el.on('click',function(){app.current = app.current*-1;app.update();});
+		app.elements.buttons.plusMinus.el.on('click',function(){app.current = app.current*-1;app.update();});
 		app.elements.buttons.ce.el.on('click',function(){app.current = '';app.update();});
 		app.elements.buttons.c.el.on('click',function(){app.previous='';app.current = '';app.operator='';app.update();app.updateHistory()});
 		app.elements.buttons.back.el.on('click',function(){app.current = String (app.current).slice(0, -1);app.update();});
@@ -120,7 +120,7 @@ $$.Apps.src.calc = class {
 		app.current = result;
 		app.update();
 	}
-	update(clearCurrent){
+	update(){
 		let app = this;
 		app.elements.display.el.html(app.current);
 	}

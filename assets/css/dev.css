@@ -48,28 +48,27 @@ body {
       background-color: #E5F1FB;
       border: 1px solid #0078D7; }
 
-body form.loginscreen {
+body form.loginScreen {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #15234a;
   background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5)), url("/assets/img/wallpaper/default.jpg");
   z-index: 99999;
   display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center; }
-  body form.loginscreen img {
+  body form.loginScreen img {
     width: 250px;
     margin-top: -150px;
     filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.5)); }
-  body form.loginscreen h1 {
+  body form.loginScreen h1 {
     color: #fff;
     font-weight: 100;
     font-size: 40px; }
-  body form.loginscreen input {
+  body form.loginScreen input {
     height: 35px;
     width: 300px;
     font-size: 14px;
@@ -78,10 +77,10 @@ body form.loginscreen {
     outline: none;
     padding: 0 10px;
     margin: 10px; }
-  body form.loginscreen group input {
+  body form.loginScreen group input {
     width: 263px;
     margin-right: 0; }
-  body form.loginscreen group button {
+  body form.loginScreen group button {
     height: 37px;
     width: 37px;
     border-radius: 0;
@@ -96,6 +95,37 @@ body form.loginscreen {
 desktop {
   display: flex;
   overflow: hidden; }
+  desktop > workspace > menu {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    width: 100%;
+    padding: 2px;
+    flex-wrap: wrap;
+    align-content: flex-start; }
+    desktop > workspace > menu item {
+      display: flex;
+      width: 120px;
+      height: 70px;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px 2px;
+      border: 1px solid transparent;
+      color: #fff;
+      text-shadow: 1px 1px 2px black;
+      justify-content: space-evenly; }
+      desktop > workspace > menu item i {
+        font-size: 38px;
+        text-shadow: none; }
+      desktop > workspace > menu item:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2); }
+      desktop > workspace > menu item.active {
+        background-color: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3); }
+        desktop > workspace > menu item.active:hover {
+          background-color: rgba(255, 255, 255, 0.15);
+          border: 1px solid rgba(255, 255, 255, 0.25); }
 
 taskbar {
   background-color: rgba(0, 0, 0, 0.72);
@@ -140,31 +170,33 @@ taskbar {
       background-color: #fff; }
     taskbar input::placeholder {
       color: #2D2D2D; }
-  taskbar apps {
-    grid-area: apps;
+  taskbar apps, taskbar info {
     display: flex; }
+    taskbar apps item, taskbar info item {
+      display: flex;
+      align-items: center; }
+      taskbar apps item:hover, taskbar info item:hover {
+        background-color: rgba(255, 255, 255, 0.15); }
+      taskbar apps item.active, taskbar info item.active {
+        background-color: rgba(255, 255, 255, 0.2); }
+        taskbar apps item.active:hover, taskbar info item.active:hover {
+          background-color: rgba(255, 255, 255, 0.3); }
+  taskbar apps {
+    grid-area: apps; }
     taskbar apps item {
       border-top: 2px solid transparent;
       border-bottom: 2px solid transparent;
-      display: flex;
-      align-items: center;
       margin-right: 2px; }
-      taskbar apps item:hover {
-        background-color: rgba(255, 255, 255, 0.15); }
       taskbar apps item.active {
-        border-bottom: 2px solid #83C0EF;
-        background-color: rgba(255, 255, 255, 0.2); }
-        taskbar apps item.active:hover {
-          background-color: rgba(255, 255, 255, 0.3); }
+        border-bottom: 2px solid #83C0EF; }
       taskbar apps item i {
-        color: #ffffff;
         font-size: 22px;
-        padding: 0 12px; }
+        padding: 0 12px;
+        color: #ffffff; }
   taskbar info {
-    grid-area: info;
-    display: flex; }
-    taskbar info img {
-      width: 15px;
+    grid-area: info; }
+    taskbar info item i {
+      font-size: 16px;
       padding: 0 5px; }
   taskbar clock {
     letter-spacing: -0.5px;
@@ -187,11 +219,11 @@ desktop startmenu {
   height: 100%;
   display: none;
   z-index: 2000;
-  position: relative;
   backdrop-filter: blur(10px);
   align-self: self-end;
   flex-direction: column;
-  overflow-y: auto; }
+  overflow-y: auto;
+  position: absolute; }
   desktop startmenu menu {
     margin: 0;
     padding: 0;
@@ -475,21 +507,27 @@ desktop window {
       padding: 0 5px;
       grid-area: center;
       text-align: left; }
+      desktop window content center form h1, desktop window content center form h2, desktop window content center form h3, desktop window content center form h4, desktop window content center form h5, desktop window content center form h6 {
+        width: 100%; }
       desktop window content center form group[data-group="root"] {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap; }
-        desktop window content center form group[data-group="root"] group[data-hasinputgroups] {
+        desktop window content center form group[data-group="root"] flexGroup {
+          display: flex !important;
+          align-items: center;
+          margin-right: 20px; }
+        desktop window content center form group[data-group="root"] flexGroup[data-hasinputgroups], desktop window content center form group[data-group="root"] group[data-hasinputgroups] {
           display: flex;
           width: 100%;
           flex-wrap: wrap; }
-        desktop window content center form group[data-group="root"] group[data-hasinputs] {
+        desktop window content center form group[data-group="root"] flexGroup[data-hasinputs], desktop window content center form group[data-group="root"] group[data-hasinputs] {
           display: block;
           margin: 5px 0; }
-          desktop window content center form group[data-group="root"] group[data-hasinputs] label {
+          desktop window content center form group[data-group="root"] flexGroup[data-hasinputs] label, desktop window content center form group[data-group="root"] group[data-hasinputs] label {
             display: block;
             padding: 5px 0; }
-          desktop window content center form group[data-group="root"] group[data-hasinputs] input {
+          desktop window content center form group[data-group="root"] flexGroup[data-hasinputs] input, desktop window content center form group[data-group="root"] group[data-hasinputs] input {
             padding: 5px;
             border: 1px solid #D9D9D9;
             outline: none;

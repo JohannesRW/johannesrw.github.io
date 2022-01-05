@@ -1,6 +1,6 @@
 $$.Apps.src.logs = class {
 	options = {
-		appname: 'logs',
+		appName: 'logs',
 		title: 'Logs',
 		version: '0.0.1',
 		resizable: true,

@@ -1,6 +1,6 @@
 $$.Apps.src.contacts = class {
 	options = {
-		appname: 'contacts',
+		appName: 'contacts',
 		title: 'Contacts',
 		version: '0.0.1',
 		resizable: true,
@@ -153,7 +153,7 @@ $$.Apps.src.contacts = class {
 	}
 	setContact(contact) {
 		let app = this;
-		let editable = contact.permissions.owner==$$.User.id;
+		let editable = contact.permissions.owner===$$.User.id;
 		app.current = contact;
 		app.ribbon.clearActive();
 		app.win.setContent(app.templates.contactDetails(contact));
@@ -228,7 +228,7 @@ $$.Apps.src.contacts = class {
 		let app = this;
 		if (!$$.System.database || !$$.User.id) {return;}
 		let url = 'contacts/delete/'+contact._id;
-		$.get(url,function(data){
+		$.get(url,function(){
 			delete app.contacts[contact._id];
 			app.setMenu();
 			app.menu.clickFirst();

@@ -51,7 +51,10 @@ window[data-app="calc"] {
         border: none;
         outline: none;
         font-size: 14px;
-        background-color: rgba(255, 255, 255, 0.6); }
+        background-color: rgba(255, 255, 255, 0.6);
+        margin: 0;
+        padding: 0;
+        min-width: unset; }
         window[data-app="calc"] content center buttons button[type="digit"] {
           background-color: rgba(255, 255, 255, 0.9);
           font-size: 18px; }

@@ -1,6 +1,6 @@
 $$.Apps.src.info = class {
 	options={
-		appname:'info',
+		appName:'info',
 		title:'Info',
 		version:'0.0.1',
 		resizable:false,
@@ -15,7 +15,7 @@ $$.Apps.src.info = class {
 			github:{title:'GitHub',callback:()=>this.win.setContent(this.templates.github)}
 		},
 		about:
-			`<img src="assets/img/nos.png" width="75">
+			`<img src="assets/img/nos.png" width="75" alt="Logo">
 			<h3>NodeOperatingSystem</h3>
 			<h4>v${$$.version}</h4>
 			<p>Built with Node.JS, JQuery, Express and MongoDB</p>
@@ -24,7 +24,7 @@ $$.Apps.src.info = class {
 			`<h2>Johannes Hundt</h2>
 			<a href="mailto:hundt.johannes@gmail.com">hundt.johannes@gmail.com</a>`,
 		github:
-			`<img src="assets/img/github.png" width="80%">
+			`<img src="assets/img/github.png" width="300" alt="GitHub">
 			<a href="//github.com/JohannesRW" target="_blank">JohannesRW@GitHub.com</a>`,
 	}
 	constructor(options={}) {

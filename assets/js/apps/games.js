@@ -1,6 +1,6 @@
 $$.Apps.src.games = class {
 	options={
-		appname:'games',
+		appName:'games',
 		title:'Games',
 		version:'0.0.1',
 		iconColor:'#91ff00',

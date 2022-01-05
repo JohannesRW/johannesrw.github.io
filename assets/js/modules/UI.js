@@ -1,23 +1,41 @@
 export class Desktop {
-	zindex = 100;
+	zIndex = 100;
 	elements={
-		el:$('<desktop/>')
+		el:$('<desktop/>'),
+		workspace: {el:$('<workspace/>')}
 	}
+	templates={
+		menu:[]
+	}
+	items = {};
 	init(){
 		let desktop = this;
 		$('body').append($$.Tools.autoAppend(desktop.elements));
 	}
 	width(){
-		let desktop = this;
 		return $('body').outerWidth();
 	}
 	height(){
 		let desktop = this;
 		return desktop.elements.el.outerHeight();
 	}
-	get zindex(){
+	get zIndex(){
 		let desktop = this;
-		return ++desktop.zindex;
+		return ++desktop.zIndex;
+	}
+	add(icon,title,appName){
+		let desktop = this;
+		desktop.templates.menu.push({title:title,icon:icon,callback:()=>$$.Apps.run(appName)})
+		desktop.setMenu();
+	}
+	setMenu(){
+		let desktop = this;
+		desktop.menu = new $$.Menu({search:false,doubleClick:true,forceHighlight:true},desktop.templates.menu,desktop);
+		desktop.elements.workspace.el.html(desktop.menu.el);
+	}
+	clearActive(){
+		let desktop = this;
+		desktop.menu.clearActive();
 	}
 }
 export class Taskbar {
@@ -39,7 +57,7 @@ export class Taskbar {
 		apps:{el:$('<apps/>')},
 		info:{el:$('<info/>')},
 		clock:{el:$('<clock/>')},
-		showdesktop:{el:$('<showdesktop/>')}
+		showDesktop:{el:$('<showdesktop/>')}
 	};
 	init(){
 		let taskbar = this;
@@ -70,7 +88,7 @@ export class Taskbar {
 	}
 	updateClock(){
 		let taskbar = this;
-		taskbar.elements.clock.el.html($$.System.time(false)+(taskbar.options.clock.date?'<br>'+$$.System.date():''));
+		taskbar.elements.clock.el.html($$.System.time(taskbar.options.clock.seconds)+(taskbar.options.clock.date?'<br>'+$$.System.date():''));
 	}
 	stopClock(){
 		let taskbar = this;
@@ -79,13 +97,14 @@ export class Taskbar {
 	listen(){
 		let taskbar = this;
 		taskbar.elements.start.el.on('click',function(event){event.stopImmediatePropagation();$$.StartMenu.show();});
-		taskbar.elements.showdesktop.el.on('click',function(){
-			$.each($$.Apps.running,function(appname,app){
+		taskbar.elements.showDesktop.el.on('click',function(){
+			$.each($$.Apps.running,function(appName,app){
 				app.win.minimize();
 				taskbar.removeActive();
 			})
 		});
 		taskbar.elements.search.el.on('click',function(){
+			// noinspection JSDeprecatedSymbols
 			$(this).select();
 		})
 	}
@@ -100,37 +119,38 @@ export class StartMenu {
 		menu: []
 	}
 	init(){
-		let startmenu = this;
-		$$.Desktop.elements.el.append(startmenu.elements.el);
-		startmenu.setMenu();
-		startmenu.listen();
+		let startMenu = this;
+		$$.Desktop.elements.el.append(startMenu.elements.el);
+		startMenu.setMenu();
+		startMenu.listen();
 	}
 	listen(){
-		let startmenu = this;
+		let startMenu = this;
 		$$.Taskbar.elements.search.el.on('keyup',function(){
 			$$.StartMenu.show();
-			startmenu.menu.search($(this).val(),false);
+			startMenu.menu.search($(this).val(),false);
 		})
 	}
 	setMenu(){
-		let startmenu = this;
-		startmenu.menu = new $$.Menu({search:false},startmenu.elements.menu,startmenu);
-		startmenu.elements.el.html(startmenu.menu.el);
+		let startMenu = this;
+		startMenu.menu = new $$.Menu({search:false},startMenu.elements.menu,startMenu);
+		startMenu.elements.el.html(startMenu.menu.el);
 	}
 	hide(){
-		let startmenu = this;
-		startmenu.elements.el.css({display:'none'});
+		let startMenu = this;
+		startMenu.elements.el.css({display:'none'});
 	}
 	show(){
-		let startmenu = this;
-		startmenu.elements.el.css({display:'flex'});
-		$(document).one('click',function (event){
-			startmenu.hide();
+		let startMenu = this;
+		$$.Desktop.clearActive();
+		startMenu.elements.el.css({display:'flex'});
+		$(document).one('click',function (){
+			startMenu.hide();
 		})
 	}
-	add(icon='',title,appname){
-		let startmenu = this;
-		startmenu.elements.menu.push({title:title,icon:icon,callback:()=>$$.Apps.run(appname)})
-		startmenu.setMenu();
+	add(icon='',title,appName){
+		let startMenu = this;
+		startMenu.elements.menu.push({title:title,icon:icon,callback:()=>$$.Apps.run(appName)})
+		startMenu.setMenu();
 	}
 }
